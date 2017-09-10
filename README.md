@@ -1,38 +1,46 @@
-Role Name
-=========
+Ansible Role for JIRA
+=====================
 
-A brief description of the role goes here.
+[![Build Status](https://travis-ci.org/alvistack/ansible-role-jira.svg?branch=master)](https://travis-ci.org/alvistack/ansible-role-jira)
+[![GitHub tag](https://img.shields.io/github/tag/alvistack/ansible-role-jira.svg)](https://github.com/alvistack/ansible-role-jira)
+[![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-jira.svg)](https://github.com/alvistack/ansible-role-jira/blob/master/LICENSE)
+
+Ansible Role for Atlassian JIRA Installation.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role require Ansible 2.3 or higher.
+
+This role was designed for Ubuntu 16.04/14.04.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+No additional role variables.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+No additional role dependencies.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
+    - hosts: all
       roles:
-         - { role: username.rolename, x: 42 }
+        - role: jira
 
 License
 -------
 
-BSD
+-   Code released under [Apache License 2.0](https://github.com/alvistack/ansible-role-jira/blob/master/LICENSE)
+-   Docs released under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+-   Wong Hoi Sing Edison
+    -   <https://twitter.com/hswong3i>
+    -   <https://github.com/hswong3i>
+

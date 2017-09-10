@@ -1,7 +1,10 @@
 ---
 
+- src: https://github.com/alvistack/ansible-role-python
+  version: master
+
 - src: https://github.com/alvistack/ansible-role-apt
   version: master
 
-- src: https://github.com/alvistack/ansible-role-python
+- src: https://github.com/alvistack/ansible-role-java
   version: master

@@ -1,2 +1,28 @@
 ---
-# defaults file for jira
+
+# (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+jira_archive_url: "https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-7.5.0.tar.gz"
+jira_catalina: "/opt/atlassian/jira"
+jira_connector_port: "8080"
+jira_context_path: ~
+jira_home: "/var/atlassian/application-data/jira"
+jira_jvm_maximum_memory: "1024m"
+jira_jvm_minimum_memory: "512m"
+jira_jvm_support_recommended_args: "-Datlassian.plugins.enable.wait=300"
+jira_proxy_name: ~
+jira_scheme: ~
+jira_server_port: "8005"
+jira_user: "daemon"

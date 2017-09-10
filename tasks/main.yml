@@ -1,2 +1,56 @@
 ---
-# tasks file for jira
+
+# (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- name: prepare files
+  file:
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+    state: "{{ item.state }}"
+  with_items:
+    - { dest: "{{ jira_catalina }}", owner: "{{ jira_user }}", group: "{{ jira_user }}", mode: "0755", state: "directory" }
+    - { dest: "{{ jira_home }}", owner: "{{ jira_user }}", group: "{{ jira_user }}", mode: "0755", state: "directory" }
+  tags: jira
+
+- name: unarchive package
+  shell: |
+    curl -sL {{ jira_archive_url }} > /tmp/atlassian-jira.tar.gz
+    tar zxvf /tmp/atlassian-jira.tar.gz -C {{ jira_catalina }} --strip-components=1
+    chown -Rf {{ jira_user }}:{{ jira_user }} {{ jira_catalina }}
+    rm -rf /tmp/atlassian-jira.tar.gz
+  args:
+    creates: "{{ jira_catalina }}/bin/start-jira.sh"
+  tags: jira
+
+- name: copy templates
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { src: "etc/init.d/jira.j2", dest: "/etc/init.d/jira", owner: "root", group: "root", mode: "0755" }
+    - { src: "usr/share/jira/bin/setenv.sh.j2", dest: "{{ jira_catalina }}/bin/setenv.sh", owner: "{{ jira_user }}", group: "{{ jira_user }}", mode: "0644" }
+    - { src: "usr/share/jira/conf/server.xml.j2", dest: "{{ jira_catalina }}/conf/server.xml", owner: "{{ jira_user }}", group: "{{ jira_user }}", mode: "0644" }
+  tags: jira
+
+- name: enable service
+  service:
+    name: "jira"
+    enabled: "yes"
+  tags: jira

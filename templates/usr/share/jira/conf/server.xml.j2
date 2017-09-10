@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- {{ ansible_managed }} -->
+<Server port="{{ jira_server_port }}" shutdown="SHUTDOWN">
+    <Listener className="org.apache.catalina.startup.VersionLoggerListener"/>
+    <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on"/>
+    <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener"/>
+    <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
+    <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener"/>
+    <Service name="Catalina">
+        <Connector acceptCount="100" bindOnInit="false" connectionTimeout="20000" disableUploadTimeout="true" enableLookups="false" maxHttpHeaderSize="8192" maxThreads="150" minSpareThreads="25" port="{{ jira_connector_port }}" protocol="HTTP/1.1" redirectPort="8443" useBodyEncodingForURI="true"{% if jira_proxy_name and jira_scheme in ["http", "https"] %} proxyName="{{ jira_proxy_name }}"{% if jira_scheme == "http" %} scheme="http" proxyPort="80"{% elif jira_scheme == "https" %} scheme="https" proxyPort="443" secure="true"{% endif %}{% endif %}/>
+        <Engine name="Catalina" defaultHost="localhost">
+            <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true">
+                <Context path="{{ jira_context_path or '' }}" docBase="${catalina.home}/atlassian-jira" reloadable="false" useHttpOnly="true">
+                    <Resource name="UserTransaction" auth="Container" type="javax.transaction.UserTransaction" factory="org.objectweb.jotm.UserTransactionFactory" jotm.timeout="60"/>
+                    <Manager pathname=""/>
+                    <JarScanner scanManifest="false"/>
+                </Context>
+            </Host>
+            <Valve className="org.apache.catalina.valves.AccessLogValve" pattern="%a %{jira.request.id}r %{jira.request.username}r %t &quot;%m %U%q %H&quot; %s %b %D &quot;%{Referer}i&quot; &quot;%{User-Agent}i&quot; &quot;%{jira.request.assession.id}r&quot;"/>
+        </Engine>
+    </Service>
+</Server>

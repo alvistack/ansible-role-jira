@@ -21,7 +21,7 @@ CATALINA_HOME={{ jira_catalina }}
 start() {
     echo "Starting JIRA: "
     if [ "x$USER" != "x$RUN_AS_USER" ]; then
-        su - $RUN_AS_USER -c "$CATALINA_HOME/bin/start-jira.sh"
+        su -s /bin/bash $RUN_AS_USER -c "$CATALINA_HOME/bin/start-jira.sh"
     else
         $CATALINA_HOME/bin/start-jira.sh
     fi
@@ -30,7 +30,7 @@ start() {
 stop() {
     echo "Shutting down JIRA: "
     if [ "x$USER" != "x$RUN_AS_USER" ]; then
-        su - $RUN_AS_USER -c "$CATALINA_HOME/bin/stop-jira.sh"
+        su -s /bin/bash $RUN_AS_USER -c "$CATALINA_HOME/bin/stop-jira.sh"
     else
         $CATALINA_HOME/bin/stop-jira.sh
     fi

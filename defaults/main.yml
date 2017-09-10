@@ -19,8 +19,8 @@ jira_catalina: "/opt/atlassian/jira"
 jira_connector_port: "8080"
 jira_context_path: ~
 jira_home: "/var/atlassian/application-data/jira"
-jira_jvm_maximum_memory: "1024m"
-jira_jvm_minimum_memory: "512m"
+jira_jvm_maximum_memory: "768m"
+jira_jvm_minimum_memory: "384m"
 jira_jvm_support_recommended_args: "-Datlassian.plugins.enable.wait=300"
 jira_proxy_name: ~
 jira_scheme: ~

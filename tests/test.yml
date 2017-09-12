@@ -24,5 +24,6 @@
   remote_user: root
   roles:
     - role: ansible-role-apt
+    - role: ansible-role-yum
     - role: ansible-role-java
     - role: ansible-role-jira

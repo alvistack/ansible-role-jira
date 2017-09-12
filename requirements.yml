@@ -6,5 +6,8 @@
 - src: https://github.com/alvistack/ansible-role-apt
   version: master
 
+- src: https://github.com/alvistack/ansible-role-yum
+  version: master
+
 - src: https://github.com/alvistack/ansible-role-java
   version: master

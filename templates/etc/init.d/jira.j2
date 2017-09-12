@@ -21,28 +21,29 @@ CATALINA_HOME={{ jira_catalina }}
 start() {
     echo "Starting JIRA: "
     if [ "x$USER" != "x$RUN_AS_USER" ]; then
-        su -s /bin/bash $RUN_AS_USER -c "$CATALINA_HOME/bin/start-jira.sh" ${@:2}
+        su -s /bin/bash $RUN_AS_USER -c "$CATALINA_HOME/bin/start-jira.sh $@"
     else
-        $CATALINA_HOME/bin/start-jira.sh ${@:2}
+        $CATALINA_HOME/bin/start-jira.sh $@
     fi
     echo "done."
 }
+
 stop() {
     echo "Shutting down JIRA: "
     if [ "x$USER" != "x$RUN_AS_USER" ]; then
-        su -s /bin/bash $RUN_AS_USER -c "$CATALINA_HOME/bin/stop-jira.sh" ${@:2}
+        su -s /bin/bash $RUN_AS_USER -c "$CATALINA_HOME/bin/stop-jira.sh $@"
     else
-        $CATALINA_HOME/bin/stop-jira.sh ${@:2}
+        $CATALINA_HOME/bin/stop-jira.sh $@
     fi
     echo "done."
 }
 
 case "$1" in
     start)
-        start
+        start ${@:2}
         ;;
     stop)
-        stop
+        stop ${@:2}
         ;;
     restart)
         stop

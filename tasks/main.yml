@@ -28,13 +28,13 @@
 
 - name: unarchive package
   shell: |
-    ARCHIVE=`mktemp -u`
+    ARCHIVE="`mktemp -u`.tar.gz"
     curl -sL {{ jira_archive_url }} > $ARCHIVE
-    tar zxvf $ARCHIVE -C {{ jira_catalina }} --strip-components=1
+    tar zxf $ARCHIVE -C {{ jira_catalina }} --strip-components=1
     chown -Rf {{ jira_user }}:{{ jira_user }} {{ jira_catalina }}
     rm -rf $ARCHIVE
   args:
-    creates: "{{ jira_catalina }}/bin/start-jira.sh"
+    creates: "{{ jira_catalina }}/bin/setenv.sh"
   tags: jira
 
 - name: copy templates

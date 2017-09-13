@@ -28,12 +28,13 @@
 
 - name: unarchive package
   shell: |
-    curl -sL {{ jira_archive_url }} > /tmp/atlassian-jira.tar.gz
-    tar zxvf /tmp/atlassian-jira.tar.gz -C {{ jira_catalina }} --strip-components=1
+    ARCHIVE="`mktemp -u`.tar.gz"
+    curl -sL {{ jira_archive_url }} > $ARCHIVE
+    tar zxf $ARCHIVE -C {{ jira_catalina }} --strip-components=1
     chown -Rf {{ jira_user }}:{{ jira_user }} {{ jira_catalina }}
-    rm -rf /tmp/atlassian-jira.tar.gz
+    rm -rf $ARCHIVE
   args:
-    creates: "{{ jira_catalina }}/bin/start-jira.sh"
+    creates: "{{ jira_catalina }}/bin/setenv.sh"
   tags: jira
 
 - name: copy templates

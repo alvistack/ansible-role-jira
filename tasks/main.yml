@@ -28,10 +28,11 @@
 
 - name: unarchive package
   shell: |
-    curl -sL {{ jira_archive_url }} > /tmp/atlassian-jira.tar.gz
-    tar zxvf /tmp/atlassian-jira.tar.gz -C {{ jira_catalina }} --strip-components=1
+    ARCHIVE=`mktemp -u`
+    curl -sL {{ jira_archive_url }} > $ARCHIVE
+    tar zxvf $ARCHIVE -C {{ jira_catalina }} --strip-components=1
     chown -Rf {{ jira_user }}:{{ jira_user }} {{ jira_catalina }}
-    rm -rf /tmp/atlassian-jira.tar.gz
+    rm -rf $ARCHIVE
   args:
     creates: "{{ jira_catalina }}/bin/start-jira.sh"
   tags: jira

@@ -29,7 +29,7 @@
 - name: unarchive package
   shell: |
     ARCHIVE="`mktemp -u`.tar.gz"
-    curl -sL {{ jira_archive_url }} > $ARCHIVE
+    curl -sL {{ jira_url }} > $ARCHIVE
     tar zxf $ARCHIVE -C {{ jira_catalina }} --strip-components=1
     chown -Rf {{ jira_owner }}:{{ jira_group }} {{ jira_catalina }}
     rm -rf $ARCHIVE

@@ -14,6 +14,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: include release specific variables
+  include_vars: "{{ loop_var }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+      paths: "../vars"
+      skip: "yes"
+  loop_control:
+    loop_var: "loop_var"
+  tags: jira
+
+- name: include release specific tasks
+  include: "{{ loop_var }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+      paths: "."
+      skip: "yes"
+  loop_control:
+    loop_var: "loop_var"
+  tags: jira
+
 - name: prepare files
   file:
     dest: "{{ item.dest }}"

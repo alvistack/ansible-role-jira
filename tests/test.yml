@@ -27,5 +27,5 @@
     - role: ansible-role-yum
     - role: ansible-role-java
     - role: ansible-role-jira
-    - role: ansible-role-mariadb-connector-jira
+    - role: ansible-role-mariadb-connector-java
       mariadb_connector_java_dest: "/opt/atlassian/jira/lib/mariadb-connector-java.jar"

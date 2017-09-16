@@ -14,6 +14,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: include release specific variables
+  include_vars: "{{ loop_var }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+      paths: "../vars"
+      skip: "yes"
+  loop_control:
+    loop_var: "loop_var"
+  tags: jira
+
+- name: include release specific tasks
+  include: "{{ loop_var }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+      paths: "."
+      skip: "yes"
+  loop_control:
+    loop_var: "loop_var"
+  tags: jira
+
 - name: prepare files
   file:
     dest: "{{ item.dest }}"
@@ -22,16 +52,16 @@
     mode: "{{ item.mode }}"
     state: "{{ item.state }}"
   with_items:
-    - { dest: "{{ jira_catalina }}", owner: "{{ jira_user }}", group: "{{ jira_user }}", mode: "0755", state: "directory" }
-    - { dest: "{{ jira_home }}", owner: "{{ jira_user }}", group: "{{ jira_user }}", mode: "0755", state: "directory" }
+    - { dest: "{{ jira_catalina }}", owner: "{{ jira_owner }}", group: "{{ jira_group }}", mode: "0755", state: "directory" }
+    - { dest: "{{ jira_home }}", owner: "{{ jira_owner }}", group: "{{ jira_group }}", mode: "0755", state: "directory" }
   tags: jira
 
 - name: unarchive package
   shell: |
     ARCHIVE="`mktemp -u`.tar.gz"
-    curl -sL {{ jira_archive_url }} > $ARCHIVE
+    curl -sL {{ jira_url }} > $ARCHIVE
     tar zxf $ARCHIVE -C {{ jira_catalina }} --strip-components=1
-    chown -Rf {{ jira_user }}:{{ jira_user }} {{ jira_catalina }}
+    chown -Rf {{ jira_owner }}:{{ jira_group }} {{ jira_catalina }}
     rm -rf $ARCHIVE
   args:
     creates: "{{ jira_catalina }}/bin/setenv.sh"
@@ -46,8 +76,8 @@
     mode: "{{ item.mode }}"
   with_items:
     - { src: "etc/init.d/jira.j2", dest: "/etc/init.d/jira", owner: "root", group: "root", mode: "0755" }
-    - { src: "opt/atlassian/jira/bin/setenv.sh.j2", dest: "{{ jira_catalina }}/bin/setenv.sh", owner: "{{ jira_user }}", group: "{{ jira_user }}", mode: "0644" }
-    - { src: "opt/atlassian/jira/conf/server.xml.j2", dest: "{{ jira_catalina }}/conf/server.xml", owner: "{{ jira_user }}", group: "{{ jira_user }}", mode: "0644" }
+    - { src: "opt/atlassian/jira/bin/setenv.sh.j2", dest: "{{ jira_catalina }}/bin/setenv.sh", owner: "{{ jira_owner }}", group: "{{ jira_group }}", mode: "0644" }
+    - { src: "opt/atlassian/jira/conf/server.xml.j2", dest: "{{ jira_catalina }}/conf/server.xml", owner: "{{ jira_owner }}", group: "{{ jira_group }}", mode: "0644" }
   tags: jira
 
 - name: enable service

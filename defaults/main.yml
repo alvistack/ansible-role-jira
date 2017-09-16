@@ -14,15 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-jira_archive_url: "https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-7.5.0.tar.gz"
 jira_catalina: "/opt/atlassian/jira"
 jira_connector_port: "8080"
 jira_context_path: ~
+jira_group: "daemon"
 jira_home: "/var/atlassian/application-data/jira"
 jira_jvm_maximum_memory: "768m"
 jira_jvm_minimum_memory: "384m"
 jira_jvm_support_recommended_args: "-Datlassian.plugins.enable.wait=300"
+jira_owner: "daemon"
 jira_proxy_name: ~
 jira_scheme: ~
 jira_server_port: "8005"
-jira_user: "daemon"
+jira_url: "https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-7.5.0.tar.gz"

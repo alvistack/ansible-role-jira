@@ -13,8 +13,6 @@
 #               Provide commands for manually starting and stopping JIRA.
 ### END INIT INFO
 
-# Based on script at http://www.bifrost.org/problems.html
-
 RUN_AS_USER={{ jira_owner}}
 CATALINA_HOME={{ jira_catalina }}
 
@@ -46,11 +44,11 @@ case "$1" in
         stop ${@:2}
         ;;
     restart)
-        stop
+        $0 stop ${@:2}
         sleep 10
         #echo "Hard killing any remaining threads.."
         #kill -9 `cat $CATALINA_HOME/work/catalina.pid`
-        start
+        $0 start ${@:2}
         ;;
     *)
         echo "Usage: $0 {start|stop|restart}"

@@ -37,7 +37,7 @@ script:
   - ansible-playbook -i $DOCKER_ID, -c docker tests/test.yml --syntax-check
   - ansible-playbook -i $DOCKER_ID, -c docker tests/test.yml --diff --verbose
   - ansible-playbook -i $DOCKER_ID, -c docker tests/test.yml --diff --verbose
-  - tail -n 1 ansible.log | grep -Eq 'changed=0 +unreachable=0 +failed=0'
+  - tail -n 1 $ANSIBLE_LOG_PATH | grep -Eq 'changed=0 +unreachable=0 +failed=0'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

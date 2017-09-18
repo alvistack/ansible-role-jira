@@ -38,8 +38,8 @@ stop() {
 }
 
 status() {
-    if [ -f $PIDFILE ]; then
-        PID=$(<$PIDFILE)
+    if [ -f $PID_FILE ]; then
+        PID=$(<$PID_FILE)
         if $(kill -0 "${PID:-}" 2> /dev/null); then
             echo "JIRA is running"
             exit 0

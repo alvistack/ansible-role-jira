@@ -30,7 +30,7 @@
   tags: jira
 
 - name: include release specific tasks
-  include: "{{ loop_var }}"
+  include_tasks: "{{ loop_var }}"
   with_first_found:
     - files:
         - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"

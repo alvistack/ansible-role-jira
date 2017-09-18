@@ -24,7 +24,8 @@ env:
     - DOCKER_IMAGE: 'centos/systemd:latest'
 
 before_install:
-  - pip install --upgrade --upgrade-strategy only-if-needed ansible docker docker-compose
+  - pip install --upgrade git+git://github.com/ansible/ansible.git@stable-2.4
+  - pip install --upgrade docker docker-compose
   - docker pull $DOCKER_IMAGE
   - DOCKER_ID="$(docker run -itd --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run $DOCKER_IMAGE | head -c12)"
 

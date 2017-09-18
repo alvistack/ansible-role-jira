@@ -15,7 +15,7 @@
 
 RUN_AS_USER={{ jira_owner }}
 CATALINA_HOME={{ jira_catalina }}
-PID_FILE=$CATALINA_HOME/work/catalina.pid
+PID_FILE={{ jira_catalina }}/work/catalina.pid
 
 start() {
     echo "Starting JIRA: "

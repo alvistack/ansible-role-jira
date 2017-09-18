@@ -4,6 +4,7 @@ Ansible Role for JIRA
 [![Build Status](https://travis-ci.org/alvistack/ansible-role-jira.svg?branch=master)](https://travis-ci.org/alvistack/ansible-role-jira)
 [![GitHub tag](https://img.shields.io/github/tag/alvistack/ansible-role-jira.svg)](https://github.com/alvistack/ansible-role-jira)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-jira.svg)](https://github.com/alvistack/ansible-role-jira/blob/master/LICENSE)
+[![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.jira-blue.svg)](https://galaxy.ansible.com/alvistack/jira)
 
 Ansible Role for Atlassian JIRA Installation.
 

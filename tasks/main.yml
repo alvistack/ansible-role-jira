@@ -64,7 +64,7 @@
     chown -Rf {{ jira_owner }}:{{ jira_group }} {{ jira_catalina }}
     rm -rf $ARCHIVE
   args:
-    creates: "{{ jira_catalina }}/bin/setenv.sh"
+    creates: "{{ jira_catalina }}/bin/start-jira.sh"
   tags: jira
 
 - name: copy templates

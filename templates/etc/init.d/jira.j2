@@ -15,6 +15,7 @@
 
 RUN_AS_USER={{ jira_owner }}
 CATALINA_HOME={{ jira_catalina }}
+PID_FILE=$CATALINA_HOME/work/catalina.pid
 
 start() {
     echo "Starting JIRA: "
@@ -36,6 +37,25 @@ stop() {
     echo "done."
 }
 
+status() {
+    if [ -f $PIDFILE ]; then
+        PID=$(<$PIDFILE)
+        if $(kill -0 "${PID:-}" 2> /dev/null); then
+            echo "JIRA is running"
+            exit 0
+        elif ps "${PID:-}" > /dev/null 2>&1; then
+            echo "JIRA is running"
+            exit 0
+        else
+            echo "JIRA is not running (pidfile exists)"
+            exit 1
+        fi
+    fi
+
+    echo "JIRA is not running"
+    exit 3
+}
+
 case "$1" in
     start)
         start ${@:2}
@@ -44,14 +64,14 @@ case "$1" in
         stop ${@:2}
         ;;
     restart)
-        $0 stop ${@:2}
-        sleep 10
-        #echo "Hard killing any remaining threads.."
-        #kill -9 `cat $CATALINA_HOME/work/catalina.pid`
-        $0 start ${@:2}
+        stop ${@:2}
+        start ${@:2}
+        ;;
+    status)
+        status
         ;;
     *)
-        echo "Usage: $0 {start|stop|restart}"
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1
+        ;;
 esac
-
-exit 0

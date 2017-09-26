@@ -14,16 +14,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-jira_catalina: "/opt/atlassian/jira"
-jira_connector_port: "8080"
-jira_context_path: ~
-jira_group: "daemon"
-jira_home: "/var/atlassian/application-data/jira"
-jira_jvm_maximum_memory: "768m"
-jira_jvm_minimum_memory: "384m"
-jira_jvm_support_recommended_args: "-Datlassian.plugins.enable.wait=300"
+# Owner and group for JIRA.
 jira_owner: "daemon"
+jira_group: "daemon"
+
+# Location for the $JIRA_HOME directory.
+jira_home: "/var/atlassian/application-data/jira"
+
+# Location for the $JIRA_CATALINA directory.
+jira_catalina: "/opt/atlassian/jira"
+
+# JIRA JVM minimal and maximum memory usage.
+jira_jvm_minimum_memory: "384m"
+jira_jvm_maximum_memory: "768m"
+
+# JIRA Apache Tomcat connector and server port.
+jira_connector_port: "8080"
+jira_server_port: "8005"
+
+# Context path for JIRA installation.
+jira_context_path: ~
+
+# If JIRA running behide reverse proxy, setup `jira_scheme` with whatever
+# `http` or `https`, and supply `jira_proxy_name` with its domain name.
 jira_proxy_name: ~
 jira_scheme: ~
-jira_server_port: "8005"
+
+# Atlassian Support recommended JVM arguments.
+jira_jvm_support_recommended_args: "-Datlassian.plugins.enable.wait=300"
+
+# URL for download JIRA archive.
 jira_url: "https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-7.5.0.tar.gz"

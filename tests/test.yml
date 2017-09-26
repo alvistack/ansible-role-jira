@@ -26,6 +26,21 @@
     - role: ansible-role-apt
     - role: ansible-role-yum
     - role: ansible-role-java
+
+- hosts: all
+  remote_user: root
+  roles:
     - role: ansible-role-jira
+      # Owner and group for JIRA.
+      jira_owner: "daemon"
+      jira_group: "daemon"
+      # Location for the $JIRA_HOME directory.
+      jira_home: "/var/atlassian/application-data/jira"
+      # Location for the $JIRA_CATALINA directory.
+      jira_catalina: "/opt/atlassian/jira"
+
+- hosts: all
+  remote_user: root
+  roles:
     - role: ansible-role-mariadb-connector-java
       mariadb_connector_java_dest: "/opt/atlassian/jira/lib/mariadb-connector-java.jar"

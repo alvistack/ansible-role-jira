@@ -38,9 +38,25 @@
       jira_home: "/var/atlassian/application-data/jira"
       # Location for the $JIRA_CATALINA directory.
       jira_catalina: "/opt/atlassian/jira"
+      # JIRA Apache Tomcat connector and server port.
+      jira_connector_port: "8080"
+      jira_server_port: "8005"
 
 - hosts: all
   remote_user: root
   roles:
     - role: ansible-role-mariadb-connector-java
       mariadb_connector_java_dest: "/opt/atlassian/jira/lib/mariadb-connector-java.jar"
+
+- hosts: all
+  remote_user: root
+  tasks:
+    - name: service jira start
+      service:
+        name: "jira"
+        enabled: "yes"
+
+    - name: check port
+      wait_for:
+        port: "8080"
+        timeout: "300"

@@ -47,16 +47,3 @@
   roles:
     - role: ansible-role-mariadb-connector-java
       mariadb_connector_java_dest: "/opt/atlassian/jira/lib/mariadb-connector-java.jar"
-
-- hosts: all
-  remote_user: root
-  tasks:
-    - name: service jira start
-      service:
-        name: "jira"
-        enabled: "yes"
-
-    - name: check port
-      wait_for:
-        port: "8080"
-        timeout: "300"

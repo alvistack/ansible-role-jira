@@ -38,6 +38,9 @@
       jira_home: "/var/atlassian/application-data/jira"
       # Location for the $JIRA_CATALINA directory.
       jira_catalina: "/opt/atlassian/jira"
+      # JIRA Apache Tomcat connector and server port.
+      jira_connector_port: "8080"
+      jira_server_port: "8005"
 
 - hosts: all
   remote_user: root

@@ -13,33 +13,43 @@
 #               Provide commands for manually starting and stopping JIRA.
 ### END INIT INFO
 
-RUN_AS_USER={{ jira_owner }}
-CATALINA_HOME={{ jira_catalina }}
-PID_FILE={{ jira_catalina }}/work/catalina.pid
+JIRA_OWNER={{ jira_owner }}
+JIRA_GROUP={{ jira_group }}
+JIRA_HOME={{ jira_home }}
+JIRA_CATALINA={{ jira_catalina }}
+JIRA_CATALINA_PID={{ jira_catalina }}/work/catalina.pid
 
 start() {
     echo "Starting JIRA: "
-    if [ "x$USER" != "x$RUN_AS_USER" ]; then
-        su -s /bin/bash $RUN_AS_USER -c "$CATALINA_HOME/bin/start-jira.sh $@"
+
+    mkdir -p ${JIRA_HOME}
+    chmod -f 755 ${JIRA_HOME}
+    chown -Rf ${JIRA_OWNER}:${JIRA_GROUP} ${JIRA_HOME}
+
+    if [ "x${USER}" != "x${JIRA_OWNER}" ]; then
+        su -s /bin/bash ${JIRA_OWNER} -c "${JIRA_CATALINA}/bin/start-jira.sh $@"
     else
-        $CATALINA_HOME/bin/start-jira.sh $@
+        ${JIRA_CATALINA}/bin/start-jira.sh $@
     fi
+
     echo "done."
 }
 
 stop() {
     echo "Shutting down JIRA: "
-    if [ "x$USER" != "x$RUN_AS_USER" ]; then
-        su -s /bin/bash $RUN_AS_USER -c "$CATALINA_HOME/bin/stop-jira.sh $@"
+
+    if [ "x${USER}" != "x${JIRA_OWNER}" ]; then
+        su -s /bin/bash ${JIRA_OWNER} -c "${JIRA_CATALINA}/bin/stop-jira.sh $@"
     else
-        $CATALINA_HOME/bin/stop-jira.sh $@
+        ${JIRA_CATALINA}/bin/stop-jira.sh $@
     fi
+
     echo "done."
 }
 
 status() {
-    if [ -f $PID_FILE ]; then
-        PID=$(<$PID_FILE)
+    if [ -f ${JIRA_CATALINA_PID} ]; then
+        PID=$(<${JIRA_CATALINA_PID})
         if $(kill -0 "${PID:-}" 2> /dev/null); then
             echo "JIRA is running"
             exit 0
@@ -53,6 +63,7 @@ status() {
     fi
 
     echo "JIRA is not running"
+
     exit 3
 }
 

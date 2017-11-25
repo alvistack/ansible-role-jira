@@ -58,7 +58,7 @@
 
     - name: check port
       wait_for:
-        port: "{{ jira_connector_port }}"
+        port: "8080"
         timeout: "300"
         delay: "180"
       async: "300"
@@ -66,7 +66,7 @@
 
     - name: check page
       uri:
-        url: "http://localhost:{{ jira_connector_port }}"
+        url: "http://localhost:8080"
         status_code: "200"
         timeout: "300"
         return_content: "yes"

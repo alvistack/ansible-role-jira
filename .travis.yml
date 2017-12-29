@@ -38,8 +38,8 @@ install:
 script:
   - yamllint -c .yamllint .
   - ansible-playbook -i $DOCKER_ID, -c docker tests/test.yml --syntax-check
-  - ansible-playbook -i $DOCKER_ID, -c docker tests/test.yml --diff --verbose
-  - ansible-playbook -i $DOCKER_ID, -c docker tests/test.yml --diff --verbose
+  - ansible-playbook -i $DOCKER_ID, -c docker tests/test.yml --diff
+  - ansible-playbook -i $DOCKER_ID, -c docker tests/test.yml --diff
   - tail -n 1 $ANSIBLE_LOG_PATH | grep -Eq 'changed=0 +unreachable=0 +failed=0'
 
 notifications:

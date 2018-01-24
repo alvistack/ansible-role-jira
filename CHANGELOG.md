@@ -1,6 +1,13 @@
 Ansible Role for JIRA
 =====================
 
+1.2.0 - TBC
+-----------
+
+### Major Changes
+
+-   Add Ubuntu 17.10 and 18.04 support
+
 1.1.0 - 2017-11-23
 ------------------
 

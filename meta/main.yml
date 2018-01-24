@@ -25,6 +25,8 @@ galaxy_info:
       versions:
         - trusty
         - xenial
+        - artful
+        - bionic
     - name: EL
       versions:
         - 6

@@ -66,6 +66,7 @@
       async: "300"
       poll: "10"
       register: result
+      until: result.status == 200
 
     - name: check result
       fail:

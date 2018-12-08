@@ -44,44 +44,50 @@
     loop_var: "loop_var"
   tags: jira
 
-- name: prepare files
+- name: prepare directories
   file:
     dest: "{{ item.dest }}"
-    owner: "{{ item.owner }}"
-    group: "{{ item.group }}"
-    mode: "{{ item.mode }}"
-    state: "{{ item.state }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0755') }}"
+    state: "{{ item.state | default('directory') }}"
   with_items:
-    - { dest: "{{ jira_catalina }}", owner: "{{ jira_owner }}", group: "{{ jira_group }}", mode: "0755", state: "directory" }
-    - { dest: "{{ jira_home }}", owner: "{{ jira_owner }}", group: "{{ jira_group }}", mode: "0755", state: "directory" }
+    - { dest: "/opt/atlassian/jira", owner: "daemon", group: "daemon" }
+    - { dest: "/var/atlassian/application-data/jira", owner: "daemon", group: "daemon" }
   tags: jira
 
 - name: unarchive package
   shell: |
-    ARCHIVE="`mktemp --suffix=tar.gz`"
-    curl -sL {{ jira_url }} > $ARCHIVE
-    tar zxf $ARCHIVE -C {{ jira_catalina }} --strip-components=1
-    chown -Rf {{ jira_owner }}:{{ jira_group }} {{ jira_catalina }}
-    rm -rf $ARCHIVE
+    cd /opt/atlassian/jira
+    curl -skL {{ jira_download_url }} | tar zxf - --strip-components 1
+    cd /opt/atlassian/jira/lib
+    rm -rf *mysql*.jar
+    curl -skL {{ mysql_jdbc_download_url }} tar zxf - --strip-components 1 --wildcards "mysql*/*mysql*.jar"
+    cd /opt/atlassian/jira/lib
+    rm -rf *postgresql*.jar
+    curl -skL {{ postgresql_jdbc_download_url }} -O
+    chown -Rf daemon:daemon /opt/atlassian/jira
   args:
-    creates: "{{ jira_catalina }}/bin/start-jira.sh"
+    creates: "/opt/atlassian/jira/bin/start-jira.sh"
   tags: jira
 
 - name: copy templates
   template:
-    src: "{{ item.src }}"
+    src: "./templates{{ item.dest }}.j2"
     dest: "{{ item.dest }}"
-    owner: "{{ item.owner }}"
-    group: "{{ item.group }}"
-    mode: "{{ item.mode }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
   with_items:
-    - { src: "etc/init.d/jira.j2", dest: "/etc/init.d/jira", owner: "root", group: "root", mode: "0755" }
-    - { src: "opt/atlassian/jira/bin/setenv.sh.j2", dest: "{{ jira_catalina }}/bin/setenv.sh", owner: "{{ jira_owner }}", group: "{{ jira_group }}", mode: "0644" }
-    - { src: "opt/atlassian/jira/conf/server.xml.j2", dest: "{{ jira_catalina }}/conf/server.xml", owner: "{{ jira_owner }}", group: "{{ jira_group }}", mode: "0644" }
+    - { dest: "/etc/init.d/jira", mode: "0755" }
+    - { dest: "/opt/atlassian/jira/bin/setenv.sh", owner: "daemon", group: "daemon" }
+    - { dest: "/opt/atlassian/jira/conf/server.xml", owner: "daemon", group: "daemon" }
   tags: jira
 
 - name: enable service
   service:
-    name: "jira"
-    enabled: "yes"
+    name: jira
+    enabled: yes
+  changed_when: false
+  ignore_errors: yes
   tags: jira

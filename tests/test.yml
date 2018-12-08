@@ -14,53 +14,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Use `gather_faces: no` to initialize Python on system that not yet
+# pre-installed with Python (e.g. Ubuntu 16.04 Cloud Image and Docker Image).
 - hosts: all
   remote_user: root
   gather_facts: no
   roles:
-    - role: ansible-role-python
+    - role: python
 
 - hosts: all
   remote_user: root
   roles:
-    - role: ansible-role-apt
-    - role: ansible-role-yum
-    - role: ansible-role-java
-
-- hosts: all
-  remote_user: root
-  roles:
-    - role: ansible-role-jira
-      # Owner and group for JIRA.
-      jira_owner: "daemon"
-      jira_group: "daemon"
-      # Location for the $JIRA_HOME directory.
-      jira_home: "/var/atlassian/application-data/jira"
-      # Location for the $JIRA_CATALINA directory.
-      jira_catalina: "/opt/atlassian/jira"
-      # JIRA Apache Tomcat connector and server port.
-      jira_connector_port: "8080"
-      jira_server_port: "8005"
-
-- hosts: all
-  remote_user: root
-  roles:
-    - role: ansible-role-mariadb-connector-java
-      mariadb_connector_java_dest: "/opt/atlassian/jira/lib/mariadb-connector-java.jar"
+    - role: apt
+    - role: yum
+    - role: java
+    - role: jira
 
 - hosts: all
   remote_user: root
   tasks:
     - name: start service
       service:
-        name: "jira"
-        state: "started"
+        name: jira
+        state: started
+      changed_when: false
+      ignore_errors: yes
 
     - name: check port
       wait_for:
         port: "8080"
         timeout: "300"
-        delay: "180"
+        delay: "10"
       async: "300"
       poll: "10"
 
@@ -76,4 +60,4 @@
 
     - name: check result
       fail:
-      when: "'JIRA - JIRA setup' not in result.content"
+      when: "'jira' not in result.content"

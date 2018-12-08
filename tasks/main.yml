@@ -80,7 +80,7 @@
     mode: "{{ item.mode | default('0644') }}"
   with_items:
     - { dest: "/etc/init.d/jira", mode: "0755" }
-    - { dest: "/opt/atlassian/jira/bin/setenv.sh", owner: "daemon", group: "daemon" }
+    - { dest: "/opt/atlassian/jira/bin/setenv.sh", owner: "daemon", group: "daemon", mode: "0755" }
     - { dest: "/opt/atlassian/jira/conf/server.xml", owner: "daemon", group: "daemon" }
   tags: jira
 

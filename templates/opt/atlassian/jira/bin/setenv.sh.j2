@@ -3,18 +3,23 @@
 #
 # One way to set the JIRA HOME path is here via this variable.  Simply uncomment it and set a valid path like /jira/home.  You can of course set it outside in the command terminal.  That will also work.
 #
-JIRA_HOME="{{ jira_home }}"
+JIRA_HOME="${JIRA_HOME:-"/var/atlassian/application-data/jira"}"
 
 #
 #  Occasionally Atlassian Support may recommend that you set some specific JVM arguments.  You can use this variable below to do that.
 #
-JVM_SUPPORT_RECOMMENDED_ARGS="{{ jira_jvm_support_recommended_args }}"
+JVM_SUPPORT_RECOMMENDED_ARGS="${JVM_SUPPORT_RECOMMENDED_ARGS:-"{{ jira_jvm_support_recommended_args }}"}"
 
 #
 # The following 2 settings control the minimum and maximum given to the JIRA Java virtual machine.  In larger JIRA instances, the maximum amount will need to be increased.
 #
-JVM_MINIMUM_MEMORY="{{ jira_jvm_minimum_memory }}"
-JVM_MAXIMUM_MEMORY="{{ jira_jvm_maximum_memory }}"
+JVM_MINIMUM_MEMORY="${JVM_MINIMUM_MEMORY:-"{{ jira_jvm_minimum_memory }}"}"
+JVM_MAXIMUM_MEMORY="${JVM_MAXIMUM_MEMORY:-"{{ jira_jvm_maximum_memory }}"}"
+
+#
+# The following setting configures the size of JVM code cache.  A high value of reserved size allows Jira to work with more installed apps.
+#
+JVM_CODE_CACHE_ARGS='-XX:InitialCodeCacheSize=32m -XX:ReservedCodeCacheSize=512m'
 
 #
 # The following are the required arguments for JIRA.
@@ -36,7 +41,7 @@ JVM_REQUIRED_ARGS='-Djava.awt.headless=true -Datlassian.standalone=JIRA -Dorg.ap
 # Prevents the JVM from suppressing stack traces if a given type of exception
 # occurs frequently, which could make it harder for support to diagnose a problem.
 #-----------------------------------------------------------------------------------
-JVM_EXTRA_ARGS="-XX:-OmitStackTraceInFastThrow"
+JVM_EXTRA_ARGS="-XX:-OmitStackTraceInFastThrow -Dcatalina.connector.scheme=${CATALINA_CONNECTOR_SCHEME:-"{{ jira_catalina_connector_scheme }}"} -Dcatalina.connector.secure=${CATALINA_CONNECTOR_SECURE:-"{{ jira_catalina_connector_secure }}"} -Dcatalina.connector.proxyName=${CATALINA_CONNECTOR_PROXYNAME:-"{{ jira_catalina_connector_proxyname }}"} -Dcatalina.connector.proxyPort=${CATALINA_CONNECTOR_PROXYPORT:-"{{ jira_catalina_connector_proxyport }}"} -Dcatalina.context.path=${CATALINA_CONTEXT_PATH:-"{{ jira_catalina_context_path }}"}"
 
 PRGDIR=`dirname "$0"`
 cat "${PRGDIR}"/jirabanner.txt
@@ -54,7 +59,7 @@ if [ "$JIRA_HOME" != "" ]; then
     fi
 fi
 
-JAVA_OPTS="-Xms${JVM_MINIMUM_MEMORY} -Xmx${JVM_MAXIMUM_MEMORY} ${JAVA_OPTS} ${JVM_REQUIRED_ARGS} ${DISABLE_NOTIFICATIONS} ${JVM_SUPPORT_RECOMMENDED_ARGS} ${JVM_EXTRA_ARGS} ${JIRA_HOME_MINUSD} ${START_JIRA_JAVA_OPTS}"
+JAVA_OPTS="-Xms${JVM_MINIMUM_MEMORY} -Xmx${JVM_MAXIMUM_MEMORY} ${JVM_CODE_CACHE_ARGS} ${JAVA_OPTS} ${JVM_REQUIRED_ARGS} ${DISABLE_NOTIFICATIONS} ${JVM_SUPPORT_RECOMMENDED_ARGS} ${JVM_EXTRA_ARGS} ${JIRA_HOME_MINUSD} ${START_JIRA_JAVA_OPTS}"
 
 export JAVA_OPTS
 
@@ -113,3 +118,5 @@ GC_JVM_PARAMETERS="-Xloggc:$LOGBASEABS/logs/atlassian-jira-gc-%t.log -XX:+UseGCL
 
 CATALINA_OPTS="${GC_JVM_PARAMETERS} ${CATALINA_OPTS}"
 export CATALINA_OPTS
+
+sed -i "s/\(<session-timeout>\).*\(<\/session-timeout>\)/\1${SESSION_TIMEOUT:-"{{ jira_session_timeout }}"}\2/g" ${JIRA_CATALINA}/atlassian-jira/WEB-INF/web.xml

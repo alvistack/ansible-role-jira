@@ -8,19 +8,19 @@
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Initscript for Atlassian JIRA
-# Description:  Automatically start Atlassian JIRA when the system starts up.
-#               Provide commands for manually starting and stopping JIRA.
+# Short-Description: Initscript for Atlassian Jira
+# Description:  Automatically start Atlassian Jira when the system starts up.
+#               Provide commands for manually starting and stopping Jira.
 ### END INIT INFO
 
-JIRA_OWNER={{ jira_owner }}
-JIRA_GROUP={{ jira_group }}
-JIRA_HOME={{ jira_home }}
-JIRA_CATALINA={{ jira_catalina }}
-JIRA_CATALINA_PID={{ jira_catalina }}/work/catalina.pid
+JIRA_OWNER=${JIRA_OWNER:-daemon}
+JIRA_GROUP=${JIRA_GROUP:-daemon}
+JIRA_HOME=${JIRA_HOME:-/var/atlassian/application-data/jira}
+JIRA_CATALINA=${JIRA_CATALINA:-/opt/atlassian/jira}
+JIRA_CATALINA_PID=${JIRA_CATALINA}/work/catalina.pid
 
 start() {
-    echo "Starting JIRA: "
+    echo "Starting Jira: "
 
     mkdir -p ${JIRA_HOME}
     chmod -f 755 ${JIRA_HOME}
@@ -36,7 +36,7 @@ start() {
 }
 
 stop() {
-    echo "Shutting down JIRA: "
+    echo "Shutting down Jira: "
 
     if [ "x${USER}" != "x${JIRA_OWNER}" ]; then
         su -s /bin/bash ${JIRA_OWNER} -c "${JIRA_CATALINA}/bin/stop-jira.sh $@"
@@ -51,32 +51,35 @@ status() {
     if [ -f ${JIRA_CATALINA_PID} ]; then
         PID=$(<${JIRA_CATALINA_PID})
         if $(kill -0 "${PID:-}" 2> /dev/null); then
-            echo "JIRA is running"
+            echo "Jira is running"
             exit 0
         elif ps "${PID:-}" > /dev/null 2>&1; then
-            echo "JIRA is running"
+            echo "Jira is running"
             exit 0
         else
-            echo "JIRA is not running (pidfile exists)"
+            echo "Jira is not running (pidfile exists)"
             exit 1
         fi
     fi
 
-    echo "JIRA is not running"
+    echo "Jira is not running"
 
     exit 3
 }
 
 case "$1" in
     start)
-        start ${@:2}
+        shift
+        start $@
         ;;
     stop)
-        stop ${@:2}
+        shift
+        stop $@
         ;;
     restart)
-        stop ${@:2}
-        start ${@:2}
+        shift
+        stop $@
+        start $@
         ;;
     status)
         status

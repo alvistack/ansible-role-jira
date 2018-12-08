@@ -50,12 +50,12 @@ JIRA_HOME_MINUSD=""
 if [ "$JIRA_HOME" != "" ]; then
     echo $JIRA_HOME | grep -q " "
     if [ $? -eq 0 ]; then
-        echo ""
-        echo "--------------------------------------------------------------------------------------------------------------------"
-        echo "   WARNING : You cannot have a JIRA_HOME environment variable set with spaces in it.  This variable is being ignored"
-        echo "--------------------------------------------------------------------------------------------------------------------"
+	    echo ""
+	    echo "--------------------------------------------------------------------------------------------------------------------"
+		echo "   WARNING : You cannot have a JIRA_HOME environment variable set with spaces in it.  This variable is being ignored"
+	    echo "--------------------------------------------------------------------------------------------------------------------"
     else
-        JIRA_HOME_MINUSD=-Djira.home=$JIRA_HOME
+		JIRA_HOME_MINUSD=-Djira.home=$JIRA_HOME
     fi
 fi
 
@@ -84,16 +84,16 @@ fi
 export CATALINA_PID
 
 if [ -z "$CATALINA_BASE" ]; then
-    if [ -z "$CATALINA_HOME" ]; then
-        LOGBASE=$PRGDIR
-        LOGTAIL=..
-    else
-        LOGBASE=$CATALINA_HOME
-        LOGTAIL=.
-    fi
-else
-    LOGBASE=$CATALINA_BASE
+  if [ -z "$CATALINA_HOME" ]; then
+    LOGBASE=$PRGDIR
+    LOGTAIL=..
+  else
+    LOGBASE=$CATALINA_HOME
     LOGTAIL=.
+  fi
+else
+  LOGBASE=$CATALINA_BASE
+  LOGTAIL=.
 fi
 
 PUSHED_DIR=`pwd`

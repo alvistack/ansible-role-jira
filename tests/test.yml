@@ -28,6 +28,15 @@
     - role: apt
     - role: yum
     - role: java
+      apt:
+        - { state: "latest", name: "openjdk-8-jdk" }
+      java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
+      when: ansible_os_family | lower == 'debian'
+    - role: java
+      yum:
+        - { state: "latest", name: "java-1.8.0-openjdk" }
+      java_home: "/usr/lib/jvm/jre-openjdk"
+      when: ansible_os_family | lower == 'redhat'
     - role: jira
 
 - hosts: all

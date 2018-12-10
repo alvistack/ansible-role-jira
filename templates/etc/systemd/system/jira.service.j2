@@ -1,0 +1,15 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Atlassian Jira
+After=syslog.target
+
+[Service]
+User=daemon
+Group=daemon
+ExecStart=/etc/init.d/jira start
+ExecStop=/etc/init.d/jira stop
+PIDFile=/opt/atlassian/jira/work/catalina.pid
+
+[Install]
+WantedBy=multi-user.target

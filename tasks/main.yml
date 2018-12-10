@@ -62,7 +62,7 @@
     curl -skL {{ jira_download_url }} | tar zxf - --strip-components 1
     cd /opt/atlassian/jira/lib
     rm -rf *mysql*.jar
-    curl -skL {{ mysql_jdbc_download_url }} tar zxf - --strip-components 1 --wildcards "mysql*/*mysql*.jar"
+    curl -skL {{ mysql_jdbc_download_url }} | tar zxf - --strip-components 1 --wildcards "mysql*/*mysql*.jar"
     cd /opt/atlassian/jira/lib
     rm -rf *postgresql*.jar
     curl -skL {{ postgresql_jdbc_download_url }} -O

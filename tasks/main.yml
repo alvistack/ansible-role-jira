@@ -52,6 +52,8 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   with_items:
+    - { dest: "/etc/init.d" }
+    - { dest: "/etc/systemd/system" }
     - { dest: "/opt/atlassian/jira", owner: "daemon", group: "daemon" }
     - { dest: "/var/atlassian/application-data/jira", owner: "daemon", group: "daemon" }
   tags: jira

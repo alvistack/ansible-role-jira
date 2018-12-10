@@ -22,12 +22,8 @@ JIRA_CATALINA_PID=${JIRA_CATALINA}/work/catalina.pid
 start() {
     echo "Starting Jira: "
 
-    mkdir -p ${JIRA_HOME}
-    chmod -f 755 ${JIRA_HOME}
-    chown -Rf ${JIRA_OWNER}:${JIRA_GROUP} ${JIRA_HOME}
-
     if [ "x${USER}" != "x${JIRA_OWNER}" ]; then
-        su -s /bin/bash ${JIRA_OWNER} -c "${JIRA_CATALINA}/bin/start-jira.sh $@"
+        su -l -s /bin/bash ${JIRA_OWNER} -c "${JIRA_CATALINA}/bin/start-jira.sh $@"
     else
         ${JIRA_CATALINA}/bin/start-jira.sh $@
     fi
@@ -39,7 +35,7 @@ stop() {
     echo "Shutting down Jira: "
 
     if [ "x${USER}" != "x${JIRA_OWNER}" ]; then
-        su -s /bin/bash ${JIRA_OWNER} -c "${JIRA_CATALINA}/bin/stop-jira.sh $@"
+        su -l -s /bin/bash ${JIRA_OWNER} -c "${JIRA_CATALINA}/bin/stop-jira.sh $@"
     else
         ${JIRA_CATALINA}/bin/stop-jira.sh $@
     fi

@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Add systemd service support
+
 ## 2.1.0 - 2018-12-08
 
 ### Major Changes

@@ -23,7 +23,7 @@ start() {
     echo "Starting Jira: "
 
     if [ "x${USER}" != "x${JIRA_OWNER}" ]; then
-        su -l -s /bin/bash ${JIRA_OWNER} -c "${JIRA_CATALINA}/bin/start-jira.sh $@"
+        su -s /bin/bash ${JIRA_OWNER} -c "${JIRA_CATALINA}/bin/start-jira.sh $@"
     else
         ${JIRA_CATALINA}/bin/start-jira.sh $@
     fi
@@ -35,7 +35,7 @@ stop() {
     echo "Shutting down Jira: "
 
     if [ "x${USER}" != "x${JIRA_OWNER}" ]; then
-        su -l -s /bin/bash ${JIRA_OWNER} -c "${JIRA_CATALINA}/bin/stop-jira.sh $@"
+        su -s /bin/bash ${JIRA_OWNER} -c "${JIRA_CATALINA}/bin/stop-jira.sh $@"
     else
         ${JIRA_CATALINA}/bin/stop-jira.sh $@
     fi

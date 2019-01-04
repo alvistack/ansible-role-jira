@@ -22,7 +22,7 @@ export ANSIBLE_FORCE_COLOR=true
 export ANSIBLE_LOG_PATH="./ansible.log"
 export ANSIBLE_ROLES_PATH="$HOME/.ansible/roles"
 
-LXC_IMAGE=${LXC_IMAGE:-"ubuntu:16.04"}
+LXC_IMAGE=${LXC_IMAGE:-"images:ubuntu/18.04"}
 LXC_ID=${LXC_ID:-"$(cat /dev/urandom | tr -dc a-z | head -c1)$(cat /dev/urandom | tr -dc a-z0-9 | head -c11)"}
 lxc restart $LXC_ID || lxc launch $LXC_IMAGE $LXC_ID
 

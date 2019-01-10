@@ -13,3 +13,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+- name: systemctl daemon-reload
+  systemd:
+    daemon_reload: yes
+  when:
+    - ansible_service_mgr == 'systemd'
+  changed_when: false
+  ignore_errors: yes

@@ -32,7 +32,6 @@ jira_jvm_support_recommended_args: "-Datlassian.plugins.enable.wait=300"
 jira_session_timeout: "300"
 
 # URL for download archives.
-jira_download_url: "https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-7.13.0.tar.gz"
+jira_download_url: "https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-core-7.13.0.tar.gz"
 mysql_jdbc_download_url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.13.tar.gz"
 postgresql_jdbc_download_url: "https://jdbc.postgresql.org/download/postgresql-42.2.5.jar"
-oracle_jdbc_download_url: "http://download.oracle.com/otn/utilities_drivers/jdbc/183/ojdbc8.jar"

@@ -16,8 +16,8 @@
 
 - name: systemctl daemon-reload
   systemd:
-    daemon_reload: yes
+    daemon_reload: true
   when:
     - ansible_service_mgr == 'systemd'
   changed_when: false
-  ignore_errors: yes
+  ignore_errors: true

@@ -14,29 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Use `gather_faces: no` to initialize Python on system that not yet
-# pre-installed with Python (e.g. Ubuntu 16.04 Cloud Image and Docker Image).
 - hosts: all
   remote_user: root
-  gather_facts: no
   roles:
     - role: python
-
-- hosts: all
-  remote_user: root
-  roles:
     - role: apt
-    - role: yum
     - role: java
       apt:
         - { state: "latest", name: "openjdk-8-jdk" }
       java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
-      when: ansible_os_family | lower == 'debian'
-    - role: java
-      yum:
-        - { state: "latest", name: "java-1.8.0-openjdk" }
-      java_home: "/usr/lib/jvm/jre-openjdk"
-      when: ansible_os_family | lower == 'redhat'
     - role: jira
 
 - hosts: all
@@ -47,7 +33,7 @@
         name: jira
         state: started
       changed_when: false
-      ignore_errors: yes
+      ignore_errors: true
 
     - name: check port
       wait_for:
@@ -62,7 +48,7 @@
         url: "http://localhost:8080"
         status_code: "200"
         timeout: "300"
-        return_content: "yes"
+        return_content: true
       async: "300"
       poll: "10"
       register: result

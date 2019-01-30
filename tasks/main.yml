@@ -24,7 +24,7 @@
         - "{{ ansible_distribution | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
       paths: "../vars"
-      skip: "yes"
+      skip: true
   loop_control:
     loop_var: "loop_var"
   tags: jira
@@ -39,7 +39,7 @@
         - "{{ ansible_distribution | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
       paths: "."
-      skip: "yes"
+      skip: true
   loop_control:
     loop_var: "loop_var"
   tags: jira
@@ -108,7 +108,7 @@
 - name: enable service
   service:
     name: jira
-    enabled: yes
+    enabled: true
   changed_when: false
-  ignore_errors: yes
+  ignore_errors: true
   tags: jira

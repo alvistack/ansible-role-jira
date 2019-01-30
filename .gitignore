@@ -1,2 +1,4 @@
+*.pyc
 *.retry
+__pycache__
 ansible.log

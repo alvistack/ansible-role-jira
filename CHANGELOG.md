@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Run systemd service with specific system user
+
 ## 2.3.0 - 2019-01-30
 
 ### Major Changes

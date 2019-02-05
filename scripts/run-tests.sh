@@ -25,6 +25,4 @@ export ANSIBLE_ROLES_PATH="$HOME/.ansible/roles"
 export LXC_IMAGE=${LXC_IMAGE:-"ubuntu/bionic/amd64"}
 export LXC_ID=${LXC_ID:-"$(cat /dev/urandom | tr -dc a-z | head -c1)$(cat /dev/urandom | tr -dc a-z0-9 | head -c11)"}
 
-export MOLECULE_SCENARIO_NAME=${MOLECULE_SCENARIO_NAME:-"default"}
-
-molecule test -s $MOLECULE_SCENARIO_NAME
+molecule test $@

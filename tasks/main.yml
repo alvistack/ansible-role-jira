@@ -44,6 +44,26 @@
     loop_var: "loop_var"
   tags: jira
 
+- name: groupadd
+  group:
+    name: "jira"
+    gid: "68080"
+    system: true
+    state: "present"
+  tags: jira
+
+- name: useradd
+  user:
+    name: "jira"
+    group: "jira"
+    uid: "68080"
+    home: "/var/atlassian/application-data/jira"
+    shell: "/usr/sbin/nologin"
+    system: true
+    create_home: false
+    state: "present"
+  tags: jira
+
 - name: prepare directories
   file:
     dest: "{{ item.dest }}"
@@ -53,11 +73,11 @@
     state: "{{ item.state | default('directory') }}"
   with_items:
     - { dest: "/etc/init.d" }
-    - { dest: "/etc/systemd/system" }
-    - { dest: "/opt/atlassian/jira", owner: "daemon", group: "daemon" }
-    - { dest: "/opt/atlassian/jira/bin", owner: "daemon", group: "daemon" }
-    - { dest: "/opt/atlassian/jira/conf", owner: "daemon", group: "daemon" }
-    - { dest: "/var/atlassian/application-data/jira", owner: "daemon", group: "daemon" }
+    - { dest: "/lib/systemd/system" }
+    - { dest: "/opt/atlassian/jira", owner: "jira", group: "jira" }
+    - { dest: "/opt/atlassian/jira/bin", owner: "jira", group: "jira" }
+    - { dest: "/opt/atlassian/jira/conf", owner: "jira", group: "jira" }
+    - { dest: "/var/atlassian/application-data/jira", owner: "jira", group: "jira" }
   tags: jira
 
 - name: unarchive package
@@ -70,7 +90,7 @@
     cd /opt/atlassian/jira/lib
     rm -rf *postgresql*.jar
     curl -skL {{ postgresql_jdbc_download_url }} -O
-    chown -Rf daemon:daemon /opt/atlassian/jira
+    chown -Rf jira:jira /opt/atlassian/jira
   args:
     creates: "/opt/atlassian/jira/bin/start-jira.sh"
   tags: jira
@@ -84,9 +104,9 @@
     mode: "{{ item.mode | default('0644') }}"
   with_items:
     - { dest: "/etc/init.d/jira", mode: "0755" }
-    - { dest: "/etc/systemd/system/jira.service" }
-    - { dest: "/opt/atlassian/jira/bin/setenv.sh", owner: "daemon", group: "daemon", mode: "0755" }
-    - { dest: "/opt/atlassian/jira/conf/server.xml", owner: "daemon", group: "daemon" }
+    - { dest: "/lib/systemd/system/jira.service" }
+    - { dest: "/opt/atlassian/jira/bin/setenv.sh", owner: "jira", group: "jira", mode: "0755" }
+    - { dest: "/opt/atlassian/jira/conf/server.xml", owner: "jira", group: "jira" }
   notify:
     - systemctl daemon-reload
   tags: jira
@@ -100,9 +120,9 @@
     state: "{{ item.state | default('file') }}"
   with_items:
     - { dest: "/etc/init.d/jira", mode: "0755" }
-    - { dest: "/etc/systemd/system/jira.service" }
-    - { dest: "/opt/atlassian/jira/bin/setenv.sh", owner: "daemon", group: "daemon", mode: "0755" }
-    - { dest: "/opt/atlassian/jira/conf/server.xml", owner: "daemon", group: "daemon" }
+    - { dest: "/lib/systemd/system/jira.service" }
+    - { dest: "/opt/atlassian/jira/bin/setenv.sh", owner: "jira", group: "jira", mode: "0755" }
+    - { dest: "/opt/atlassian/jira/conf/server.xml", owner: "jira", group: "jira" }
   tags: jira
 
 - name: enable service

@@ -47,7 +47,6 @@
 - name: groupadd
   group:
     name: "jira"
-    gid: "68080"
     system: true
     state: "present"
   tags: jira
@@ -56,7 +55,6 @@
   user:
     name: "jira"
     group: "jira"
-    uid: "68080"
     home: "/var/atlassian/application-data/jira"
     shell: "/usr/sbin/nologin"
     system: true

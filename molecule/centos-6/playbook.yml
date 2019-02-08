@@ -18,7 +18,7 @@
   remote_user: root
   roles:
     - role: python
-    - role: yum
+    - role: bootstrap
     - role: java
       yum:
         - { state: "latest", name: "java-1.8.0-openjdk" }

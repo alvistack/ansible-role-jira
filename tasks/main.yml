@@ -80,6 +80,7 @@
 
 - name: unarchive package
   shell: |
+    set -o pipefail
     cd /opt/atlassian/jira
     curl -skL {{ jira_download_url }} | tar zxf - --strip-components=1
     cd /opt/atlassian/jira/lib

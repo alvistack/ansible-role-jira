@@ -91,6 +91,7 @@
     curl -skL {{ postgresql_jdbc_download_url }} -O
     chown -Rf jira:jira /opt/atlassian/jira
   args:
+    executable: /bin/bash
     creates: "/opt/atlassian/jira/bin/start-jira.sh"
   tags: jira
 

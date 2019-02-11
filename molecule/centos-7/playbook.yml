@@ -20,7 +20,7 @@
     - role: python
     - role: bootstrap
     - role: java
-      yum:
+      package:
         - { state: "latest", name: "java-1.8.0-openjdk" }
       java_home: "/usr/lib/jvm/jre-openjdk"
     - role: jira

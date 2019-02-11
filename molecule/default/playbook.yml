@@ -20,12 +20,12 @@
     - role: python
     - role: bootstrap
     - role: java
-      apt:
+      package:
         - { state: "latest", name: "openjdk-8-jdk" }
       java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
       when: ansible_os_family | lower == 'debian'
     - role: java
-      yum:
+      package:
         - { state: "latest", name: "java-1.8.0-openjdk" }
       java_home: "/usr/lib/jvm/jre-openjdk"
       when: ansible_os_family | lower == 'redhat'

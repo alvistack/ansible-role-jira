@@ -6,12 +6,12 @@ language: python
 
 env:
   matrix:
-    - MOLECULE_OPTIONS="-s centos-6"
-    - MOLECULE_OPTIONS="-s centos-7"
-    - MOLECULE_OPTIONS="-s suse-15"
-    - MOLECULE_OPTIONS="-s suse-42"
-    - MOLECULE_OPTIONS="-s ubuntu-16.04"
-    - MOLECULE_OPTIONS="-s ubuntu-18.04"
+    - MOLECULE_OPTIONS="--debug test -s centos-6"
+    - MOLECULE_OPTIONS="--debug test -s centos-7"
+    - MOLECULE_OPTIONS="--debug test -s suse-15"
+    - MOLECULE_OPTIONS="--debug test -s suse-42"
+    - MOLECULE_OPTIONS="--debug test -s ubuntu-16.04"
+    - MOLECULE_OPTIONS="--debug test -s ubuntu-18.04"
 
 before_install:
   - sudo apt-get -y purge lxc-* lxd-* && sudo apt-get -y autoremove

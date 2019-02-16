@@ -23,6 +23,7 @@ platforms:
     url: unix:/var/snap/lxd/common/lxd/unix.socket
     source:
       server: https://images.linuxcontainers.org
+      protocol: simplestreams
       alias: ubuntu/xenial/amd64
 lint:
   name: yamllint

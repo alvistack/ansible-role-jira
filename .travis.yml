@@ -6,7 +6,6 @@ language: python
 
 env:
   matrix:
-    - MOLECULE_OPTIONS="-s centos-6"
     - MOLECULE_OPTIONS="-s centos-7"
     - MOLECULE_OPTIONS="-s suse-15"
     - MOLECULE_OPTIONS="-s ubuntu-16.04"

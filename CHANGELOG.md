@@ -5,7 +5,7 @@
 ### Major Changes
 
   - Run systemd service with specific system user
-  - Add openSUSE Leap 42/15 support
+  - Add openSUSE Leap 15 support
 
 ## 2.3.0 - 2019-01-30
 

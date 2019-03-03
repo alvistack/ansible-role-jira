@@ -28,11 +28,9 @@ galaxy_info:
         - bionic
     - name: EL
       versions:
-        - 6
         - 7
     - name: opensuse
       versions:
-        - 42
         - 15
   galaxy_tags:
     - system

@@ -17,7 +17,6 @@
 - hosts: all
   remote_user: root
   roles:
-    - role: python
     - role: bootstrap
     - role: java
       package:

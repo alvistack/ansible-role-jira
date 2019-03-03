@@ -1,11 +1,16 @@
 # Ansible Role for Jira
 
-## 2.4.0 - TBC
+## 2.5.0 - TBC
+
+### Major Changes
+
+## 2.4.0 - 2019-03-03
 
 ### Major Changes
 
   - Run systemd service with specific system user
-  - Add openSUSE Leap 42/15 support
+  - Add openSUSE Leap 15 support
+  - Remove CentOS 6 support
 
 ## 2.3.0 - 2019-01-30
 

@@ -14,5 +14,5 @@
 
 ansible
 ansible-lint
-molecule
+molecule>=2.20.0.0a1
 yamllint

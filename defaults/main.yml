@@ -32,6 +32,15 @@ jira_jvm_support_recommended_args: "-Datlassian.plugins.enable.wait=300 -XX:+Unl
 jira_session_timeout: "300"
 
 # URL for download archives.
-jira_download_url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.0.2.tar.gz"
-mysql_jdbc_download_url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.14.tar.gz"
-postgresql_jdbc_download_url: "https://jdbc.postgresql.org/download/postgresql-42.2.5.jar"
+jira_download:
+  url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.0.2.tar.gz"
+  dest: "/tmp/atlassian-jira-core-8.0.2.tar.gz"
+  checksum: "sha1:0fd6249c407a03cceef635b8c73e0cde8910a2a8"
+mysql_jdbc_download:
+  url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.14.tar.gz"
+  dest: "/tmp/mysql-connector-java-8.0.14.tar.gz"
+  checksum: "sha1:ac684534f948b312ac2e3e5d9adfe28c05d62a5a"
+postgresql_jdbc_download:
+  url: "https://jdbc.postgresql.org/download/postgresql-42.2.5.jar"
+  dest: "/tmp/postgresql-42.2.5.jar"
+  checksum: "sha1:951b7eda125f3137538a94e2cbdcf744088ad4c2"

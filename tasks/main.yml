@@ -78,17 +78,30 @@
     - { dest: "/var/atlassian/application-data/jira", owner: "jira", group: "jira" }
   tags: jira
 
+- name: download archive
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+    checksum: "{{ item.checksum }}"
+  with_items:
+    - "{{ jira_download }}"
+    - "{{ mysql_jdbc_download }}"
+    - "{{ postgresql_jdbc_download }}"
+  register: result
+  until: result is succeeded
+  tags: jira
+
 - name: unarchive package
   shell: |
     set -o pipefail
     cd /opt/atlassian/jira
-    curl -skL {{ jira_download_url }} | tar zxf - --strip-components=1
+    tar zxf {{ jira_download.dest }} --strip-components=1
     cd /opt/atlassian/jira/lib
     rm -rf *mysql*.jar
-    curl -skL {{ mysql_jdbc_download_url }} | tar zxf - --strip-components=1 --wildcards "mysql*/*mysql*.jar"
+    tar zxf {{ mysql_jdbc_download.dest }} --strip-components=1 --wildcards "mysql*/*mysql*.jar"
     cd /opt/atlassian/jira/lib
     rm -rf *postgresql*.jar
-    curl -skL {{ postgresql_jdbc_download_url }} -O
+    cp {{ postgresql_jdbc_download.dest }} .
     chown -Rf jira:jira /opt/atlassian/jira
   args:
     executable: "/bin/bash"

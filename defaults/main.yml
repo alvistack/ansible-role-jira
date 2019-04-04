@@ -33,9 +33,9 @@ jira_session_timeout: "300"
 
 # URL for download archives.
 jira_download:
-  url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.0.2.tar.gz"
-  dest: "/tmp/atlassian-jira-core-8.0.2.tar.gz"
-  checksum: "sha1:0fd6249c407a03cceef635b8c73e0cde8910a2a8"
+  url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.1.0.tar.gz"
+  dest: "/tmp/atlassian-jira-core-8.1.0.tar.gz"
+  checksum: "sha1:5d3c241dfa5da2a8eecb8cc875d5cbd34fa62217"
 mysql_jdbc_download:
   url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.15.tar.gz"
   dest: "/tmp/mysql-connector-java-8.0.15.tar.gz"

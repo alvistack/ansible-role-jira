@@ -28,7 +28,7 @@ install:
   - ln -s $TRAVIS_BUILD_DIR $HOME/.ansible/roles/$ROLE
 
 script:
-  - sudo ./scripts/run-tests.sh $MOLECULE_OPTIONS
+  - travis_wait sudo ./scripts/run-tests.sh $MOLECULE_OPTIONS
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

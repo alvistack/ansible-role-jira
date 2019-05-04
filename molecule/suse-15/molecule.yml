@@ -19,7 +19,7 @@ scenario:
 driver:
   name: lxd
 platforms:
-  - name: ${LXC_ID}-1
+  - name: ${MOLECULE_INSTANCE_NAME}-1
     url: unix:/var/snap/lxd/common/lxd/unix.socket
     source:
       server: https://images.linuxcontainers.org

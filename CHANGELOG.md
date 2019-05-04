@@ -1,8 +1,14 @@
 # Ansible Role for Jira
 
-## 2.6.0 - TBC
+## 2.7.0 - TBC
 
 ### Major Changes
+
+## 2.6.0 - 2019-05-04
+
+### Major Changes
+
+  - Refine Travis CI Molecue test cases
 
 ## 2.5.0 - 2019-04-17
 

@@ -121,7 +121,7 @@
     - { dest: "/opt/atlassian/jira/bin/setenv.sh", owner: "jira", group: "jira", mode: "0755" }
     - { dest: "/opt/atlassian/jira/conf/server.xml", owner: "jira", group: "jira" }
   notify:
-    - systemctl daemon-reload
+    - jira | systemctl daemon-reload
   tags: jira
 
 - name: prepare files

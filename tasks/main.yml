@@ -138,6 +138,10 @@
     - { dest: "/opt/atlassian/jira/conf/server.xml", owner: "jira", group: "jira" }
   tags: jira
 
+- name: flush handlers
+  meta: flush_handlers
+  tags: jira
+
 - name: enable service
   service:
     name: jira

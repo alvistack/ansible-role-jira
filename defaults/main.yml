@@ -37,11 +37,11 @@ jira_download:
   url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-{{ jira_version }}.tar.gz"
   dest: "/tmp/atlassian-jira-core-{{ jira_version }}.tar.gz"
   checksum: "sha1:5d3c241dfa5da2a8eecb8cc875d5cbd34fa62217"
-mysql_jdbc_version: "8.0.15"
+mysql_jdbc_version: "8.0.16"
 mysql_jdbc_download:
   url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-{{ mysql_jdbc_version }}.tar.gz"
   dest: "/tmp/mysql-connector-java-{{ mysql_jdbc_version }}.tar.gz"
-  checksum: "sha1:b67644eaa04af53f4b23869e24e1fec978da64b5"
+  checksum: "sha1:12a12227640d00c8e249b81c7818c12e4ad943ba"
 postgresql_jdbc_version: "42.2.5"
 postgresql_jdbc_download:
   url: "https://jdbc.postgresql.org/download/postgresql-{{ postgresql_jdbc_version }}.jar"

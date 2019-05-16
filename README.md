@@ -23,7 +23,7 @@ This role was designed for Ubuntu 16.04/18.04 or RHEL/CentOS 7 or openSUSE Leap 
 
 ## Example Playbook
 
-[molecule/default/playbook.yml](molecule/default/playbook.yml)
+[molecule/ubuntu-18.04/playbook.yml](molecule/ubuntu-18.04/playbook.yml)
 
 ## License
 

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ansible
+ansible>=2.8.0
 ansible-lint
-molecule>=2.20.0.0a1
+molecule>2.20.1
 yamllint

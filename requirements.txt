@@ -14,5 +14,5 @@
 
 ansible>=2.8.0
 ansible-lint
-molecule>2.20.1
+git+https://github.com/ansible/molecule.git@master#egg=molecule
 yamllint

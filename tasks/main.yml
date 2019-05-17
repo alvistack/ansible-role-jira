@@ -23,10 +23,11 @@
         - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
         - "{{ ansible_distribution | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
+        - "main.yml"
       paths: "../vars"
-      skip: true
   loop_control:
     loop_var: "loop_var"
+  ignore_errors: true
   tags: jira
 
 - name: include release specific tasks
@@ -39,9 +40,9 @@
         - "{{ ansible_distribution | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
       paths: "."
-      skip: true
   loop_control:
     loop_var: "loop_var"
+  ignore_errors: true
   tags: jira
 
 - name: groupadd

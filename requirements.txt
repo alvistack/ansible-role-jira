@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ansible-lint
 ansible>=2.8.0
+ansible-lint
 flake8
 git+https://github.com/ansible/molecule.git@master#egg=molecule
-git+https://github.com/alvistack/testinfra.git@lxd-backend#egg=testinfra
+testinfra>=3.0.4
 yamllint

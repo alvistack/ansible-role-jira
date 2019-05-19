@@ -9,7 +9,7 @@ Ansible Role for Atlassian Jira Installation.
 
 ## Requirements
 
-This role require Ansible 2.6 or higher.
+This role require Ansible 2.8 or higher.
 
 This role was designed for Ubuntu 16.04/18.04 or RHEL/CentOS 7 or openSUSE Leap 15.
 
@@ -23,7 +23,7 @@ This role was designed for Ubuntu 16.04/18.04 or RHEL/CentOS 7 or openSUSE Leap 
 
 ## Example Playbook
 
-[molecule/default/playbook.yml](molecule/default/playbook.yml)
+[molecule/ubuntu-18.04/playbook.yml](molecule/ubuntu-18.04/playbook.yml)
 
 ## License
 

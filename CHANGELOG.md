@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Improve service restart implementation
+
 ## 3.0.0 - 2019-05-20
 
 ### Major Changes

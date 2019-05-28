@@ -107,6 +107,9 @@
   args:
     executable: "/bin/bash"
     creates: "/opt/atlassian/jira/bin/start-jira.sh"
+  notify:
+    - jira | systemctl daemon-reload
+    - jira | systemctl restart
   tags: jira
 
 - name: copy templates
@@ -123,6 +126,7 @@
     - { dest: "/opt/atlassian/jira/conf/server.xml", owner: "jira", group: "jira" }
   notify:
     - jira | systemctl daemon-reload
+    - jira | systemctl restart
   tags: jira
 
 - name: prepare files

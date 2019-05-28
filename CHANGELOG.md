@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+  - Always use `become: true` with molecule, especially for vagrant
+  - Improve service restart implementation
+
 ## 3.0.0 - 2019-05-20
 
 ### Major Changes

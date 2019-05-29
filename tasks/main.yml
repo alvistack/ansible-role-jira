@@ -14,6 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: include default variables
+  include_vars: "../vars/main.yml"
+  tags: jira
+
 - name: include release specific variables
   include_vars: "{{ loop_var }}"
   with_first_found:
@@ -23,7 +27,6 @@
         - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
         - "{{ ansible_distribution | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
-        - "main.yml"
       paths: "../vars"
   loop_control:
     loop_var: "loop_var"

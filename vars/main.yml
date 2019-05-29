@@ -13,3 +13,33 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+_jira_download:
+  8.2.1:
+    url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.2.1.tar.gz"
+    dest: "/tmp/atlassian-jira-core-8.2.1.tar.gz"
+    checksum: "sha1:5985ed9c3755e11775401b86c934fd8557d73733"
+  8.2.0:
+    url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.2.0.tar.gz"
+    dest: "/tmp/atlassian-jira-core-8.2.0.tar.gz"
+    checksum: "sha1:10297ea20ea26b043d00f89b78442345f2a551c5"
+  8.1.1:
+    url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.1.1.tar.gz"
+    dest: "/tmp/atlassian-jira-core-8.1.1.tar.gz"
+    checksum: "sha1:ddc317f01ae54169eca70ad31205bbe9c8a03025"
+
+_mysql_jdbc_download:
+  8.0.16:
+    url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.16.tar.gz"
+    dest: "/tmp/mysql-connector-java-8.0.16.tar.gz"
+    checksum: "sha1:12a12227640d00c8e249b81c7818c12e4ad943ba"
+  5.1.47:
+    url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.47.tar.gz"
+    dest: "/tmp/mysql-connector-java-5.1.47.tar.gz"
+    checksum: "sha1:abf720d4e48fabcf677653a9f61993e093526616"
+
+_postgresql_jdbc_download:
+  42.2.5:
+    url: "https://jdbc.postgresql.org/download/postgresql-42.2.5.jar"
+    dest: "/tmp/postgresql-42.2.5.jar"
+    checksum: "sha1:951b7eda125f3137538a94e2cbdcf744088ad4c2"

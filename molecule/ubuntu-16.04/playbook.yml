@@ -19,6 +19,7 @@
   become: true
   roles:
     - role: bootstrap
+    - role: python
     - role: java
       package:
         - { state: "latest", name: "openjdk-8-jdk" }

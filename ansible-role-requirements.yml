@@ -21,3 +21,7 @@
 - name: java
   src: https://github.com/alvistack/ansible-role-java
   version: develop
+
+- name: python
+  src: https://github.com/alvistack/ansible-role-python
+  version: develop

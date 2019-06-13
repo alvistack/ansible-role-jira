@@ -1,6 +1,10 @@
 # Ansible Role for Jira
 
-## 3.1.0 - TBC
+## 3.2.0 - TBC
+
+### Major Changes
+
+## 3.1.0 - 2019-06-13
 
 ### Major Changes
 

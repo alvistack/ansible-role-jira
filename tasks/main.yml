@@ -117,8 +117,8 @@
 
 - name: copy templates
   template:
-    src: "./templates{{ item.dest }}.j2"
     dest: "{{ item.dest }}"
+    src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
     owner: "{{ item.owner | default('root') }}"
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"

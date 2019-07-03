@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Jira version.
-jira_version: "8.2.2"
+jira_version: "8.2.3"
 
 # Jira download details.
 jira_download: "{{ _jira_download[jira_version] }}"

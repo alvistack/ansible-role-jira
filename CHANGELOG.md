@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Download archives to `/var/cache/ansible`
+
 ## 3.2.0 - 2019-07-08
 
 ### Major Changes

@@ -21,7 +21,7 @@ jira_version: "8.3.2"
 jira_download: "{{ _jira_download[jira_version] }}"
 
 # MySQL JDBC version.
-mysql_jdbc_version: "5.1.47"
+mysql_jdbc_version: "5.1.48"
 
 # MySQL JDBC download details.
 mysql_jdbc_download: "{{ _mysql_jdbc_download[mysql_jdbc_version] }}"

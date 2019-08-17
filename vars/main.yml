@@ -57,6 +57,10 @@ _mysql_jdbc_download:
     url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.16.tar.gz"
     dest: "/var/cache/ansible/mysql-connector-java-8.0.16.tar.gz"
     checksum: "sha1:12a12227640d00c8e249b81c7818c12e4ad943ba"
+  5.1.48:
+    url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.48.tar.gz"
+    dest: "/var/cache/ansible/mysql-connector-java-5.1.48.tar.gz"
+    checksum: "sha1:a8067480d7d7e4a975771e08b48b64de18837341"
   5.1.47:
     url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.47.tar.gz"
     dest: "/var/cache/ansible/mysql-connector-java-5.1.47.tar.gz"

@@ -95,8 +95,7 @@
         -->
 
         <!--
-        <Connector port="8009" relaxedPathChars="[]|" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"
-                   URIEncoding="UTF-8" enableLookups="false" protocol="AJP/1.3"/>
+        <Connector port="8009" URIEncoding="UTF-8" enableLookups="false" protocol="AJP/1.3"/>
         -->
 
         <Engine name="Catalina" defaultHost="localhost">
@@ -107,6 +106,7 @@
                               factory="org.objectweb.jotm.UserTransactionFactory" jotm.timeout="60"/>
                     <Manager pathname=""/>
                     <JarScanner scanManifest="false"/>
+                    <Valve className="org.apache.catalina.valves.StuckThreadDetectionValve" threshold="120" />
                 </Context>
 
             </Host>

@@ -155,10 +155,8 @@
 
 - name: enable service
   service:
-    name: "{{ item.name }}"
+    name: "jira"
     enabled: true
-  loop:
-    - { name: "jira" }
   changed_when: false
   ignore_errors: true
   tags: jira

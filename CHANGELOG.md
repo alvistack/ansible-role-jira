@@ -6,6 +6,7 @@
 
   - Download archives to `/var/cache/ansible`
   - Upgrade packages if archives not found from `/var/cache/ansible`
+  - Restart service serially
 
 ## 3.2.0 - 2019-07-08
 

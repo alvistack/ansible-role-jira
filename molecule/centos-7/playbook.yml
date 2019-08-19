@@ -32,8 +32,8 @@
   tasks:
     - name: start service
       service:
-        name: jira
-        state: started
+        name: "jira"
+        state: "started"
       changed_when: false
       ignore_errors: true
 

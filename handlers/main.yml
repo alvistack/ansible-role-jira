@@ -17,16 +17,15 @@
 - name: jira | systemctl daemon-reload
   systemd:
     daemon_reload: true
-  when:
-    - ansible_service_mgr == 'systemd'
   changed_when: false
   ignore_errors: true
 
 - name: jira | systemctl restart
   service:
-    name: "{{ item.name }}"
-    state: restarted
-  loop:
-    - { name: "jira" }
+    name: "jira"
+    state: "restarted"
+  loop: "{{ ansible_play_hosts }}"
+  delegate_to: "{{ item }}"
+  run_once: true
   changed_when: false
   ignore_errors: true

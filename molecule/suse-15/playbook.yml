@@ -21,9 +21,7 @@
     - role: bootstrap
     - role: python
     - role: java
-      package:
-        - { state: "latest", name: "java-1_8_0-openjdk" }
-      java_home: "/usr/lib64/jvm/jre-openjdk"
+      java_version: "1.8.0"
     - role: jira
 
 - hosts: all

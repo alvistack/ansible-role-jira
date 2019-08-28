@@ -110,6 +110,7 @@
     rm -rf *postgresql*.jar
     cp {{ postgresql_jdbc_download.dest }} .
     chown -Rf jira:jira /opt/atlassian/jira
+    chmod 0755 /opt/atlassian/jira /opt/atlassian/jira/bin /opt/atlassian/jira/conf
   args:
     executable: "/bin/bash"
   when: get_url_result is changed

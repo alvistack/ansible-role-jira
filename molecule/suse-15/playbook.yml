@@ -21,7 +21,7 @@
     - role: bootstrap
     - role: python
     - role: java
-      java_version: "1.8.0"
+      java_release: "1.8.x"
     - role: jira
 
 - hosts: all

@@ -59,7 +59,7 @@
   user:
     name: "jira"
     group: "jira"
-    home: "/var/atlassian/application-data/jira"
+    home: "{{ jira_home_dir }}"
     shell: "/usr/sbin/nologin"
     system: true
     create_home: false
@@ -79,7 +79,7 @@
     - { dest: "/opt/atlassian/jira", owner: "jira", group: "jira" }
     - { dest: "/opt/atlassian/jira/bin", owner: "jira", group: "jira" }
     - { dest: "/opt/atlassian/jira/conf", owner: "jira", group: "jira" }
-    - { dest: "/var/atlassian/application-data/jira", owner: "jira", group: "jira" }
+    - { dest: "{{ jira_home_dir }}", owner: "jira", group: "jira" }
     - { dest: "{{ jira_download.dest | dirname }}" }
     - { dest: "{{ mysql_jdbc_download.dest | dirname }}" }
     - { dest: "{{ postgresql_jdbc_download.dest | dirname }}" }

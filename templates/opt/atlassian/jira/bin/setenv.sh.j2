@@ -3,7 +3,7 @@
 #
 # One way to set the JIRA HOME path is here via this variable.  Simply uncomment it and set a valid path like /jira/home.  You can of course set it outside in the command terminal.  That will also work.
 #
-JIRA_HOME="${JIRA_HOME:-"/var/atlassian/application-data/jira"}"
+JIRA_HOME="${JIRA_HOME:-"{{ jira_home_dir }}"}"
 JIRA_CATALINA="${JIRA_CATALINA:-"/opt/atlassian/jira"}"
 
 #

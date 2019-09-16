@@ -48,3 +48,6 @@ jira_jvm_support_recommended_args: "-Datlassian.plugins.enable.wait=300 -XX:+Unl
 
 # Session timeout.
 jira_session_timeout: "300"
+
+# Jira Home Directory
+jira_home_dir: "/var/atlassian/application-data/jira"

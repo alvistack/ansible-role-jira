@@ -9,8 +9,8 @@ ExecStart=/opt/atlassian/jira/bin/start-jira.sh
 ExecStop=/opt/atlassian/jira/bin/stop-jira.sh
 PIDFile=/opt/atlassian/jira/work/catalina.pid
 Type=forking
-User=jira
-Group=jira
+User={{ jira_owner }}
+Group={{ jira_group }}
 
 [Install]
 WantedBy=multi-user.target

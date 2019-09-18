@@ -32,6 +32,10 @@ postgresql_jdbc_version: "42.2.8"
 # PostgreSQL JDBC download details.
 postgresql_jdbc_download: "{{ _postgresql_jdbc_download[postgresql_jdbc_version] }}"
 
+# Owner and group for Jira.
+jira_owner: "jira"
+jira_group: "jira"
+
 # JVM minimal and maximum memory usage.
 jira_jvm_minimum_memory: "384m"
 jira_jvm_maximum_memory: "768m"

@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Run molecule test manually on Travis CI
+
 ## 3.3.0 - 2019-08-27
 
 ### Major Changes

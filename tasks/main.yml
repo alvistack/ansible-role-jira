@@ -76,13 +76,21 @@
   loop:
     - { dest: "/etc/init.d" }
     - { dest: "/lib/systemd/system" }
-    - { dest: "{{ jira_catalina }}", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
-    - { dest: "{{ jira_catalina }}/bin", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
-    - { dest: "{{ jira_catalina }}/conf", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
-    - { dest: "{{ jira_home }}", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
     - { dest: "{{ jira_download.dest | dirname }}" }
     - { dest: "{{ mysql_jdbc_download.dest | dirname }}" }
     - { dest: "{{ postgresql_jdbc_download.dest | dirname }}" }
+    - dest: "{{ jira_catalina }}"
+      owner: "{{ jira_owner }}"
+      group: "{{ jira_group }}"
+    - dest: "{{ jira_catalina }}/bin"
+      owner: "{{ jira_owner }}"
+      group: "{{ jira_group }}"
+    - dest: "{{ jira_catalina }}/conf"
+      owner: "{{ jira_owner }}"
+      group: "{{ jira_group }}"
+    - dest: "{{ jira_home }}"
+      owner: "{{ jira_owner }}"
+      group: "{{ jira_group }}"
   tags: jira
 
 - name: download archive

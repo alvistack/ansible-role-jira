@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+  - Abstract `jira_owner` and `jira_group` as variable
+  - Abstract `jira_home` and `jira_catalina` as variable
+
 ## 3.4.0 - 2019-09-18
 
 ### Major Changes

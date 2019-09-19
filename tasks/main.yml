@@ -124,7 +124,10 @@
     rm -rf *postgresql*.jar
     cp {{ postgresql_jdbc_download.dest }} .
     chown -Rf jira:jira {{ jira_catalina }}
-    chmod 0755 {{ jira_catalina }} {{ jira_catalina }}/bin {{ jira_catalina }}/conf
+    chmod 0755 \
+      {{ jira_catalina }} \
+      {{ jira_catalina }}/bin \
+      {{ jira_catalina }}/conf
   args:
     executable: "/bin/bash"
   when: get_url_result is changed

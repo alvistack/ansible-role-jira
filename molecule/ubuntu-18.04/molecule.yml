@@ -42,6 +42,8 @@ provisioner:
   inventory:
     links:
       group_vars: group_vars
+  playbooks:
+    prepare: prepare.yml
 verifier:
   name: testinfra
   lint:

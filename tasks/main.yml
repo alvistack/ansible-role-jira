@@ -59,7 +59,7 @@
   user:
     name: "{{ jira_owner }}"
     group: "{{ jira_group }}"
-    home: "/var/atlassian/application-data/jira"
+    home: "{{ jira_home }}"
     shell: "/usr/sbin/nologin"
     system: true
     create_home: false
@@ -76,10 +76,10 @@
   loop:
     - { dest: "/etc/init.d" }
     - { dest: "/lib/systemd/system" }
-    - { dest: "/opt/atlassian/jira", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
-    - { dest: "/opt/atlassian/jira/bin", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
-    - { dest: "/opt/atlassian/jira/conf", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
-    - { dest: "/var/atlassian/application-data/jira", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
+    - { dest: "{{ jira_catalina }}", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
+    - { dest: "{{ jira_catalina }}/bin", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
+    - { dest: "{{ jira_catalina }}/conf", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
+    - { dest: "{{ jira_home }}", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
     - { dest: "{{ jira_download.dest | dirname }}" }
     - { dest: "{{ mysql_jdbc_download.dest | dirname }}" }
     - { dest: "{{ postgresql_jdbc_download.dest | dirname }}" }
@@ -101,16 +101,22 @@
 - name: unarchive package
   shell: |
     set -o pipefail
-    cd /opt/atlassian/jira
-    TMP_DIR="`mktemp -d`" && tar -zx -C $TMP_DIR -f {{ jira_download.dest }} && rsync -aq --delete $TMP_DIR/*/ . && rm -rf $TMP_DIR
-    cd /opt/atlassian/jira/lib
+    cd {{ jira_catalina }}
+    TMP_DIR="`mktemp -d`" \
+      && tar -zx -C $TMP_DIR -f {{ jira_download.dest }} \
+      && rsync -aq --delete $TMP_DIR/*/ . \
+      && rm -rf $TMP_DIR
+    cd {{ jira_catalina }}/lib
     rm -rf *mysql*.jar
-    TMP_DIR="`mktemp -d`" && tar -zx -C $TMP_DIR -f {{ mysql_jdbc_download.dest }} && mv $TMP_DIR/*/*mysql*-bin.jar . && rm -rf $TMP_DIR
-    cd /opt/atlassian/jira/lib
+    TMP_DIR="`mktemp -d`" \
+      && tar -zx -C $TMP_DIR -f {{ mysql_jdbc_download.dest }} \
+      && mv $TMP_DIR/*/*mysql*-bin.jar . \
+      && rm -rf $TMP_DIR
+    cd {{ jira_catalina }}/lib
     rm -rf *postgresql*.jar
     cp {{ postgresql_jdbc_download.dest }} .
-    chown -Rf jira:jira /opt/atlassian/jira
-    chmod 0755 /opt/atlassian/jira /opt/atlassian/jira/bin /opt/atlassian/jira/conf
+    chown -Rf jira:jira {{ jira_catalina }}
+    chmod 0755 {{ jira_catalina }} {{ jira_catalina }}/bin {{ jira_catalina }}/conf
   args:
     executable: "/bin/bash"
   when: get_url_result is changed
@@ -129,8 +135,15 @@
   loop:
     - { dest: "/etc/init.d/jira", mode: "0755" }
     - { dest: "/lib/systemd/system/jira.service" }
-    - { dest: "/opt/atlassian/jira/bin/setenv.sh", owner: "{{ jira_owner }}", group: "{{ jira_group }}", mode: "0755" }
-    - { dest: "/opt/atlassian/jira/conf/server.xml", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
+    - dest: "{{ jira_catalina }}/bin/setenv.sh"
+      src: "./templates/opt/atlassian/jira/bin/setenv.sh.j2"
+      owner: "{{ jira_owner }}"
+      group: "{{ jira_group }}"
+      mode: "0755"
+    - dest: "{{ jira_catalina }}/conf/server.xml"
+      src: "./templates/opt/atlassian/jira/conf/server.xml.j2"
+      owner: "{{ jira_owner }}"
+      group: "{{ jira_group }}"
   notify:
     - jira | systemctl daemon-reload
     - jira | systemctl restart
@@ -146,8 +159,13 @@
   loop:
     - { dest: "/etc/init.d/jira", mode: "0755" }
     - { dest: "/lib/systemd/system/jira.service" }
-    - { dest: "/opt/atlassian/jira/bin/setenv.sh", owner: "{{ jira_owner }}", group: "{{ jira_group }}", mode: "0755" }
-    - { dest: "/opt/atlassian/jira/conf/server.xml", owner: "{{ jira_owner }}", group: "{{ jira_group }}" }
+    - dest: "{{ jira_catalina }}/bin/setenv.sh"
+      owner: "{{ jira_owner }}"
+      group: "{{ jira_group }}"
+      mode: "0755"
+    - dest: "{{ jira_catalina }}/conf/server.xml"
+      owner: "{{ jira_owner }}"
+      group: "{{ jira_group }}"
   tags: jira
 
 - name: flush handlers

@@ -36,6 +36,12 @@ postgresql_jdbc_download: "{{ _postgresql_jdbc_download[postgresql_jdbc_version]
 jira_owner: "jira"
 jira_group: "jira"
 
+# Jira home directory.
+jira_home: "/var/atlassian/application-data/jira"
+
+# Jira installation directory.
+jira_catalina: "/opt/atlassian/jira"
+
 # JVM minimal and maximum memory usage.
 jira_jvm_minimum_memory: "384m"
 jira_jvm_maximum_memory: "768m"

@@ -1,4 +1,6 @@
+*.log
+*.orig
 *.pyc
+*.rej
 *.retry
 __pycache__
-ansible.log

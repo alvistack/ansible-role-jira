@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-scenario:
-  name: redhat-7-singlenode
 driver:
   name: vagrant
   provider:
@@ -34,6 +32,10 @@ platforms:
       - "customize [ 'createhd', '--filename', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\", '--size', 10 * 1024 ]"
       - "customize [ 'storagectl', :id, '--name', 'SCSI Controller', '--add', 'scsi' ]"
       - "customize [ 'storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
+    provision: true
+    instance_raw_config_args:
+      - "vm.provision \"shell\", inline: \"subscription-manager register --autosubscribe --username=${REDHAT_USERNAME} --password=${REDHAT_PASSWORD}\""
+      - "vm.provision \"shell\", inline: \"echo 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games' > /etc/environment\""
 lint:
   name: yamllint
 dependency:

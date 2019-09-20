@@ -5,6 +5,7 @@
 ### Major Changes
 
   - Default with Python 3
+  - Revamp molecule test with vagrant
   - Abstract `jira_owner` and `jira_group` as variable
   - Abstract `jira_home` and `jira_catalina` as variable
 

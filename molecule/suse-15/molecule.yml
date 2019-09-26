@@ -22,7 +22,7 @@ platforms:
     source:
       server: https://images.linuxcontainers.org
       protocol: simplestreams
-      alias: opensuse/15.0/amd64
+      alias: opensuse/15.1/amd64
 lint:
   name: yamllint
 dependency:

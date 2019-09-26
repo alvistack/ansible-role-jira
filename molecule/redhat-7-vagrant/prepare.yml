@@ -5,17 +5,53 @@
   become: true
   gather_facts: false
   tasks:
-    - name: install ca-certificates curl python3 sudo
+    - name: redhat-7 | export PATH
+      raw: |
+        if [ -x "$(command -v subscription-manager)" ]
+        then
+          echo 'PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"' > /etc/environment
+        fi
+
+    - name: redhat-7 | subscription-manager register
+      raw: |
+        if [ -x "$(command -v subscription-manager)" ]
+        then
+          subscription-manager register --autosubscribe --username={{ lookup('env', 'REDHAT_USERNAME') }} --password={{ lookup('env', 'REDHAT_PASSWORD') }}
+        fi
+
+    - name: redhat | systemctl stop firewalld
+      raw: |
+        if [ -x "$(command -v firewalld)" ]
+        then
+          systemctl stop firewalld
+        fi
+
+    - name: debian | systemctl stop ufw
+      raw: |
+        if [ -x "$(command -v ufw)" ]
+        then
+          systemctl stop ufw
+        fi
+
+    - name: redhat | yum install ca-certificates curl python3 sudo
+      raw: |
+        if [ -x "$(command -v yum)" ]
+        then
+          yum install -y ca-certificates curl python3 sudo
+        fi
+
+    - name: suse | zypper install ca-certificates* curl python3 python3-xml sudo
+      raw: |
+        if [ -x "$(command -v zypper)" ]
+        then
+          zypper -n --gpg-auto-import-keys refresh
+          zypper -n install -y ca-certificates* curl python3 python3-xml sudo
+        fi
+
+    - name: debian | apt-get install ca-certificates curl python3 sudo
       raw: |
         if [ -x "$(command -v apt-get)" ]
         then
-          apt-get update && apt-get install -y ca-certificates curl python3 sudo
-        elif [ -x "$(command -v yum)" ]
-        then
-          yum install -y ca-certificates curl python3 sudo
-        elif [ -x "$(command -v zypper)" ]
-        then
-          zypper -n --gpg-auto-import-keys refresh && zypper -n install -y ca-certificates* curl python3 python3-xml sudo
+          apt-get update
+          apt-get install -y ca-certificates curl python3 sudo
         fi
-      register: result
-      changed_when: result is not succeeded

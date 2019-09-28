@@ -5,70 +5,60 @@
   become: true
   gather_facts: false
   tasks:
+    - name: systemctl stop firewalld.service
+      raw: |
+        systemctl stop firewalld.service
+      ignore_errors: true
+
+    - name: systemctl stop ufw.service
+      raw: |
+        systemctl stop ufw.service
+      ignore_errors: true
+
+    - name: systemctl stop systemd-resolved.service
+      raw: |
+        systemctl stop systemd-resolved.service
+      ignore_errors: true
+
     - name: cat > /etc/environment <<EOF
       raw: |
+        rm -rf /etc/environment
         cat > /etc/environment <<EOF
         PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
         EOF
-
-    - name: ln -fs /run/systemd/resolve/resolv.conf /etc/resolv.conf
-      raw: |
-        if [ -f "/run/systemd/resolve/resolv.conf" ]
-        then
-          ln -fs /run/systemd/resolve/resolv.conf /etc/resolv.conf
-        fi
+      ignore_errors: true
 
     - name: cat > /etc/resolv.conf <<EOF
       raw: |
+        rm -rf /etc/resolv.conf
         cat > /etc/resolv.conf <<EOF
         search localdomain
         nameserver 8.8.8.8
         nameserver 8.8.4.4
         EOF
+      ignore_errors: true
 
     - name: redhat-7 | subscription-manager register
       raw: |
-        if [ -x "$(command -v subscription-manager)" ]
-        then
-          subscription-manager register \
-            --username={{ lookup('env', 'REDHAT_USERNAME') }} \
-            --password={{ lookup('env', 'REDHAT_PASSWORD') }} \
-            --autosubscribe
-        fi
-
-    - name: redhat | systemctl stop firewalld
-      raw: |
-        if [ -x "$(command -v firewalld)" ]
-        then
-          systemctl stop firewalld
-        fi
-
-    - name: debian | systemctl stop ufw
-      raw: |
-        if [ -x "$(command -v ufw)" ]
-        then
-          systemctl stop ufw
-        fi
+        subscription-manager register \
+          --username={{ lookup('env', 'REDHAT_USERNAME') }} \
+          --password={{ lookup('env', 'REDHAT_PASSWORD') }} \
+          --autosubscribe
+      ignore_errors: true
 
     - name: redhat | yum install ca-certificates curl python3 sudo
       raw: |
-        if [ -x "$(command -v yum)" ]
-        then
-          yum install -y ca-certificates curl python3 sudo
-        fi
+        yum install -y ca-certificates curl python3 sudo
+      ignore_errors: true
 
     - name: suse | zypper install ca-certificates* curl python3 python3-xml sudo
       raw: |
-        if [ -x "$(command -v zypper)" ]
-        then
-          zypper -n --gpg-auto-import-keys refresh
-          zypper -n install -y ca-certificates* curl python3 python3-xml sudo
-        fi
+        zypper -n --gpg-auto-import-keys refresh
+        zypper -n install -y ca-certificates* curl python3 python3-xml sudo
+      ignore_errors: true
 
     - name: debian | apt-get install ca-certificates curl python3 sudo
       raw: |
-        if [ -x "$(command -v apt-get)" ]
-        then
-          apt-get update
-          apt-get install -y ca-certificates curl python3 sudo
-        fi
+        apt-get update
+        apt-get install -y ca-certificates curl python3 sudo
+      ignore_errors: true

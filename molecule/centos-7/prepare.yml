@@ -5,18 +5,35 @@
   become: true
   gather_facts: false
   tasks:
-    - name: redhat-7 | export PATH
+    - name: cat > /etc/environment <<EOF
       raw: |
-        if [ -x "$(command -v subscription-manager)" ]
+        cat > /etc/environment <<EOF
+        PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        EOF
+
+    - name: ln -fs /run/systemd/resolve/resolv.conf /etc/resolv.conf
+      raw: |
+        if [ -f "/run/systemd/resolve/resolv.conf" ]
         then
-          echo 'PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"' > /etc/environment
+          ln -fs /run/systemd/resolve/resolv.conf /etc/resolv.conf
         fi
+
+    - name: cat > /etc/resolv.conf <<EOF
+      raw: |
+        cat > /etc/resolv.conf <<EOF
+        search localdomain
+        nameserver 8.8.8.8
+        nameserver 8.8.4.4
+        EOF
 
     - name: redhat-7 | subscription-manager register
       raw: |
         if [ -x "$(command -v subscription-manager)" ]
         then
-          subscription-manager register --autosubscribe --username={{ lookup('env', 'REDHAT_USERNAME') }} --password={{ lookup('env', 'REDHAT_PASSWORD') }}
+          subscription-manager register \
+            --username={{ lookup('env', 'REDHAT_USERNAME') }} \
+            --password={{ lookup('env', 'REDHAT_PASSWORD') }} \
+            --autosubscribe
         fi
 
     - name: redhat | systemctl stop firewalld

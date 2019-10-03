@@ -15,14 +15,23 @@
 # limitations under the License.
 
 driver:
-  name: lxd
+  name: vagrant
+  provider:
+    name: virtualbox
 platforms:
   - name: ${MOLECULE_INSTANCE_NAME}-1
-    url: unix:/var/snap/lxd/common/lxd/unix.socket
-    source:
-      server: https://images.linuxcontainers.org
-      protocol: simplestreams
-      alias: opensuse/15.1/amd64
+    box: generic/ubuntu1804
+    cpu: 2
+    memory: 4096
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: dhcp
+    provider_raw_config_args:
+      - "customize [ 'modifyvm', :id, '--uartmode1', 'disconnected' ]"
+      - "customize [ 'createhd', '--filename', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\", '--size', 10 * 1024 ]"
+      - "customize [ 'storagectl', :id, '--name', 'SCSI Controller', '--add', 'scsi' ]"
+      - "customize [ 'storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
 lint:
   name: yamllint
 dependency:

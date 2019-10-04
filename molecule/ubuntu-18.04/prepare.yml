@@ -15,29 +15,6 @@
         systemctl stop ufw.service
       ignore_errors: true
 
-    - name: systemctl stop systemd-resolved.service
-      raw: |
-        systemctl stop systemd-resolved.service
-      ignore_errors: true
-
-    - name: cat > /etc/environment <<EOF
-      raw: |
-        rm -rf /etc/environment
-        cat > /etc/environment <<EOF
-        PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-        EOF
-      ignore_errors: true
-
-    - name: cat > /etc/resolv.conf <<EOF
-      raw: |
-        rm -rf /etc/resolv.conf
-        cat > /etc/resolv.conf <<EOF
-        search localdomain
-        nameserver 8.8.8.8
-        nameserver 8.8.4.4
-        EOF
-      ignore_errors: true
-
     - name: redhat-7 | subscription-manager register
       raw: |
         subscription-manager register \

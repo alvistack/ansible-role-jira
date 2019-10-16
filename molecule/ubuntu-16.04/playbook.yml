@@ -19,15 +19,19 @@
   become: true
   roles:
     - role: bootstrap
+    - role: locales
+    - role: timezone
     - role: python
-    - role: java
-      java_release: "8"
-    - role: jira
 
 - hosts: all
   remote_user: root
   become: true
-  tasks:
+  roles:
+    - role: java
+      java_release: "8"
+    - role: jira
+
+  post_tasks:
     - name: start service
       service:
         name: "jira"

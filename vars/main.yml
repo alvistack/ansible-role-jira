@@ -15,6 +15,10 @@
 # limitations under the License.
 
 _jira_download:
+  8.5.0:
+    url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.5.0.tar.gz"
+    dest: "/var/cache/ansible/atlassian-jira-core-8.5.0.tar.gz"
+    checksum: "sha1:38d8b2c5b4c12b2548f43e55e8461c3e8fbf277e"
   8.4.2:
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.4.2.tar.gz"
     dest: "/var/cache/ansible/atlassian-jira-core-8.4.2.tar.gz"

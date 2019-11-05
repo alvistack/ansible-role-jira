@@ -124,7 +124,7 @@
     cd {{ jira_catalina }}/lib
     rm -rf *postgresql*.jar
     cp {{ postgresql_jdbc_download.dest }} .
-    chown -Rf jira:jira {{ jira_catalina }}
+    chown -Rf {{ jira_owner }}:{{ jira_group }} {{ jira_catalina }}
     chmod 0755 \
       {{ jira_catalina }} \
       {{ jira_catalina }}/bin \

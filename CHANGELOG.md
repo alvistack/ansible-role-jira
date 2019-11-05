@@ -1,10 +1,16 @@
 # Ansible Role for Jira
 
-## 3.6.0 - TBC
+## 4.1.0 - TBC
+
+### Major Changes
+
+## 4.0.0 - 2019-11-05
 
 ### Major Changes
 
   - Upgrade minimal Ansible support to 2.9.0
+  - Upgrade Travis CI test as Ubuntu Bionic based
+  - Cleanup supported archives
 
 ## 3.5.0 - 2019-10-06
 

@@ -31,7 +31,7 @@ galaxy_info:
         - 7
     - name: opensuse
       versions:
-        - 15
+        - all
   galaxy_tags:
     - system
 dependencies: []

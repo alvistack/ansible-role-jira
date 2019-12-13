@@ -43,7 +43,7 @@ _mysql_jdbc_download:
     checksum: "sha1:a8067480d7d7e4a975771e08b48b64de18837341"
 
 _postgresql_jdbc_download:
-  42.2.8:
-    url: "https://jdbc.postgresql.org/download/postgresql-42.2.8.jar"
-    dest: "/var/cache/ansible/postgresql-42.2.8.jar"
-    checksum: "sha1:6f394c7df5600d11b221f356ff020440d2ece44f"
+  42.2.9:
+    url: "https://jdbc.postgresql.org/download/postgresql-42.2.9.jar"
+    dest: "/var/cache/ansible/postgresql-42.2.9.jar"
+    checksum: "sha1:c01ad1251420f5e25ea9af5c3f9e9477d05808c7"

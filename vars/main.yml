@@ -15,6 +15,10 @@
 # limitations under the License.
 
 _jira_download:
+  8.6.0:
+    url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.6.0.tar.gz"
+    dest: "/var/cache/ansible/atlassian-jira-core-8.6.0.tar.gz"
+    checksum: "sha1:e49cde4c32080c14468b5683d80e15b1cf7c1af1"
   8.5.2:
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.5.2.tar.gz"
     dest: "/var/cache/ansible/atlassian-jira-core-8.5.2.tar.gz"
@@ -27,18 +31,6 @@ _jira_download:
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.5.0.tar.gz"
     dest: "/var/cache/ansible/atlassian-jira-core-8.5.0.tar.gz"
     checksum: "sha1:38d8b2c5b4c12b2548f43e55e8461c3e8fbf277e"
-  8.4.2:
-    url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.4.2.tar.gz"
-    dest: "/var/cache/ansible/atlassian-jira-core-8.4.2.tar.gz"
-    checksum: "sha1:7dd2678ed9128bd8a10fae674af69b1e0b9b2c25"
-  8.4.1:
-    url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.4.1.tar.gz"
-    dest: "/var/cache/ansible/atlassian-jira-core-8.4.1.tar.gz"
-    checksum: "sha1:e89ef3b3db59f9eeb28c259e42249262a130b055"
-  8.4.0:
-    url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.4.0.tar.gz"
-    dest: "/var/cache/ansible/atlassian-jira-core-8.4.0.tar.gz"
-    checksum: "sha1:305ca9443d9c7efd5c16005a2ded2838450ca3ba"
 
 _mysql_jdbc_download:
   5.1.48:

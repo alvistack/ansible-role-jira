@@ -27,8 +27,8 @@
   remote_user: root
   become: true
   roles:
-    - role: java
-      java_release: "8"
+    - role: openjdk
+      openjdk_release: "8"
     - role: jira
 
   post_tasks:

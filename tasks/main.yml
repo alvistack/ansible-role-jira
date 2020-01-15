@@ -110,10 +110,11 @@
 - name: unarchive package
   shell: |
     set -o pipefail
+    rm -rf {{ jira_catalina }} && mkdir -p {{ jira_catalina }}
     cd {{ jira_catalina }}
     TMP_DIR="`mktemp -d`" \
       && tar -zx -C $TMP_DIR -f {{ jira_download.dest }} \
-      && rsync -aq --delete $TMP_DIR/*/ . \
+      && cp -rfT $TMP_DIR/* . \
       && rm -rf $TMP_DIR
     cd {{ jira_catalina }}/lib
     rm -rf *mysql*.jar

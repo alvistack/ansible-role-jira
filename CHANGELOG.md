@@ -1,8 +1,16 @@
 # Ansible Role for Jira
 
-## 4.1.0 - TBC
+## 4.2.0 - TBC
 
 ### Major Changes
+
+## 4.1.0 - 2020-01-16
+
+### Major Changes
+
+  - Default `interpreter_python` with `python3`
+  - Bugfix `python3-xml` not exists for openSUSE Leap 15.1
+  - Replace `java` with `openjdk`
 
 ## 4.0.0 - 2019-11-05
 

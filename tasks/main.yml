@@ -110,7 +110,8 @@
 - name: unarchive package
   shell: |
     set -o pipefail
-    rm -rf {{ jira_catalina }} && mkdir -p {{ jira_catalina }}
+    rm -rf {{ jira_catalina }} \
+      && mkdir -p {{ jira_catalina }}
     cd {{ jira_catalina }}
     TMP_DIR="`mktemp -d`" \
       && tar -zx -C $TMP_DIR -f {{ jira_download.dest }} \

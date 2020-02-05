@@ -40,6 +40,10 @@ profiles:
         path: /dev/kmsg
         source: /dev/kmsg
         type: disk
+      aadisable3:
+        path: /run/docker.sock
+        source: /run/docker.sock
+        type: disk
       root:
         path: /
         pool: default

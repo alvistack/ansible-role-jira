@@ -25,6 +25,7 @@ platforms:
     environment:
       container: docker
     volumes:
+      - "/run/docker.sock:/run/docker.sock:rw"
       - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
 lint:
   name: yamllint

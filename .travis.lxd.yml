@@ -26,6 +26,7 @@ profiles:
         lxc.apparmor.profile = unconfined
         lxc.cap.drop =
         lxc.cgroup.devices.allow = a
+        lxc.environment = container=docker
         lxc.mount.auto = proc:rw sys:rw cgroup:rw
     devices:
       aadisable:

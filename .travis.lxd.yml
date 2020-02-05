@@ -26,7 +26,6 @@ profiles:
         lxc.apparmor.profile = unconfined
         lxc.cap.drop =
         lxc.cgroup.devices.allow = a
-        lxc.environment = container=docker
         lxc.mount.auto = proc:rw sys:rw cgroup:rw
     devices:
       aadisable:
@@ -40,10 +39,6 @@ profiles:
       aadisable2:
         path: /dev/kmsg
         source: /dev/kmsg
-        type: disk
-      aadisable3:
-        path: /run/docker.sock
-        source: /run/docker.sock
         type: disk
       root:
         path: /

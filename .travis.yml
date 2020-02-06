@@ -10,6 +10,7 @@ env:
     - MOLECULE_SCENARIO_NAME="suse-15"
     - MOLECULE_SCENARIO_NAME="ubuntu-16.04"
     - MOLECULE_SCENARIO_NAME="ubuntu-18.04"
+    - MOLECULE_SCENARIO_NAME="ubuntu-20.04"
 
 matrix:
   allow_failures:
@@ -25,7 +26,7 @@ before_install:
 
   - |
     sudo apt-get -y purge python3-openssl && sudo apt-get -y autoremove
-    sudo apt-get update && sudo apt-get -y install curl gcc libffi-dev libssl-dev make python3 python3-dev
+    sudo apt-get update && sudo apt-get install -y ca-certificates curl iproute2 python3 sudo
     curl -skL https://bootstrap.pypa.io/get-pip.py | sudo -H python3
     sudo -H pip3 install --upgrade --ignore-installed --requirement requirements.txt
 

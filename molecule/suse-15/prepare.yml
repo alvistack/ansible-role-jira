@@ -30,6 +30,7 @@
 
     - name: redhat | yum install -y ca-certificates curl iproute python3 sudo
       raw: |
+        yum makecache fast
         yum install -y ca-certificates curl iproute python3 sudo
       ignore_errors: true
 

@@ -6,7 +6,6 @@ language: minimal
 
 env:
   matrix:
-    - MOLECULE_SCENARIO_NAME="default"
     - MOLECULE_SCENARIO_NAME="centos-7"
     - MOLECULE_SCENARIO_NAME="suse-15"
     - MOLECULE_SCENARIO_NAME="ubuntu-16.04"

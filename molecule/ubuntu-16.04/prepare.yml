@@ -10,6 +10,11 @@
         cp -rfT /etc/skel /root
       ignore_errors: true
 
+    - name: setenforce 0
+      raw: |
+        setenforce 0
+      ignore_errors: true
+
     - name: systemctl stop firewalld.service
       raw: |
         systemctl stop firewalld.service

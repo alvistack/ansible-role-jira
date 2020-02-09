@@ -15,14 +15,21 @@
 # limitations under the License.
 
 driver:
-  name: lxd
+  name: vagrant
+  provider:
+    name: libvirt
 platforms:
   - name: ${MOLECULE_INSTANCE_NAME}-1
-    url: unix:/var/snap/lxd/common/lxd/unix.socket
-    source:
-      server: https://images.linuxcontainers.org
-      protocol: simplestreams
-      alias: ubuntu/xenial/amd64
+    box: generic/ubuntu1604
+    cpu: 2
+    memory: 2048
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: dhcp
+    provider_raw_config_args:
+      - 'disk_bus = "virtio"'
+      - 'storage :file, size: "10G", bus: "virtio"'
 lint:
   name: yamllint
 dependency:

@@ -28,8 +28,11 @@ platforms:
         network_name: private_network
         type: dhcp
     provider_raw_config_args:
+      - 'cpu_mode = "host-passthrough"'
+      - 'nic_model_type = "virtio"'
       - 'disk_bus = "sata"'
-      - 'storage :file, size: "10G", bus: "sata"'
+      - 'volume_cache = "none"'
+      - 'storage :file, bus: "sata", cache: "none"'
 lint:
   name: yamllint
 dependency:

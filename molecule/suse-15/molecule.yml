@@ -28,7 +28,6 @@ platforms:
         network_name: private_network
         type: dhcp
     provider_raw_config_args:
-      - 'cpu_mode = "host-passthrough"'
       - 'nic_model_type = "virtio"'
       - 'disk_bus = "sata"'
       - 'volume_cache = "none"'
@@ -45,6 +44,12 @@ provisioner:
   name: ansible
   env:
     ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH}
+  config_options:
+    defaults:
+      forks: 20
+    ssh_connection:
+      pipelining: true
+      ssh_args: -o ControlMaster=auto -o ControlPersist=600s
   lint:
     name: ansible-lint
   inventory:

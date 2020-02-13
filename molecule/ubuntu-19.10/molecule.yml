@@ -20,7 +20,7 @@ driver:
     name: libvirt
 platforms:
   - name: ${MOLECULE_INSTANCE_NAME}-1
-    box: generic/opensuse15
+    box: generic/ubuntu1910
     cpu: 2
     memory: 2048
     interfaces:
@@ -29,9 +29,9 @@ platforms:
         type: dhcp
     provider_raw_config_args:
       - 'nic_model_type = "virtio"'
-      - 'disk_bus = "sata"'
+      - 'disk_bus = "virtio"'
       - 'volume_cache = "none"'
-      - 'storage :file, bus: "sata", cache: "none"'
+      - 'storage :file, bus: "virtio", cache: "none"'
 lint:
   name: yamllint
 dependency:

@@ -17,11 +17,30 @@
 - hosts: all
   remote_user: root
   become: true
-  roles:
-    - role: bootstrap
-    - role: locales
-    - role: timezone
-    - role: python
-    - role: openjdk
-      openjdk_release: "8"
-    - role: jira
+  tasks:
+    - name: check port
+      wait_for:
+        port: "8080"
+        timeout: "300"
+        delay: "10"
+      async: "300"
+      poll: "10"
+      register: result
+      until: result is succeeded
+      retries: 30
+
+    - name: check page
+      uri:
+        url: "http://localhost:8080"
+        status_code: "200"
+        timeout: "300"
+        return_content: true
+      async: "300"
+      poll: "10"
+      register: result
+      until: result.status == 200
+      retries: 30
+
+    - name: check result
+      fail:
+      when: "'jira' not in result.content"

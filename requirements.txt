@@ -17,9 +17,9 @@ ansible-lint
 ansible-runner
 ansible-runner-http
 argcomplete
-docker>=2.0.0
+docker
 molecule
 netaddr
-openshift>=0.9.0
+openshift
 python-vagrant
 yamllint

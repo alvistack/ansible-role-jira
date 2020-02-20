@@ -24,6 +24,7 @@
   service:
     name: "jira"
     state: "restarted"
+    enabled: true
   loop: "{{ ansible_play_hosts }}"
   delegate_to: "{{ item }}"
   run_once: true

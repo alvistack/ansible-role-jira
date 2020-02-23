@@ -33,9 +33,7 @@ platforms:
       - 'volume_cache = "none"'
       - 'storage :file, bus: "sata", cache: "none"'
 lint: |
-  yamllint .
-  ansible-lint
-  flake8
+  yamllint . && ansible-lint && flake8
 dependency:
   name: galaxy
   options:
@@ -52,5 +50,8 @@ provisioner:
     ssh_connection:
       pipelining: true
       ssh_args: -o ControlMaster=auto -o ControlPersist=600s
+  inventory:
+    links:
+      group_vars: group_vars
 verifier:
   name: ansible

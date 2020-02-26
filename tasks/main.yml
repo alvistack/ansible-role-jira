@@ -115,13 +115,13 @@
     rm -rf {{ jira_catalina }} \
       && mkdir -p {{ jira_catalina }}
     cd {{ jira_catalina }}
-    TMP_DIR="`mktemp -d`" \
+    TMP_DIR="$(mktemp -d)" \
       && tar -zx -C $TMP_DIR -f {{ jira_download.dest }} \
       && cp -rfT $TMP_DIR/* . \
       && rm -rf $TMP_DIR
     cd {{ jira_catalina }}/lib
     rm -rf *mysql*.jar
-    TMP_DIR="`mktemp -d`" \
+    TMP_DIR="$(mktemp -d)" \
       && tar -zx -C $TMP_DIR -f {{ mysql_jdbc_download.dest }} \
       && mv $TMP_DIR/*/*mysql*-bin.jar . \
       && rm -rf $TMP_DIR
@@ -188,7 +188,7 @@
   meta: flush_handlers
   tags: jira
 
-- name: enable service
+- name: start service
   service:
     name: "jira"
     state: "started"

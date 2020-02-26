@@ -32,8 +32,11 @@ platforms:
       - 'disk_bus = "virtio"'
       - 'volume_cache = "none"'
       - 'storage :file, bus: "virtio", cache: "none"'
-lint:
-  name: yamllint
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
 dependency:
   name: galaxy
   options:
@@ -50,8 +53,6 @@ provisioner:
     ssh_connection:
       pipelining: true
       ssh_args: -o ControlMaster=auto -o ControlPersist=600s
-  lint:
-    name: ansible-lint
   inventory:
     links:
       group_vars: group_vars
@@ -59,5 +60,3 @@ provisioner:
     prepare: prepare.yml
 verifier:
   name: ansible
-  lint:
-    name: ansible-lint

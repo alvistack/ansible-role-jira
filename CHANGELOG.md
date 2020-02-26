@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Upgrade minimal Molecule support to 3.0.2
   - Migrate role name to lowercase or underline
   - Migrate group name to lowercase or underline
   - Migrate molecule `group_vars` to file

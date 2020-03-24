@@ -15,6 +15,10 @@
 # limitations under the License.
 
 _jira_download:
+  8.8.0:
+    url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.8.0.tar.gz"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.8.0.tar.gz"
+    checksum: "sha1:7affc8d1dc36091b92c04e1bfc467bac4998a5ec"
   8.7.1:
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.7.1.tar.gz"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.7.1.tar.gz"
@@ -23,14 +27,6 @@ _jira_download:
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.7.0.tar.gz"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.7.0.tar.gz"
     checksum: "sha1:af37a69eab64d4feb1611a4db7ad3a94f9c04846"
-  8.6.1:
-    url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.6.1.tar.gz"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.6.1.tar.gz"
-    checksum: "sha1:6f1afc24311434199fc284bdc3179c2e9f5f35dd"
-  8.6.0:
-    url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.6.0.tar.gz"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.6.0.tar.gz"
-    checksum: "sha1:e49cde4c32080c14468b5683d80e15b1cf7c1af1"
 
 _mysql_jdbc_download:
   5.1.48:
@@ -39,7 +35,7 @@ _mysql_jdbc_download:
     checksum: "sha1:a8067480d7d7e4a975771e08b48b64de18837341"
 
 _postgresql_jdbc_download:
-  42.2.10:
-    url: "https://jdbc.postgresql.org/download/postgresql-42.2.10.jar"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/postgresql-42.2.10.jar"
-    checksum: "sha1:338af492789fd198dbd52735a22b1946030ecc96"
+  42.2.11:
+    url: "https://jdbc.postgresql.org/download/postgresql-42.2.11.jar"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/postgresql-42.2.11.jar"
+    checksum: "sha1:e9a90d880f0340784d61b1188227fde47c0a9116"

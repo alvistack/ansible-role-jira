@@ -1,6 +1,6 @@
 # Ansible Role for Jira
 
-[![Travis](https://img.shields.io/travis/alvistack/ansible-role-jira.svg)](https://travis-ci.org/alvistack/ansible-role-jira)
+[![Travis](https://img.shields.io/travis/com/alvistack/ansible-role-jira.svg)](https://travis-ci.com/alvistack/ansible-role-jira)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-jira.svg)](https://github.com/alvistack/ansible-role-jira)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-jira.svg)](https://github.com/alvistack/ansible-role-jira/blob/master/LICENSE)
 [![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.jira-blue.svg)](https://galaxy.ansible.com/alvistack/jira)

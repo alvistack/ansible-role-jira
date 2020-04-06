@@ -14,10 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: python
-  src: https://github.com/alvistack/ansible-role-python
-  version: develop
-
-- name: openjdk
-  src: https://github.com/alvistack/ansible-role-openjdk
-  version: develop
+openjdk_release: "8"

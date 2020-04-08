@@ -9,6 +9,7 @@
   - Migrate group name to lowercase or underline
   - Migrate molecule `group_vars` to file
   - Consolidate molecule tests into `default` (noop)
+  - Support CentOS/RHEL 8
   - Download archives to `{{ ansible_user_dir }}/.ansible/tmp`
 
 ## 4.2.0 - 2020-02-13

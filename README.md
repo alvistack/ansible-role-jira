@@ -1,6 +1,6 @@
 # Ansible Role for Jira
 
-[![Travis](https://img.shields.io/travis/alvistack/ansible-role-jira.svg)](https://travis-ci.org/alvistack/ansible-role-jira)
+[![Travis](https://img.shields.io/travis/com/alvistack/ansible-role-jira.svg)](https://travis-ci.com/alvistack/ansible-role-jira)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-jira.svg)](https://github.com/alvistack/ansible-role-jira)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-jira.svg)](https://github.com/alvistack/ansible-role-jira/blob/master/LICENSE)
 [![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.jira-blue.svg)](https://galaxy.ansible.com/alvistack/jira)
@@ -11,7 +11,7 @@ Ansible Role for Atlassian Jira Installation.
 
 This role require Ansible 2.9 or higher.
 
-This role was designed for Ubuntu 16.04/18.04/19.10 or RHEL/CentOS 7 or openSUSE Leap 15.1.
+This role was designed for Ubuntu 16.04/18.04/19.10 or RHEL/CentOS 7/8 or openSUSE Leap 15.1.
 
 ## Role Variables
 
@@ -23,7 +23,7 @@ This role was designed for Ubuntu 16.04/18.04/19.10 or RHEL/CentOS 7 or openSUSE
 
 ## Example Playbook
 
-[molecule/ubuntu-18.04/playbook.yml](molecule/ubuntu-18.04/playbook.yml)
+[molecule/default/converge.yml](molecule/default/converge.yml)
 
 ## License
 

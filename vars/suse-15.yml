@@ -13,3 +13,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+_zypper:
+  - { state: "latest", name: "insserv-compat" }
+  - { state: "latest", name: "systemd" }
+  - { state: "latest", name: "systemd-sysvinit" }
+  - { state: "latest", name: "tar" }
+  - { state: "latest", name: "unzip" }

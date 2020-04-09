@@ -74,7 +74,6 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
-    - { dest: "/etc/init.d" }
     - { dest: "/lib/systemd/system" }
     - { dest: "{{ jira_download.dest | dirname }}" }
     - { dest: "{{ mysql_jdbc_download.dest | dirname }}" }
@@ -149,7 +148,6 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - { dest: "/etc/init.d/jira", mode: "0755" }
     - { dest: "/lib/systemd/system/jira.service" }
     - dest: "{{ jira_catalina }}/bin/setenv.sh"
       src: "./templates/opt/atlassian/jira/bin/setenv.sh.j2"
@@ -173,7 +171,6 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/etc/init.d/jira", mode: "0755" }
     - { dest: "/lib/systemd/system/jira.service" }
     - dest: "{{ jira_catalina }}/bin/setenv.sh"
       owner: "{{ jira_owner }}"

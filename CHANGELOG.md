@@ -6,6 +6,7 @@
 
   - Support CentOS/RHEL 8
   - Support Ubuntu 20.04
+  - Remove Ubuntu 16.04 support
   - Upgrade minimal Molecule support to 3.0.2
   - Migrate role name to lowercase or underline
   - Migrate group name to lowercase or underline

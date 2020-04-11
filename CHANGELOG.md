@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Template `molecule -s default` with dummy docker driver
   - Support CentOS/RHEL 8
   - Support Ubuntu 20.04
   - Remove Ubuntu 16.04 support
@@ -11,8 +12,8 @@
   - Migrate role name to lowercase or underline
   - Migrate group name to lowercase or underline
   - Migrate molecule `group_vars` to file
-  - Consolidate molecule tests into `default` (noop)
   - Download archives to `{{ ansible_user_dir }}/.ansible/tmp`
+  - Remove System V init scripts
 
 ## 4.2.0 - 2020-02-13
 

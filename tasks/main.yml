@@ -185,7 +185,7 @@
   meta: flush_handlers
   tags: jira
 
-- name: start service
+- name: systemctl start jira
   service:
     name: "jira"
     state: "started"

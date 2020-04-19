@@ -17,6 +17,9 @@
 # Jira version.
 jira_version: "8.8.0"
 
+# Jira download directory.
+jira_download_directory: "{{ ansible_user_dir }}/.ansible/tmp"
+
 # Jira download details.
 jira_download: "{{ _jira_download[jira_version] }}"
 

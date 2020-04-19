@@ -12,7 +12,7 @@
   - Migrate role name to lowercase or underline
   - Migrate group name to lowercase or underline
   - Migrate molecule `group_vars` to file
-  - Download archives to `{{ ansible_user_dir }}/.ansible/tmp`
+  - Download archives to `{{ jira_download_directory }}`
   - Remove System V init scripts
 
 ## 4.2.0 - 2020-02-13

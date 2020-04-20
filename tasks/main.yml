@@ -181,10 +181,6 @@
       group: "{{ jira_group }}"
   tags: jira
 
-- name: flush handlers
-  meta: flush_handlers
-  tags: jira
-
 - name: systemctl start jira
   service:
     name: "jira"
@@ -192,4 +188,8 @@
     enabled: true
   changed_when: false
   ignore_errors: true
+  tags: jira
+
+- name: flush handlers
+  meta: flush_handlers
   tags: jira

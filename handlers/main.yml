@@ -20,7 +20,7 @@
   changed_when: false
   ignore_errors: true
 
-- name: jira | systemctl restart
+- name: jira | systemctl restart jira
   service:
     name: "jira"
     state: "restarted"

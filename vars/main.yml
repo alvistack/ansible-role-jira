@@ -33,10 +33,10 @@ _jira_download:
     checksum: "sha1:af37a69eab64d4feb1611a4db7ad3a94f9c04846"
 
 _mysql_jdbc_download:
-  5.1.48:
-    url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.48.tar.gz"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/mysql-connector-java-5.1.48.tar.gz"
-    checksum: "sha1:a8067480d7d7e4a975771e08b48b64de18837341"
+  5.1.49:
+    url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.49.tar.gz"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/mysql-connector-java-5.1.49.tar.gz"
+    checksum: "sha1:ed8f8574585edfb630b0b6ee4ebf6f6847795c0f"
 
 _postgresql_jdbc_download:
   42.2.12:

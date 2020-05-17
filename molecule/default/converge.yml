@@ -20,9 +20,12 @@
   tasks:
     - include_role:
         name: python
+      tags: python
 
     - include_role:
         name: openjdk
+      tags: openjdk
 
     - include_role:
         name: jira
+      tags: jira

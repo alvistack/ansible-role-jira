@@ -75,6 +75,7 @@
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/lib/systemd/system" }
+    - { dest: "/lib/systemd/system/jira.service.d" }
     - { dest: "{{ jira_download.dest | dirname }}" }
     - { dest: "{{ mysql_jdbc_download.dest | dirname }}" }
     - { dest: "{{ postgresql_jdbc_download.dest | dirname }}" }

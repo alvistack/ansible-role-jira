@@ -139,7 +139,7 @@
   when: get_url_result is changed
   notify:
     - jira | systemctl daemon-reload
-    - jira | systemctl restart jira
+    - jira | systemctl restart jira.service
   tags: jira
 
 - name: copy templates
@@ -162,7 +162,7 @@
       group: "{{ jira_group }}"
   notify:
     - jira | systemctl daemon-reload
-    - jira | systemctl restart jira
+    - jira | systemctl restart jira.service
   tags: jira
 
 - name: prepare files
@@ -183,9 +183,9 @@
       group: "{{ jira_group }}"
   tags: jira
 
-- name: systemctl start jira
+- name: systemctl start jira.service
   service:
-    name: "jira"
+    name: "jira.service"
     state: "started"
     enabled: true
   changed_when: false

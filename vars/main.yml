@@ -35,7 +35,7 @@ _mysql_jdbc_download:
     checksum: "sha1:ed8f8574585edfb630b0b6ee4ebf6f6847795c0f"
 
 _postgresql_jdbc_download:
-  42.2.14:
-    url: "https://jdbc.postgresql.org/download/postgresql-42.2.14.jar"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/postgresql-42.2.14.jar"
-    checksum: "sha1:45fa6eef266aa80024ef2ab3688d9faa38c642e5"
+  42.2.16:
+    url: "https://jdbc.postgresql.org/download/postgresql-42.2.16.jar"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/postgresql-42.2.16.jar"
+    checksum: "sha1:a9ee12f737bd5dc7d046e4c065e391d38d6a3cfc"

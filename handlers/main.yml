@@ -20,9 +20,9 @@
   changed_when: false
   ignore_errors: true
 
-- name: jira | systemctl restart jira
+- name: jira | systemctl restart jira.service
   service:
-    name: "jira"
+    name: "jira.service"
     state: "restarted"
     enabled: true
   loop: "{{ ansible_play_hosts }}"

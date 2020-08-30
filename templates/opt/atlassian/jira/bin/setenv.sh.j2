@@ -114,8 +114,8 @@ echo "Server startup logs are located in $LOGBASEABS/logs/catalina.out"
 # with other parts of the application logs.
 #-----------------------------------------------------------------------------------
 GC_JVM_PARAMETERS=""
-GC_JVM_PARAMETERS="-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintGCCause ${GC_JVM_PARAMETERS}"
-GC_JVM_PARAMETERS="-Xloggc:$LOGBASEABS/logs/atlassian-jira-gc-%t.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=20M ${GC_JVM_PARAMETERS}"
+#GC_JVM_PARAMETERS="-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintGCCause ${GC_JVM_PARAMETERS}"
+GC_JVM_PARAMETERS="-Xlog:gc:$LOGBASEABS/logs/atlassian-jira-gc-%t.log ${GC_JVM_PARAMETERS}"
 
 CATALINA_OPTS="${GC_JVM_PARAMETERS} ${CATALINA_OPTS}"
 export CATALINA_OPTS

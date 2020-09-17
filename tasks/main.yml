@@ -181,6 +181,9 @@
     - dest: "{{ jira_catalina }}/conf/server.xml"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
+  notify:
+    - jira | systemctl daemon-reload
+    - jira | systemctl restart jira.service
   tags: jira
 
 - name: systemctl start jira.service

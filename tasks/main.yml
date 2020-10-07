@@ -176,6 +176,9 @@
     - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service
 
+- name: flush handlers
+  meta: flush_handlers
+
 - name: systemctl start jira.service
   service:
     name: "jira.service"
@@ -183,6 +186,3 @@
     enabled: true
   changed_when: false
   ignore_errors: true
-
-- name: flush handlers
-  meta: flush_handlers

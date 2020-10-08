@@ -18,7 +18,7 @@ _jira_download:
   8.13.0:
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.13.0.tar.gz"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.13.0.tar.gz"
-    checksum: "sha1:f911e507116f4fef289bafd71097d6827ce4e768"
+    checksum: "sha1:8a45532d32451a73e0e74ba2dfc71c588ba6038e"
   8.12.3:
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.12.3.tar.gz"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.12.3.tar.gz"

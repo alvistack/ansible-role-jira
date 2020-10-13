@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+  - Upgrade minimal AdoptOpenJDK support to 11
+  - Migrate GC from `G1GC` to `ZGC`
+
 ## 4.5.0 - 2020-08-26
 
 ### Major Changes

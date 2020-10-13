@@ -43,8 +43,8 @@ jira_home: "/var/atlassian/application-data/jira"
 jira_catalina: "/opt/atlassian/jira"
 
 # JVM minimal and maximum memory usage.
-jira_jvm_minimum_memory: "1024m"
-jira_jvm_maximum_memory: "1024m"
+jira_jvm_minimum_memory: "2048m"
+jira_jvm_maximum_memory: "2048m"
 
 # Proxy and context path setup.
 jira_catalina_connector_proxyname: ~

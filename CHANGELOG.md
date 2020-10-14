@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Remove redundant tags from tasks
   - Upgrade minimal AdoptOpenJDK support to 11
   - Migrate GC from `G1GC` to `ZGC`
 

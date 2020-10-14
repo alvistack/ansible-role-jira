@@ -15,31 +15,31 @@
 # limitations under the License.
 
 _jira_download:
-  8.13.0:
+  "8.13.0":
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.13.0.tar.gz"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.13.0.tar.gz"
     checksum: "sha1:8a45532d32451a73e0e74ba2dfc71c588ba6038e"
-  8.12.3:
+  "8.12.3":
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.12.3.tar.gz"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.12.3.tar.gz"
     checksum: "sha1:f911e507116f4fef289bafd71097d6827ce4e768"
-  8.12.2:
+  "8.12.2":
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.12.2.tar.gz"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.12.2.tar.gz"
     checksum: "sha1:0e80ac146818e4c0135ae261c2356811e5e3e78a"
-  8.12.1:
+  "8.12.1":
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.12.1.tar.gz"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.12.1.tar.gz"
     checksum: "sha1:b5bc4fdc09d52ccc855745304ac1b8025b307de5"
 
 _mysql_jdbc_download:
-  5.1.49:
+  "5.1.49":
     url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.49.tar.gz"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/mysql-connector-java-5.1.49.tar.gz"
     checksum: "sha1:ed8f8574585edfb630b0b6ee4ebf6f6847795c0f"
 
 _postgresql_jdbc_download:
-  42.2.17:
+  "42.2.17":
     url: "https://jdbc.postgresql.org/download/postgresql-42.2.17.jar"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/postgresql-42.2.17.jar"
     checksum: "sha1:b3a214aa89d0fe146f216c2f4a3a4dfbe35d63bf"

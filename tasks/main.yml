@@ -16,7 +16,6 @@
 
 - name: include default variables
   include_vars: "../vars/main.yml"
-  tags: jira
 
 - name: include release specific variables
   include_vars: "{{ lookup('first_found', _params) }}"
@@ -31,7 +30,6 @@
       paths:
         - "../vars"
   ignore_errors: true
-  tags: jira
 
 - name: include release specific tasks
   include_tasks: "{{ lookup('first_found', _params) }}"
@@ -46,14 +44,12 @@
       paths:
         - "."
   ignore_errors: true
-  tags: jira
 
 - name: groupadd
   group:
     name: "{{ jira_group }}"
     system: true
     state: "present"
-  tags: jira
 
 - name: useradd
   user:
@@ -64,7 +60,6 @@
     system: true
     create_home: false
     state: "present"
-  tags: jira
 
 - name: prepare directories
   file:
@@ -91,7 +86,6 @@
     - dest: "{{ jira_home }}"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
-  tags: jira
 
 - name: download archive
   vars:
@@ -108,7 +102,6 @@
     - "{{ postgresql_jdbc_download }}"
   register: get_url_result
   until: get_url_result is succeeded
-  tags: jira
 
 - name: unarchive package
   shell: |
@@ -140,7 +133,6 @@
   notify:
     - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service
-  tags: jira
 
 - name: copy templates
   template:
@@ -163,7 +155,6 @@
   notify:
     - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service
-  tags: jira
 
 - name: prepare files
   file:
@@ -184,7 +175,9 @@
   notify:
     - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service
-  tags: jira
+
+- name: flush handlers
+  meta: flush_handlers
 
 - name: systemctl start jira.service
   service:
@@ -193,8 +186,3 @@
     enabled: true
   changed_when: false
   ignore_errors: true
-  tags: jira
-
-- name: flush handlers
-  meta: flush_handlers
-  tags: jira

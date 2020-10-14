@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Jira version.
-jira_version: "8.12.1"
+jira_version: "8.13.0"
 
 # Jira download details.
 jira_download: "{{ _jira_download[jira_version] }}"
@@ -27,7 +27,7 @@ mysql_jdbc_version: "5.1.49"
 mysql_jdbc_download: "{{ _mysql_jdbc_download[mysql_jdbc_version] }}"
 
 # PostgreSQL JDBC version.
-postgresql_jdbc_version: "42.2.16"
+postgresql_jdbc_version: "42.2.17"
 
 # PostgreSQL JDBC download details.
 postgresql_jdbc_download: "{{ _postgresql_jdbc_download[postgresql_jdbc_version] }}"
@@ -43,8 +43,8 @@ jira_home: "/var/atlassian/application-data/jira"
 jira_catalina: "/opt/atlassian/jira"
 
 # JVM minimal and maximum memory usage.
-jira_jvm_minimum_memory: "1024m"
-jira_jvm_maximum_memory: "1024m"
+jira_jvm_minimum_memory: "2048m"
+jira_jvm_maximum_memory: "2048m"
 
 # Proxy and context path setup.
 jira_catalina_connector_proxyname: ~
@@ -57,8 +57,8 @@ jira_catalina_context_path: "/"
 jira_jvm_support_recommended_args: >-
   -Datlassian.plugins.enable.wait=300
   -XX:+UnlockExperimentalVMOptions
-  -XX:+UseCGroupMemoryLimitForHeap
-  -XX:MaxRAMFraction=1
+  -XX:+UseContainerSupport
+  -XX:+UseZGC
 
 # Session timeout.
 jira_session_timeout: "300"

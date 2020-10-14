@@ -2,8 +2,8 @@
 
 [Unit]
 Description=Atlassian Jira
-After=syslog.target network-online.target
-Wants=syslog.target network-online.target
+After=network-online.target local-fs.target remote-fs.target time-sync.target
+Wants=network-online.target local-fs.target remote-fs.target time-sync.target
 
 [Service]
 Type=forking

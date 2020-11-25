@@ -4,9 +4,11 @@
 
 ### Major Changes
 
+  - Migrate from Travis CI to GitLab CI
+  - Support Fedora 33
+  - Remove Fedora 32 support
+  - Support Ubuntu 20.10
   - Remove redundant tags from tasks
-  - Upgrade minimal AdoptOpenJDK support to 11
-  - Migrate GC from `G1GC` to `ZGC`
 
 ## 4.5.0 - 2020-08-26
 

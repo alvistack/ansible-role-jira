@@ -109,6 +109,15 @@ echo "Server startup logs are located in $LOGBASEABS/logs/catalina.out"
 # Set the JVM arguments used to start JIRA. For a description of the options, see
 # http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html
 
+#-----------------------------------------------------------------------------------
+# This allows us to actually debug GC related issues by correlating timestamps
+# with other parts of the application logs.
+#-----------------------------------------------------------------------------------
+GC_JVM_PARAMETERS=""
+GC_JVM_PARAMETERS="-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintGCCause ${GC_JVM_PARAMETERS}"
+GC_JVM_PARAMETERS="-Xloggc:$LOGBASEABS/logs/atlassian-jira-gc-%t.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=20M ${GC_JVM_PARAMETERS}"
+
+CATALINA_OPTS="${GC_JVM_PARAMETERS} ${CATALINA_OPTS}"
 export CATALINA_OPTS
 
 sed -i "s/\(<session-timeout>\).*\(<\/session-timeout>\)/\1${SESSION_TIMEOUT:-"{{ jira_session_timeout }}"}\2/g" ${JIRA_CATALINA}/atlassian-jira/WEB-INF/web.xml

@@ -105,7 +105,7 @@
 
 - name: unarchive package
   shell: |
-    set -o pipefail
+    set -euo pipefail
     rm -rf {{ jira_catalina }} \
       && mkdir -p {{ jira_catalina }}
     cd {{ jira_catalina }}

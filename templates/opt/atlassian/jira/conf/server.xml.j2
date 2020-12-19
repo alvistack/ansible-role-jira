@@ -111,7 +111,7 @@
 
             </Host>
             <Valve className="org.apache.catalina.valves.AccessLogValve"
-                   pattern="%a %{jira.request.id}r %{jira.request.username}r %t &quot;%m %U%q %H&quot; %s %b %D &quot;%{Referer}i&quot; &quot;%{User-Agent}i&quot; &quot;%{jira.request.assession.id}r&quot;"/>
+                   pattern="{{ '%a %{jira.request.id}r %{jira.request.username}r %t &quot;%m %U%{sanitized.query}r %H&quot; %s %b %D &quot;%{sanitized.referer}r&quot; &quot;%{User-Agent}i&quot; &quot;%{jira.request.assession.id}r&quot;' }}"/>
         </Engine>
     </Service>
 </Server>

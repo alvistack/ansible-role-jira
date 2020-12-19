@@ -1,4 +1,11 @@
+#!/bin/bash
+
 # {{ ansible_managed }}
+
+#
+# If the limit of files that Jira can open is too low, it will be set to this value.
+#
+MIN_NOFILES_LIMIT=16384
 
 #
 # One way to set the JIRA HOME path is here via this variable.  Simply uncomment it and set a valid path like /jira/home.  You can of course set it outside in the command terminal.  That will also work.
@@ -12,6 +19,14 @@ JIRA_CATALINA="${JIRA_CATALINA:-"{{ jira_catalina }}"}"
 JVM_SUPPORT_RECOMMENDED_ARGS="${JVM_SUPPORT_RECOMMENDED_ARGS:-"{{ jira_jvm_support_recommended_args }}"}"
 
 #
+#  You can use variable below to modify garbage collector settings.
+#  For Java 8 we recommend default settings
+#  For Java 11 and relatively small heaps we recommend: -XX:+UseParallelGC
+#  For Java 11 and larger heaps we recommend: -XX:+UseG1GC -XX:+ExplicitGCInvokesConcurrent
+#
+JVM_GC_ARGS="-XX:+ExplicitGCInvokesConcurrent"
+
+#
 # The following 2 settings control the minimum and maximum given to the JIRA Java virtual machine.  In larger JIRA instances, the maximum amount will need to be increased.
 #
 JVM_MINIMUM_MEMORY="${JVM_MINIMUM_MEMORY:-"{{ jira_jvm_minimum_memory }}"}"
@@ -20,10 +35,10 @@ JVM_MAXIMUM_MEMORY="${JVM_MAXIMUM_MEMORY:-"{{ jira_jvm_maximum_memory }}"}"
 #
 # The following setting configures the size of JVM code cache.  A high value of reserved size allows Jira to work with more installed apps.
 #
-JVM_CODE_CACHE_ARGS='-XX:ReservedCodeCacheSize=512m -XX:+UseCodeCacheFlushing'
+JVM_CODE_CACHE_ARGS='-XX:InitialCodeCacheSize=32m -XX:ReservedCodeCacheSize=512m'
 
 #
-# The following are the required arguments for JIRA.
+# The following are the required arguments for Jira.
 #
 JVM_REQUIRED_ARGS='-Djava.awt.headless=true -Datlassian.standalone=JIRA -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true -Dmail.mime.decodeparameters=true -Dorg.dom4j.factory=com.atlassian.core.xml.InterningDocumentFactory'
 
@@ -43,6 +58,10 @@ JVM_REQUIRED_ARGS='-Djava.awt.headless=true -Datlassian.standalone=JIRA -Dorg.ap
 # occurs frequently, which could make it harder for support to diagnose a problem.
 #-----------------------------------------------------------------------------------
 JVM_EXTRA_ARGS="-XX:-OmitStackTraceInFastThrow -Djava.locale.providers=COMPAT -Dcatalina.connector.scheme=${CATALINA_CONNECTOR_SCHEME:-"{{ jira_catalina_connector_scheme }}"} -Dcatalina.connector.secure=${CATALINA_CONNECTOR_SECURE:-"{{ jira_catalina_connector_secure }}"} -Dcatalina.connector.proxyName=${CATALINA_CONNECTOR_PROXYNAME:-"{{ jira_catalina_connector_proxyname }}"} -Dcatalina.connector.proxyPort=${CATALINA_CONNECTOR_PROXYPORT:-"{{ jira_catalina_connector_proxyport }}"} -Dcatalina.context.path=${CATALINA_CONTEXT_PATH:-"{{ jira_catalina_context_path }}"}"
+
+CURRENT_NOFILES_LIMIT=$( ulimit -Hn )
+ulimit -Sn $CURRENT_NOFILES_LIMIT
+ulimit -n $(( CURRENT_NOFILES_LIMIT > MIN_NOFILES_LIMIT  ? CURRENT_NOFILES_LIMIT : MIN_NOFILES_LIMIT ))
 
 PRGDIR=`dirname "$0"`
 cat "${PRGDIR}"/jirabanner.txt
@@ -68,7 +87,7 @@ export JAVA_OPTS
 # !INSTALLER SET JAVA_HOME
 
 echo ""
-echo "If you encounter issues starting or stopping JIRA, please see the Troubleshooting guide at https://docs.atlassian.com/jira/jadm-docs-083/Troubleshooting+installation"
+echo "If you encounter issues starting or stopping Jira, please see the Troubleshooting guide at https://docs.atlassian.com/jira/jadm-docs-0814/Troubleshooting+installation"
 echo ""
 if [ "$JIRA_HOME_MINUSD" != "" ]; then
     echo "Using JIRA_HOME:       $JIRA_HOME"
@@ -105,19 +124,5 @@ cd $PUSHED_DIR
 
 echo ""
 echo "Server startup logs are located in $LOGBASEABS/logs/catalina.out"
-
-# Set the JVM arguments used to start JIRA. For a description of the options, see
-# http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html
-
-#-----------------------------------------------------------------------------------
-# This allows us to actually debug GC related issues by correlating timestamps
-# with other parts of the application logs.
-#-----------------------------------------------------------------------------------
-GC_JVM_PARAMETERS=""
-GC_JVM_PARAMETERS="-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintGCCause ${GC_JVM_PARAMETERS}"
-GC_JVM_PARAMETERS="-Xloggc:$LOGBASEABS/logs/atlassian-jira-gc-%t.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=20M ${GC_JVM_PARAMETERS}"
-
-CATALINA_OPTS="${GC_JVM_PARAMETERS} ${CATALINA_OPTS}"
-export CATALINA_OPTS
 
 sed -i "s/\(<session-timeout>\).*\(<\/session-timeout>\)/\1${SESSION_TIMEOUT:-"{{ jira_session_timeout }}"}\2/g" ${JIRA_CATALINA}/atlassian-jira/WEB-INF/web.xml

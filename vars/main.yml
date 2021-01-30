@@ -17,29 +17,29 @@
 _jira_download:
   "8.14.1":
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.14.1.tar.gz"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.14.1.tar.gz"
-    checksum: "sha1:fdb927c873c34ba86b24d153bd2945cb1b9b8ffb"
+    dest: "/var/cache/ansible/05570ea34f09b6a5d084b7e895bd5e9773623fb744fbae54f7f4940b85ff4579/atlassian-jira-core-8.14.1.tar.gz"
+    checksum: "sha256:05570ea34f09b6a5d084b7e895bd5e9773623fb744fbae54f7f4940b85ff4579"
   "8.14.0":
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.14.0.tar.gz"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.14.0.tar.gz"
-    checksum: "sha1:56d952d0996c8c7a3903f5a4a942b4ae3b36a2b1"
+    dest: "/var/cache/ansible/00b8a29bfcaeb55785422f69bab544896cc18486191f76e54c6127a638347d4f/atlassian-jira-core-8.14.0.tar.gz"
+    checksum: "sha256:00b8a29bfcaeb55785422f69bab544896cc18486191f76e54c6127a638347d4f"
   "8.13.1":
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.13.1.tar.gz"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.13.1.tar.gz"
-    checksum: "sha1:1b57c7613d48997b9a6f9e7775f4088af1322889"
+    dest: "/var/cache/ansible/85c6aae8039d0a131f3a19a2aa3b66a853487d90e688cbc3eaa6892825d2d676/atlassian-jira-core-8.13.1.tar.gz"
+    checksum: "sha256:85c6aae8039d0a131f3a19a2aa3b66a853487d90e688cbc3eaa6892825d2d676"
   "8.13.0":
     url: "https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.13.0.tar.gz"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/atlassian-jira-core-8.13.0.tar.gz"
-    checksum: "sha1:8a45532d32451a73e0e74ba2dfc71c588ba6038e"
+    dest: "/var/cache/ansible/118265efb0725cea3ddfc3cfab7f379d163cb3aae8e156901cdf460a54aafe61/atlassian-jira-core-8.13.0.tar.gz"
+    checksum: "sha256:118265efb0725cea3ddfc3cfab7f379d163cb3aae8e156901cdf460a54aafe61"
 
 _mysql_jdbc_download:
   "5.1.49":
     url: "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.49.tar.gz"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/mysql-connector-java-5.1.49.tar.gz"
-    checksum: "sha1:ed8f8574585edfb630b0b6ee4ebf6f6847795c0f"
+    dest: "/var/cache/ansible/25dc7e687f58b2345176ecb8aff6ca87acd33bce5b2b3cc92dd0557806d16dca/mysql-connector-java-5.1.49.tar.gz"
+    checksum: "sha256:25dc7e687f58b2345176ecb8aff6ca87acd33bce5b2b3cc92dd0557806d16dca"
 
 _postgresql_jdbc_download:
   "42.2.18":
     url: "https://jdbc.postgresql.org/download/postgresql-42.2.18.jar"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/postgresql-42.2.18.jar"
-    checksum: "sha1:a0a9c1d43c7727eeaf1b729477891185d3c71751"
+    dest: "/var/cache/ansible/0c891979f1eb2fe44432da114d09760b5063dad9e669ac0ac6b0b6bfb91bb3ba/postgresql-42.2.18.jar"
+    checksum: "sha256:0c891979f1eb2fe44432da114d09760b5063dad9e669ac0ac6b0b6bfb91bb3ba"

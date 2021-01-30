@@ -86,6 +86,7 @@
     - dest: "{{ jira_home }}"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
+  register: file_result
 
 - name: download archive
   vars:
@@ -100,12 +101,14 @@
     - "{{ jira_download }}"
     - "{{ mysql_jdbc_download }}"
     - "{{ postgresql_jdbc_download }}"
+  when: file_result is changed
   register: get_url_result
   until: get_url_result is succeeded
 
 - name: unarchive package
   shell: |
     set -euo pipefail
+    exec &> >(tee -a {{ jira_download.dest }}.log)
     rm -rf {{ jira_catalina }} \
       && mkdir -p {{ jira_catalina }}
     cd {{ jira_catalina }}
@@ -129,7 +132,7 @@
       {{ jira_catalina }}/conf
   args:
     executable: "/bin/bash"
-  when: get_url_result is changed
+    creates: "{{ jira_download.dest }}.log"
   notify:
     - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service

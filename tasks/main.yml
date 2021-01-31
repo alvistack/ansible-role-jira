@@ -179,6 +179,20 @@
     - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service
 
+- name: patch {{ jira_catalina }}/atlassian-jira/WEB-INF/web.xml
+  vars:
+    ansible_python_interpreter: "python3"
+  xml:
+    path: "{{ jira_catalina }}/atlassian-jira/WEB-INF/web.xml"
+    xpath: "/ns:web-app/ns:session-config/ns:session-timeout"
+    namespaces:
+      ns: "http://java.sun.com/xml/ns/javaee"
+    value: "{{ jira_session_timeout | int }}"
+    state: "present"
+  notify:
+    - jira | systemctl daemon-reload
+    - jira | systemctl restart jira.service
+
 - name: flush handlers
   meta: flush_handlers
 

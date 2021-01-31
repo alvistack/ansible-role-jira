@@ -36,7 +36,8 @@
         <Connector port="8080" relaxedPathChars="[]|" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"
                    maxThreads="150" minSpareThreads="25" connectionTimeout="20000" enableLookups="false"
                    maxHttpHeaderSize="8192" protocol="HTTP/1.1" useBodyEncodingForURI="true" redirectPort="8443"
-                   scheme="${catalina.connector.scheme}" secure="${catalina.connector.secure}" proxyName="${catalina.connector.proxyName}" proxyPort="${catalina.connector.proxyPort}"
+                   scheme="${catalina.connector.scheme}" secure="${catalina.connector.secure}"
+                   proxyName="${catalina.connector.proxyName}" proxyPort="${catalina.connector.proxyPort}"
                    acceptCount="100" disableUploadTimeout="true" bindOnInit="false"/>
 
         <!--

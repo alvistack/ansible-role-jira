@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Remove adhoc config with environment variables
+  - Bugfix session timeout
   - Improve download archive logic
   - Support CentOS 8 Stream
   - Support openSUSE Tumbleweed

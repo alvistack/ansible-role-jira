@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Improve HTTP transparent proxy support
   - Remove adhoc config with environment variables
   - Bugfix session timeout
   - Improve download archive logic

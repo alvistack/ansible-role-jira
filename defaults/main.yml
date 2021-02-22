@@ -27,7 +27,7 @@ mysql_jdbc_version: "5.1.49"
 mysql_jdbc_download: "{{ _mysql_jdbc_download[mysql_jdbc_version] }}"
 
 # PostgreSQL JDBC version.
-postgresql_jdbc_version: "42.2.18"
+postgresql_jdbc_version: "42.2.19"
 
 # PostgreSQL JDBC download details.
 postgresql_jdbc_download: "{{ _postgresql_jdbc_download[postgresql_jdbc_version] }}"

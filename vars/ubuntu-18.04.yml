@@ -16,4 +16,5 @@
 
 _apt:
   - { state: "latest", name: "fontconfig" }
+  - { state: "latest", name: "tar" }
   - { state: "latest", name: "unzip" }

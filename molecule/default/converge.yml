@@ -18,10 +18,12 @@
   remote_user: root
   become: true
   tasks:
-    - include_role:
+    - name: include role
+      include_role:
         name: openjdk
       tags: openjdk
 
-    - include_role:
+    - name: include role
+      include_role:
         name: jira
       tags: jira

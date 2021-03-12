@@ -86,24 +86,11 @@
     - dest: "{{ jira_home }}"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
-  register: file_result
+  notify:
+    - jira | download archive
 
-- name: download archive
-  vars:
-    ansible_python_interpreter: "python3"
-  get_url:
-    url: "{{ item.url }}"
-    dest: "{{ item.dest }}"
-    checksum: "{{ item.checksum }}"
-    mode: "{{ item.mode | default('0644') }}"
-    timeout: 300
-  loop:
-    - "{{ jira_download }}"
-    - "{{ mysql_jdbc_download }}"
-    - "{{ postgresql_jdbc_download }}"
-  when: file_result is changed
-  register: result
-  until: result is succeeded
+- name: flush handlers
+  meta: flush_handlers
 
 - name: unarchive package
   shell: |

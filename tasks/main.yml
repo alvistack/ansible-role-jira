@@ -71,9 +71,6 @@
   loop:
     - { dest: "/lib/systemd/system" }
     - { dest: "/lib/systemd/system/jira.service.d" }
-    - { dest: "{{ jira_download.dest | dirname }}" }
-    - { dest: "{{ mysql_jdbc_download.dest | dirname }}" }
-    - { dest: "{{ postgresql_jdbc_download.dest | dirname }}" }
     - dest: "{{ jira_catalina }}"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
@@ -86,11 +83,27 @@
     - dest: "{{ jira_home }}"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
-  notify:
-    - jira | download archive
 
-- name: flush handlers
-  meta: flush_handlers
+- name: download archive
+  shell: |
+    set -euo pipefail
+    TMP_DIR="$(mktemp -d)" \
+      && cd $TMP_DIR \
+      && mkdir -p ./{{ item.dest | dirname }} \
+      && curl -skL -m 300 {{ item.url }} > ./{{ item.dest }} \
+      && echo -n "{{ item.sha256sum }} ./{{ item.dest }}" | sha256sum -c - \
+      && mkdir -p {{ item.dest | dirname }} \
+      && mv ./{{ item.dest }} {{ item.dest }} \
+      && rm -rf $TMP_DIR
+  args:
+    executable: "/bin/bash"
+    creates: "{{ item.dest | dirname }}"
+  loop:
+    - "{{ jira_download }}"
+    - "{{ mysql_jdbc_download }}"
+    - "{{ postgresql_jdbc_download }}"
+  register: result
+  until: result is succeeded
 
 - name: unarchive package
   shell: |

@@ -15,18 +15,18 @@
 # limitations under the License.
 
 _jira_download:
+  "8.16.0":
+    url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.16.0.tar.gz"
+    dest: "/var/cache/ansible/d6eef96a8ce53f60fe08338f4d783342fea5350fae3c2d6040e827f9915e339e/atlassian-jira-core-8.16.0.tar.gz"
+    sha256sum: "d6eef96a8ce53f60fe08338f4d783342fea5350fae3c2d6040e827f9915e339e"
+  "8.15.1":
+    url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.15.1.tar.gz"
+    dest: "/var/cache/ansible/2a6ef6c162df8db4126aed808cb3e421984e9dd99a1c4429fc5bf5930665c1d2/atlassian-jira-core-8.15.1.tar.gz"
+    sha256sum: "2a6ef6c162df8db4126aed808cb3e421984e9dd99a1c4429fc5bf5930665c1d2"
   "8.15.0":
     url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.15.0.tar.gz"
     dest: "/var/cache/ansible/057df96c53034191d0ad2a703453403cc1d319773b826d136ffa5df411232c69/atlassian-jira-core-8.15.0.tar.gz"
     sha256sum: "057df96c53034191d0ad2a703453403cc1d319773b826d136ffa5df411232c69"
-  "8.14.1":
-    url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.14.1.tar.gz"
-    dest: "/var/cache/ansible/05570ea34f09b6a5d084b7e895bd5e9773623fb744fbae54f7f4940b85ff4579/atlassian-jira-core-8.14.1.tar.gz"
-    sha256sum: "05570ea34f09b6a5d084b7e895bd5e9773623fb744fbae54f7f4940b85ff4579"
-  "8.14.0":
-    url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.14.0.tar.gz"
-    dest: "/var/cache/ansible/00b8a29bfcaeb55785422f69bab544896cc18486191f76e54c6127a638347d4f/atlassian-jira-core-8.14.0.tar.gz"
-    sha256sum: "00b8a29bfcaeb55785422f69bab544896cc18486191f76e54c6127a638347d4f"
 
 _mysql_jdbc_download:
   "5.1.49":

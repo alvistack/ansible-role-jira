@@ -25,6 +25,7 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
+        - hirsute
         - groovy
         - focal
         - bionic

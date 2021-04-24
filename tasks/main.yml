@@ -100,7 +100,6 @@
     creates: "{{ item.dest | dirname }}"
   loop:
     - "{{ jira_download }}"
-    - "{{ mysql_jdbc_download }}"
     - "{{ postgresql_jdbc_download }}"
   register: result
   until: result is succeeded
@@ -115,12 +114,6 @@
     TMP_DIR="$(mktemp -d)" \
       && tar -zx -C $TMP_DIR -f {{ jira_download.dest }} \
       && cp -rfT $TMP_DIR/* . \
-      && rm -rf $TMP_DIR
-    cd {{ jira_catalina }}/lib
-    rm -rf *mysql*.jar
-    TMP_DIR="$(mktemp -d)" \
-      && tar -zx -C $TMP_DIR -f {{ mysql_jdbc_download.dest }} \
-      && mv $TMP_DIR/*/*mysql*-bin.jar . \
       && rm -rf $TMP_DIR
     cd {{ jira_catalina }}/lib
     rm -rf *postgresql*.jar
@@ -190,7 +183,6 @@
     value: "{{ jira_session_timeout | int }}"
     state: "present"
   notify:
-    - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service
 
 - name: flush handlers

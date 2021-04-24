@@ -15,6 +15,10 @@
 # limitations under the License.
 
 _jira_download:
+  "8.16.1":
+    url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.16.1.tar.gz"
+    dest: "/var/cache/ansible/3372901b607832e4090a5dbca1574aa1857905173887175e8e33c80bcf179643/atlassian-jira-core-8.16.1.tar.gz"
+    sha256sum: "3372901b607832e4090a5dbca1574aa1857905173887175e8e33c80bcf179643"
   "8.16.0":
     url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.16.0.tar.gz"
     dest: "/var/cache/ansible/d6eef96a8ce53f60fe08338f4d783342fea5350fae3c2d6040e827f9915e339e/atlassian-jira-core-8.16.0.tar.gz"
@@ -28,14 +32,8 @@ _jira_download:
     dest: "/var/cache/ansible/057df96c53034191d0ad2a703453403cc1d319773b826d136ffa5df411232c69/atlassian-jira-core-8.15.0.tar.gz"
     sha256sum: "057df96c53034191d0ad2a703453403cc1d319773b826d136ffa5df411232c69"
 
-_mysql_jdbc_download:
-  "5.1.49":
-    url: "http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.49.tar.gz"
-    dest: "/var/cache/ansible/25dc7e687f58b2345176ecb8aff6ca87acd33bce5b2b3cc92dd0557806d16dca/mysql-connector-java-5.1.49.tar.gz"
-    sha256sum: "25dc7e687f58b2345176ecb8aff6ca87acd33bce5b2b3cc92dd0557806d16dca"
-
 _postgresql_jdbc_download:
-  "42.2.19":
-    url: "http://jdbc.postgresql.org/download/postgresql-42.2.19.jar"
-    dest: "/var/cache/ansible/232747fa0924d88a26dfa42b8128b6fa1140802d804125891596e8ca5f291322/postgresql-42.2.19.jar"
-    sha256sum: "232747fa0924d88a26dfa42b8128b6fa1140802d804125891596e8ca5f291322"
+  "42.2.20":
+    url: "http://jdbc.postgresql.org/download/postgresql-42.2.20.jar"
+    dest: "/var/cache/ansible/708b2938aea81f32b8b35440da233828284a100e6f2212a7ab1eeaf4b3a6514e/postgresql-42.2.20.jar"
+    sha256sum: "708b2938aea81f32b8b35440da233828284a100e6f2212a7ab1eeaf4b3a6514e"

@@ -15,19 +15,13 @@
 # limitations under the License.
 
 # Jira version.
-jira_version: "8.16.0"
+jira_version: "8.16.1"
 
 # Jira download details.
 jira_download: "{{ _jira_download[jira_version] }}"
 
-# MySQL JDBC version.
-mysql_jdbc_version: "5.1.49"
-
-# MySQL JDBC download details.
-mysql_jdbc_download: "{{ _mysql_jdbc_download[mysql_jdbc_version] }}"
-
 # PostgreSQL JDBC version.
-postgresql_jdbc_version: "42.2.19"
+postgresql_jdbc_version: "42.2.20"
 
 # PostgreSQL JDBC download details.
 postgresql_jdbc_download: "{{ _postgresql_jdbc_download[postgresql_jdbc_version] }}"
@@ -51,7 +45,7 @@ jira_catalina_connector_proxyname: ~
 jira_catalina_connector_proxyport: ~
 jira_catalina_connector_scheme: "http"
 jira_catalina_connector_secure: "false"
-jira_catalina_context_path: "/"
+jira_catalina_context_path: ~
 
 # Atlassian Support recommended JVM arguments.
 jira_jvm_support_recommended_args: >-

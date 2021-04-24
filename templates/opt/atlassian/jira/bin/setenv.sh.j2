@@ -57,15 +57,7 @@ JVM_REQUIRED_ARGS='-Djava.awt.headless=true -Datlassian.standalone=JIRA -Dorg.ap
 # Prevents the JVM from suppressing stack traces if a given type of exception
 # occurs frequently, which could make it harder for support to diagnose a problem.
 #-----------------------------------------------------------------------------------
-JVM_EXTRA_ARGS=" \
--XX:-OmitStackTraceInFastThrow \
--Djava.locale.providers=COMPAT \
--Dcatalina.connector.scheme={{ jira_catalina_connector_scheme }} \
--Dcatalina.connector.secure={{ jira_catalina_connector_secure }} \
--Dcatalina.connector.proxyName={{ jira_catalina_connector_proxyname }} \
--Dcatalina.connector.proxyPort={{ jira_catalina_connector_proxyport }} \
--Dcatalina.context.path={{ jira_catalina_context_path }} \
-"
+JVM_EXTRA_ARGS="-XX:-OmitStackTraceInFastThrow -Djava.locale.providers=COMPAT"
 
 CURRENT_NOFILES_LIMIT=$( ulimit -Hn )
 ulimit -Sn $CURRENT_NOFILES_LIMIT
@@ -95,7 +87,7 @@ export JAVA_OPTS
 # !INSTALLER SET JAVA_HOME
 
 echo ""
-echo "If you encounter issues starting or stopping Jira, please see the Troubleshooting guide at https://docs.atlassian.com/jira/jadm-docs-0814/Troubleshooting+installation"
+echo "If you encounter issues starting or stopping Jira, please see the Troubleshooting guide at https://docs.atlassian.com/jira/jadm-docs-0816/Troubleshooting+installation"
 echo ""
 if [ "$JIRA_HOME_MINUSD" != "" ]; then
     echo "Using JIRA_HOME:       $JIRA_HOME"

@@ -183,7 +183,6 @@
     value: "{{ jira_session_timeout | int }}"
     state: "present"
   notify:
-    - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service
 
 - name: flush handlers

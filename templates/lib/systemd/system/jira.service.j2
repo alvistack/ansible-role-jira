@@ -2,8 +2,8 @@
 
 [Unit]
 Description=Atlassian Jira
-After=network-online.target local-fs.target remote-fs.target time-sync.target multi-user.target
-Wants=network-online.target local-fs.target remote-fs.target time-sync.target multi-user.target
+After=multi-user.target
+Wants=multi-user.target
 
 [Service]
 Type=forking

@@ -75,8 +75,9 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
-    - { dest: "/lib/systemd/system" }
-    - { dest: "/lib/systemd/system/jira.service.d" }
+    - { dest: "/lib/systemd/system/jira.service.d", state: "absent" }
+    - { dest: "/usr/local/lib/systemd/system" }
+    - { dest: "/usr/local/lib/systemd/system/jira.service.d" }
     - dest: "{{ jira_catalina }}"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
@@ -144,7 +145,7 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - { dest: "/lib/systemd/system/jira.service" }
+    - { dest: "/usr/local/lib/systemd/system/jira.service" }
     - dest: "{{ jira_catalina }}/bin/setenv.sh"
       src: "./templates/opt/atlassian/jira/bin/setenv.sh.j2"
       owner: "{{ jira_owner }}"
@@ -166,7 +167,8 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/lib/systemd/system/jira.service" }
+    - { dest: "/lib/systemd/system/jira.service", state: "absent" }
+    - { dest: "/usr/local/lib/systemd/system/jira.service" }
     - dest: "{{ jira_catalina }}/bin/setenv.sh"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"

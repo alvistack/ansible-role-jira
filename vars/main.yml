@@ -14,6 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+_jira_version:
+  "8.17": "8.17.0"
+  "8.16": "8.16.1"
+
 _jira_download:
   "8.17.0":
     url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.17.0.tar.gz"

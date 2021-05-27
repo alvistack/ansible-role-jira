@@ -14,8 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Jira release.
+jira_release: "8.17"
+
 # Jira version.
-jira_version: "8.17.0"
+jira_version: "{{ _jira_version[jira_release] }}"
 
 # Jira download details.
 jira_download: "{{ _jira_download[jira_version] }}"

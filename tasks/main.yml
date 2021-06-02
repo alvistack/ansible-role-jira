@@ -94,11 +94,11 @@
     set -euo pipefail
     TMP_DIR="$(mktemp -d)" \
       && cd $TMP_DIR \
-      && mkdir -p ./{{ item.dest | dirname }} \
-      && curl -skL -m 300 {{ item.url }} > ./{{ item.dest }} \
-      && echo -n "{{ item.sha256sum }} ./{{ item.dest }}" | sha256sum -c - \
+      && mkdir -p .{{ item.dest | dirname }} \
+      && curl -skL -m 300 {{ item.url }} > .{{ item.dest }} \
+      && echo -n "{{ item.checksum }} .{{ item.dest }}" | sha256sum -c - \
       && mkdir -p {{ item.dest | dirname }} \
-      && mv ./{{ item.dest }} {{ item.dest }} \
+      && mv .{{ item.dest }} {{ item.dest }} \
       && rm -rf $TMP_DIR
   args:
     executable: "/bin/bash"
@@ -112,7 +112,8 @@
 - name: unarchive package
   shell: |
     set -euo pipefail
-    exec &> >(tee -a {{ jira_download.dest }}.log)
+    mkdir -p /var/log/ansible
+    exec &> >(tee -a /var/log/ansible/{{ jira_download.checksum }}.log)
     rm -rf {{ jira_catalina }} \
       && mkdir -p {{ jira_catalina }}
     cd {{ jira_catalina }}
@@ -130,7 +131,7 @@
       {{ jira_catalina }}/conf
   args:
     executable: "/bin/bash"
-    creates: "{{ jira_download.dest }}.log"
+    creates: "/var/log/ansible/{{ jira_download.checksum }}.log"
   notify:
     - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service

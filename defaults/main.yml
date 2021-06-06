@@ -14,6 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# PostgreSQL JDBC release.
+postgresql_jdbc_release: "42.2"
+
+# PostgreSQL JDBC version.
+postgresql_jdbc_version: "{{ _postgresql_jdbc_version[postgresql_jdbc_release] }}"
+
+# PostgreSQL JDBC download details.
+postgresql_jdbc_download: "{{ _postgresql_jdbc_download[postgresql_jdbc_version] }}"
+
 # Jira release.
 jira_release: "8.17"
 
@@ -22,12 +31,6 @@ jira_version: "{{ _jira_version[jira_release] }}"
 
 # Jira download details.
 jira_download: "{{ _jira_download[jira_version] }}"
-
-# PostgreSQL JDBC version.
-postgresql_jdbc_version: "42.2.20"
-
-# PostgreSQL JDBC download details.
-postgresql_jdbc_download: "{{ _postgresql_jdbc_download[postgresql_jdbc_version] }}"
 
 # Owner and group for Jira.
 jira_owner: "jira"

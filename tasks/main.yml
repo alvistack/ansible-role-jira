@@ -94,6 +94,8 @@
 - name: download archive
   shell: |
     set -euxo pipefail
+    mkdir -p /var/log/ansible
+    exec &> >(tee -a /var/log/ansible/{{ item.checksum }}-get_url.log)
     TMP_DIR="$(mktemp -d)" \
       && cd $TMP_DIR \
       && mkdir -p .{{ item.dest | dirname }} \
@@ -104,7 +106,7 @@
       && rm -rf $TMP_DIR
   args:
     executable: "/bin/bash"
-    creates: "{{ item.dest | dirname }}"
+    creates: "/var/log/ansible/{{ item.checksum }}-get_url.log"
   loop:
     - "{{ jira_download }}"
     - "{{ postgresql_jdbc_download }}"
@@ -115,7 +117,7 @@
   shell: |
     set -euxo pipefail
     mkdir -p /var/log/ansible
-    exec &> >(tee -a /var/log/ansible/{{ jira_download.checksum }}.log)
+    exec &> >(tee -a /var/log/ansible/{{ jira_download.checksum }}-unarchive.log)
     rm -rf {{ jira_catalina }} \
       && mkdir -p {{ jira_catalina }}
     cd {{ jira_catalina }}
@@ -133,7 +135,7 @@
       {{ jira_catalina }}/conf
   args:
     executable: "/bin/bash"
-    creates: "/var/log/ansible/{{ jira_download.checksum }}.log"
+    creates: "/var/log/ansible/{{ jira_download.checksum }}-unarchive.log"
   notify:
     - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service

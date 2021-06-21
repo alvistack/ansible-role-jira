@@ -15,13 +15,13 @@
 # limitations under the License.
 
 _postgresql_jdbc_version:
-  "42.2": "42.2.21"
+  "42.2": "42.2.22"
 
 _postgresql_jdbc_download:
-  "42.2.21":
-    url: "http://jdbc.postgresql.org/download/postgresql-42.2.21.jar"
-    dest: "/var/cache/ansible/3b53cd38982d91a79c2656fb9ab95f1ea22a32d70bc73643999e9b7cb628038e/postgresql-42.2.21.jar"
-    checksum: "3b53cd38982d91a79c2656fb9ab95f1ea22a32d70bc73643999e9b7cb628038e"
+  "42.2.22":
+    url: "http://jdbc.postgresql.org/download/postgresql-42.2.22.jar"
+    dest: "/var/cache/ansible/216127fc396598edac446d0e102ac662984b91d77c820916e9189b5fc4074909/postgresql-42.2.22.jar"
+    checksum: "216127fc396598edac446d0e102ac662984b91d77c820916e9189b5fc4074909"
 
 _jira_version:
   "8.17": "8.17.1"

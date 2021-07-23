@@ -30,12 +30,9 @@
 
 ### Major Changes
 
-  - Bugfix [ansible-lint
-    `namespace`](https://github.com/ansible-community/ansible-lint/pull/1451)
-  - Bugfix [ansible-lint
-    `no-handler`](https://github.com/ansible-community/ansible-lint/pull/1402)
-  - Bugfix [ansible-lint
-    `unnamed-task`](https://github.com/ansible-community/ansible-lint/pull/1413)
+  - Bugfix [ansible-lint `namespace`](https://github.com/ansible-community/ansible-lint/pull/1451)
+  - Bugfix [ansible-lint `no-handler`](https://github.com/ansible-community/ansible-lint/pull/1402)
+  - Bugfix [ansible-lint `unnamed-task`](https://github.com/ansible-community/ansible-lint/pull/1413)
   - Simplify Python dependency with system packages
   - Support RHEL 8 with Molecule
   - Support RHEL 7 with Molecule
@@ -222,8 +219,7 @@
 ### Major Changes
 
   - Install Jira on Ubuntu 16.04/14.04 and CentOS 7/6 from source
-  - Update /etc/init.d/jira with better support for running with
-    dumb-init inside docker
+  - Update /etc/init.d/jira with better support for running with dumb-init inside docker
   - Update test cases
 
 ## 1.0.0 - 2017-09-25

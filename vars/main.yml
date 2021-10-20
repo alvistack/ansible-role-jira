@@ -15,7 +15,7 @@
 # limitations under the License.
 
 _postgresql_jdbc_version:
-  "42.2": "42.3.0"
+  "42.3": "42.3.0"
 
 _postgresql_jdbc_download:
   "42.3.0":

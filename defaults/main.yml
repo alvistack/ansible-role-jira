@@ -24,7 +24,7 @@ postgresql_jdbc_version: "{{ _postgresql_jdbc_version[postgresql_jdbc_release] }
 postgresql_jdbc_download: "{{ _postgresql_jdbc_download[postgresql_jdbc_version] }}"
 
 # Jira release.
-jira_release: "8.19"
+jira_release: "8.20"
 
 # Jira version.
 jira_version: "{{ _jira_version[jira_release] }}"

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # PostgreSQL JDBC release.
-postgresql_jdbc_release: "42.2"
+postgresql_jdbc_release: "42.3"
 
 # PostgreSQL JDBC version.
 postgresql_jdbc_version: "{{ _postgresql_jdbc_version[postgresql_jdbc_release] }}"

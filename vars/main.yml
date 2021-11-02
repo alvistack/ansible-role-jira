@@ -15,19 +15,23 @@
 # limitations under the License.
 
 _postgresql_jdbc_version:
-  "42.3": "42.3.0"
+  "42.3": "42.3.1"
 
 _postgresql_jdbc_download:
-  "42.3.0":
-    url: "http://jdbc.postgresql.org/download/postgresql-42.3.0.jar"
-    dest: "/var/cache/ansible/bd3b88a62d92f36b26c254203460d5f0463da15c0e964a0c7197c83f3c689ccd/postgresql-42.3.0.jar"
-    checksum: "bd3b88a62d92f36b26c254203460d5f0463da15c0e964a0c7197c83f3c689ccd"
+  "42.3.1":
+    url: "http://jdbc.postgresql.org/download/postgresql-42.3.1.jar"
+    dest: "/var/cache/ansible/8370570857da86eb4a76dd3d8505d34bac0c18186741fa83a6820a10fa441cb4/postgresql-42.3.1.jar"
+    checksum: "8370570857da86eb4a76dd3d8505d34bac0c18186741fa83a6820a10fa441cb4"
 
 _jira_version:
-  "8.20": "8.20.0"
+  "8.20": "8.20.1"
   "8.19": "8.19.1"
 
 _jira_download:
+  "8.20.1":
+    url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.20.1.tar.gz"
+    dest: "/var/cache/ansible/44739df3b4ba84803000bcd057a3c53f6985867230451cf5bd9c656b4a2b79e8/atlassian-jira-core-8.20.1.tar.gz"
+    checksum: "44739df3b4ba84803000bcd057a3c53f6985867230451cf5bd9c656b4a2b79e8"
   "8.20.0":
     url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.20.0.tar.gz"
     dest: "/var/cache/ansible/5717d2a08627f61e5f604ad082daa976c0f3f03ac498011de7cef643edc16113/atlassian-jira-core-8.20.0.tar.gz"

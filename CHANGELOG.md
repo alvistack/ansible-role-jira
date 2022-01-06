@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Skip package upgrade before running molecule
   - Support Fedora Rawhide
   - Support Debian Testing
 

@@ -24,10 +24,14 @@ _postgresql_jdbc_download:
     checksum: "eed0604f512ba44817954de99a07e2a5470aa4bfcb481d4e63a93e0ff0e0aede"
 
 _jira_version:
+  "8.22": "8.22.0"
   "8.21": "8.21.1"
-  "8.20": "8.20.5"
 
 _jira_download:
+  "8.22.0":
+    url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.22.0.tar.gz"
+    dest: "/var/cache/ansible/07a2ed6d9368cf58a84992846558f3aa772e0579a7487bfc6d70659a0985fce3/atlassian-jira-core-8.22.0.tar.gz"
+    checksum: "07a2ed6d9368cf58a84992846558f3aa772e0579a7487bfc6d70659a0985fce3"
   "8.21.1":
     url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.21.1.tar.gz"
     dest: "/var/cache/ansible/3652991d9ad8f895fa314cffd52ec4438772dc837b77a6747e4f020b93a7dce9/atlassian-jira-core-8.21.1.tar.gz"
@@ -36,15 +40,3 @@ _jira_download:
     url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.21.0.tar.gz"
     dest: "/var/cache/ansible/9e40238e6d5386e54fbd29358818f6d659893a3a6145565ea7672d61b63adb4f/atlassian-jira-core-8.21.0.tar.gz"
     checksum: "9e40238e6d5386e54fbd29358818f6d659893a3a6145565ea7672d61b63adb4f"
-  "8.20.5":
-    url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.20.5.tar.gz"
-    dest: "/var/cache/ansible/1327af7e432cf38b689b183ef66889d3f9144142e3dd6fe510520e7a2a8b8390/atlassian-jira-core-8.20.5.tar.gz"
-    checksum: "1327af7e432cf38b689b183ef66889d3f9144142e3dd6fe510520e7a2a8b8390"
-  "8.20.4":
-    url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.20.4.tar.gz"
-    dest: "/var/cache/ansible/2041e202a4c82d9e1b694817fce1a7acb587e2336ccd16a897fa9b5141bb06e4/atlassian-jira-core-8.20.4.tar.gz"
-    checksum: "2041e202a4c82d9e1b694817fce1a7acb587e2336ccd16a897fa9b5141bb06e4"
-  "8.20.3":
-    url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.20.3.tar.gz"
-    dest: "/var/cache/ansible/54b39dd30f06dde0cbb90c3b87d2681ce6fa5c0c320ffaabcd4c8ffcb578dbae/atlassian-jira-core-8.20.3.tar.gz"
-    checksum: "54b39dd30f06dde0cbb90c3b87d2681ce6fa5c0c320ffaabcd4c8ffcb578dbae"

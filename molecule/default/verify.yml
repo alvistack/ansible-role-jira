@@ -19,7 +19,7 @@
   become: true
   tasks:
     - name: check port
-      wait_for:
+      ansible.builtin.wait_for:
         port: "8080"
         timeout: "300"
         delay: "10"
@@ -30,7 +30,7 @@
       retries: 30
 
     - name: check page
-      uri:
+      ansible.builtin.uri:
         url: "http://localhost:8080"
         status_code: "200"
         timeout: "300"
@@ -42,5 +42,5 @@
       retries: 30
 
     - name: check result
-      fail:
+      ansible.builtin.fail:
       when: "'jira' not in result.content"

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 - name: yum install
-  yum:
+  ansible.builtin.yum:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
   loop: "{{ _yum }}"

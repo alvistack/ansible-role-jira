@@ -36,7 +36,7 @@
       skip: true
 
 - name: include release specific tasks
-  include_tasks: "{{ _loop_var }}"
+  ansible.builtin.include_tasks: "{{ _loop_var }}"
   loop: "{{ query('first_found', _params) }}"
   loop_control:
     loop_var: _loop_var
@@ -62,9 +62,9 @@
 - name: useradd
   ansible.builtin.user:
     name: "{{ jira_owner }}"
-    ansible.builtin.group: "{{ jira_group }}"
+    group: "{{ jira_group }}"
     home: "{{ jira_home }}"
-    ansible.builtin.shell: "/usr/sbin/nologin"
+    shell: "/usr/sbin/nologin"
     system: true
     create_home: false
     state: "present"
@@ -73,23 +73,23 @@
   ansible.builtin.file:
     dest: "{{ item.dest }}"
     owner: "{{ item.owner | default('root') }}"
-    ansible.builtin.group: "{{ item.group | default('root') }}"
+    group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/systemd/system" }
     - dest: "{{ jira_catalina }}"
       owner: "{{ jira_owner }}"
-      ansible.builtin.group: "{{ jira_group }}"
+      group: "{{ jira_group }}"
     - dest: "{{ jira_catalina }}/bin"
       owner: "{{ jira_owner }}"
-      ansible.builtin.group: "{{ jira_group }}"
+      group: "{{ jira_group }}"
     - dest: "{{ jira_catalina }}/conf"
       owner: "{{ jira_owner }}"
-      ansible.builtin.group: "{{ jira_group }}"
+      group: "{{ jira_group }}"
     - dest: "{{ jira_home }}"
       owner: "{{ jira_owner }}"
-      ansible.builtin.group: "{{ jira_group }}"
+      group: "{{ jira_group }}"
 
 - name: download archive
   ansible.builtin.shell: |
@@ -145,19 +145,19 @@
     dest: "{{ item.dest }}"
     src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
     owner: "{{ item.owner | default('root') }}"
-    ansible.builtin.group: "{{ item.group | default('root') }}"
+    group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
     - { dest: "/etc/systemd/system/jira.service" }
     - dest: "{{ jira_catalina }}/bin/setenv.sh"
       src: "./templates/opt/atlassian/jira/bin/setenv.sh.j2"
       owner: "{{ jira_owner }}"
-      ansible.builtin.group: "{{ jira_group }}"
+      group: "{{ jira_group }}"
       mode: "0755"
     - dest: "{{ jira_catalina }}/conf/server.xml"
       src: "./templates/opt/atlassian/jira/conf/server.xml.j2"
       owner: "{{ jira_owner }}"
-      ansible.builtin.group: "{{ jira_group }}"
+      group: "{{ jira_group }}"
   notify:
     - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service
@@ -166,18 +166,18 @@
   ansible.builtin.file:
     dest: "{{ item.dest }}"
     owner: "{{ item.owner | default('root') }}"
-    ansible.builtin.group: "{{ item.group | default('root') }}"
+    group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
     - { dest: "/etc/systemd/system/jira.service" }
     - dest: "{{ jira_catalina }}/bin/setenv.sh"
       owner: "{{ jira_owner }}"
-      ansible.builtin.group: "{{ jira_group }}"
+      group: "{{ jira_group }}"
       mode: "0755"
     - dest: "{{ jira_catalina }}/conf/server.xml"
       owner: "{{ jira_owner }}"
-      ansible.builtin.group: "{{ jira_group }}"
+      group: "{{ jira_group }}"
   notify:
     - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service

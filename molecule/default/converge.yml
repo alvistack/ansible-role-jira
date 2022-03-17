@@ -19,11 +19,11 @@
   become: true
   tasks:
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: openjdk
       tags: openjdk
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: jira
       tags: jira

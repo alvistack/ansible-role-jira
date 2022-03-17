@@ -17,7 +17,7 @@
 - name: zypper install
   vars:
     ansible_python_interpreter: "python3"
-  zypper:
+  ansible.builtin.zypper:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
   loop: "{{ _zypper }}"

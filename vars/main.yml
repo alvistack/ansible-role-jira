@@ -24,10 +24,14 @@ _postgresql_jdbc_download:
     checksum: "eed0604f512ba44817954de99a07e2a5470aa4bfcb481d4e63a93e0ff0e0aede"
 
 _jira_version:
-  "8.22": "8.22.0"
+  "8.22": "8.22.1"
   "8.21": "8.21.1"
 
 _jira_download:
+  "8.22.1":
+    url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.22.1.tar.gz"
+    dest: "/var/cache/ansible/56af0c91eba165ca3c4a1d015532b3e639d020b4086aad57bba576a18d18d982/atlassian-jira-core-8.22.1.tar.gz"
+    checksum: "56af0c91eba165ca3c4a1d015532b3e639d020b4086aad57bba576a18d18d982"
   "8.22.0":
     url: "http://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-8.22.0.tar.gz"
     dest: "/var/cache/ansible/07a2ed6d9368cf58a84992846558f3aa772e0579a7487bfc6d70659a0985fce3/atlassian-jira-core-8.22.0.tar.gz"

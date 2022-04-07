@@ -1,9 +1,16 @@
 # Ansible Role for Jira
 
-## 5.6.0 - TBC
+## 5.7.0 - TBC
 
 ### Major Changes
 
+## 5.6.0 - 2022-04-07
+
+### Major Changes
+
+  - Support Ansible community package 5.6.0
+  - Support Fedora 36
+  - Support Ubuntu 22.04
   - Support Ansible community package 5.5.0
   - Support Ansible community package 5.4.0
 

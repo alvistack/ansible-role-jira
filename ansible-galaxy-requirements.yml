@@ -20,6 +20,6 @@ collections:
     version: ">=0.0.0,<1.0.0"
 
 roles:
-  - name: openjdk
+  - name: alvistack.openjdk
     src: https://github.com/alvistack/ansible-role-openjdk
     version: develop

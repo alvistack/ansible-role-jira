@@ -20,10 +20,10 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: openjdk
-      tags: openjdk
+        name: alvistack.openjdk
+      tags: alvistack.openjdk
 
     - name: include role
       ansible.builtin.include_role:
-        name: jira
-      tags: jira
+        name: alvistack.jira
+      tags: alvistack.jira

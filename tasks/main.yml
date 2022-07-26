@@ -69,77 +69,6 @@
     create_home: false
     state: "present"
 
-- name: prepare directories
-  ansible.builtin.file:
-    dest: "{{ item.dest }}"
-    owner: "{{ item.owner | default('root') }}"
-    group: "{{ item.group | default('root') }}"
-    mode: "{{ item.mode | default('0755') }}"
-    state: "{{ item.state | default('directory') }}"
-  loop:
-    - { dest: "/etc/systemd/system" }
-    - dest: "{{ jira_catalina }}"
-      owner: "{{ jira_owner }}"
-      group: "{{ jira_group }}"
-    - dest: "{{ jira_catalina }}/bin"
-      owner: "{{ jira_owner }}"
-      group: "{{ jira_group }}"
-    - dest: "{{ jira_catalina }}/conf"
-      owner: "{{ jira_owner }}"
-      group: "{{ jira_group }}"
-    - dest: "{{ jira_home }}"
-      owner: "{{ jira_owner }}"
-      group: "{{ jira_group }}"
-
-- name: download archive
-  ansible.builtin.shell: |
-    set -euxo pipefail
-    mkdir -p /var/log/ansible
-    exec &> >(tee -a /var/log/ansible/{{ item.checksum }}-get_url.log)
-    TMP_DIR="$(mktemp -d)" \
-      && cd $TMP_DIR \
-      && mkdir -p .{{ item.dest | dirname }} \
-      && curl -skL -m 300 {{ item.url }} > .{{ item.dest }} \
-      && echo -n "{{ item.checksum }} .{{ item.dest }}" | sha256sum -c - \
-      && mkdir -p {{ item.dest | dirname }} \
-      && mv .{{ item.dest }} {{ item.dest }} \
-      && rm -rf $TMP_DIR
-  args:
-    executable: "/bin/bash"
-    creates: "/var/log/ansible/{{ item.checksum }}-get_url.log"
-  loop:
-    - "{{ jira_download }}"
-    - "{{ postgresql_jdbc_download }}"
-  register: result
-  until: result is succeeded
-
-- name: unarchive package
-  ansible.builtin.shell: |
-    set -euxo pipefail
-    mkdir -p /var/log/ansible
-    exec &> >(tee -a /var/log/ansible/{{ jira_download.checksum }}-unarchive.log)
-    rm -rf {{ jira_catalina }} \
-      && mkdir -p {{ jira_catalina }}
-    cd {{ jira_catalina }}
-    TMP_DIR="$(mktemp -d)" \
-      && tar -zx -C $TMP_DIR -f {{ jira_download.dest }} \
-      && cp -rfT $TMP_DIR/* . \
-      && rm -rf $TMP_DIR
-    cd {{ jira_catalina }}/lib
-    rm -rf *postgresql*.jar
-    cp {{ postgresql_jdbc_download.dest }} .
-    chown -Rf {{ jira_owner }}:{{ jira_group }} {{ jira_catalina }}
-    chmod 0755 \
-      {{ jira_catalina }} \
-      {{ jira_catalina }}/bin \
-      {{ jira_catalina }}/conf
-  args:
-    executable: "/bin/bash"
-    creates: "/var/log/ansible/{{ jira_download.checksum }}-unarchive.log"
-  notify:
-    - jira | systemctl daemon-reload
-    - jira | systemctl restart jira.service
-
 - name: copy templates
   ansible.builtin.template:
     dest: "{{ item.dest }}"
@@ -148,7 +77,6 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - { dest: "/etc/systemd/system/jira.service" }
     - dest: "{{ jira_catalina }}/bin/setenv.sh"
       src: "./templates/opt/atlassian/jira/bin/setenv.sh.j2"
       owner: "{{ jira_owner }}"
@@ -159,7 +87,6 @@
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
   notify:
-    - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service
 
 - name: prepare files
@@ -170,7 +97,6 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/etc/systemd/system/jira.service" }
     - dest: "{{ jira_catalina }}/bin/setenv.sh"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
@@ -179,7 +105,6 @@
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
   notify:
-    - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service
 
 - name: patch {{ jira_catalina }}/atlassian-jira/WEB-INF/web.xml

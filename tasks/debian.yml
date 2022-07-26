@@ -14,6 +14,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: apt-key add
+  ansible.builtin.apt_key:
+    keyring: "{{ item.keyring }}"
+    url: "{{ item.url }}"
+    id: "{{ item.id }}"
+    state: "{{ item.state }}"
+  loop: "{{ _apt_key }}"
+  register: result
+  until: result is succeeded
+
+- name: apt-add-repository
+  ansible.builtin.apt_repository:
+    filename: "{{ item.filename }}"
+    repo: "{{ item.repo }}"
+    state: "{{ item.state }}"
+    mode: "{{ item.mode | default('0644') }}"
+  loop: "{{ _apt_repository }}"
+  register: result
+  until: result is succeeded
+
+- name: apt-mark unhold
+  ansible.builtin.dpkg_selections:
+    name: "{{ item.name | regex_replace('^(.*)=[0-9]*:*[0-9]+\\..*$', '\\1') }}"
+    selection: "install"
+  loop: "{{ _apt }}"
+  when: item.state == "present"
+  changed_when: false
+  failed_when: false
+
 - name: apt-get install
   ansible.builtin.apt:
     name: "{{ item.name }}"
@@ -21,3 +50,14 @@
   loop: "{{ _apt }}"
   register: result
   until: result is succeeded
+  notify:
+    - jira | systemctl restart jira.service
+
+- name: apt-mark hold
+  ansible.builtin.dpkg_selections:
+    name: "{{ item.name | regex_replace('^(.*)=[0-9]*:*[0-9]+\\..*$', '\\1') }}"
+    selection: "hold"
+  loop: "{{ _apt }}"
+  when: item.state == "present"
+  changed_when: false
+  failed_when: false

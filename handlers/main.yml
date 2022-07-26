@@ -14,12 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: jira | systemctl daemon-reload
-  ansible.builtin.systemd:
-    daemon_reload: true
-  changed_when: false
-  failed_when: false
-
 - name: jira | systemctl restart jira.service
   ansible.builtin.service:
     name: "jira.service"

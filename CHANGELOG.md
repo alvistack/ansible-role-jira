@@ -1,8 +1,14 @@
 # Ansible Role for Jira
 
-## 6.2.0 - TBC
+## 6.3.0 - TBC
 
 ### Major Changes
+
+## 6.2.0 - 2022-08-03
+
+### Major Changes
+
+  - Support Ansible community package 6.2.0
 
   - Revamp manually download related with OBS repo
 

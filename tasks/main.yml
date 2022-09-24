@@ -107,7 +107,7 @@
   notify:
     - jira | systemctl restart jira.service
 
-- name: patch {{ jira_catalina }}/atlassian-jira/WEB-INF/web.xml
+- name: patch /opt/atlassian/jira/atlassian-jira/WEB-INF/web.xml
   vars:
     ansible_python_interpreter: "python3"
   xml:

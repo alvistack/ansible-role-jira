@@ -41,7 +41,8 @@
   loop: "{{ _yum_repository }}"
 
 - name: zypper removelock
-  ansible.builtin.command: zypper removelock {{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\..*$', '\1-*') }}
+  ansible.builtin.command:
+    cmd: zypper removelock {{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\..*$', '\1-*') }}
   loop: "{{ _zypper }}"
   when: item.state == "present"
   changed_when: false
@@ -61,7 +62,8 @@
     - jira | systemctl restart jira.service
 
 - name: zypper addlock
-  ansible.builtin.command: zypper addlock {{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\..*$', '\1-*') }}
+  ansible.builtin.command:
+    cmd: zypper addlock {{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\..*$', '\1-*') }}
   loop: "{{ _zypper }}"
   when: item.state == "present"
   changed_when: false

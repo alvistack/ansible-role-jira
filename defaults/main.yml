@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Jira release.
-jira_release: "9.2"
+jira_release: "9.3"
 
 # Jira version.
 jira_version: "{{ _jira_version[jira_release] }}"

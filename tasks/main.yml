@@ -64,7 +64,7 @@
     name: "{{ jira_owner }}"
     group: "{{ jira_group }}"
     home: "{{ jira_home }}"
-    shell: "/usr/sbin/nologin"
+    shell: "/bin/bash"
     system: true
     create_home: false
     state: "present"

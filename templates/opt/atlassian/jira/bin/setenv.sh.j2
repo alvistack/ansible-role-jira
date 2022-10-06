@@ -24,7 +24,7 @@ JVM_SUPPORT_RECOMMENDED_ARGS="{{ jira_jvm_support_recommended_args }}"
 #  For Java 11 and relatively small heaps we recommend: -XX:+UseParallelGC
 #  For Java 11 and larger heaps we recommend: -XX:+UseG1GC -XX:+ExplicitGCInvokesConcurrent
 #
-JVM_GC_ARGS="-XX:+ExplicitGCInvokesConcurrent"
+JVM_GC_ARGS="-XX:+UseZGC -XX:+ExplicitGCInvokesConcurrent"
 
 #
 # The following 2 settings control the minimum and maximum given to the JIRA Java virtual machine.  In larger JIRA instances, the maximum amount will need to be increased.
@@ -83,11 +83,19 @@ JAVA_OPTS="-Xms${JVM_MINIMUM_MEMORY} -Xmx${JVM_MAXIMUM_MEMORY} ${JVM_CODE_CACHE_
 
 export JAVA_OPTS
 
+CATALINA_OPTS="-Djira.catalina.connector.scheme={{ jira_catalina_connector_scheme }} ${CATALINA_OPTS}"
+CATALINA_OPTS="-Djira.catalina.connector.secure={{ jira_catalina_connector_secure }} ${CATALINA_OPTS}"
+CATALINA_OPTS="-Djira.catalina.connector.proxyname={{ jira_catalina_connector_proxyname }} ${CATALINA_OPTS}"
+CATALINA_OPTS="-Djira.catalina.connector.proxyport={{ jira_catalina_connector_proxyport }} ${CATALINA_OPTS}"
+CATALINA_OPTS="-Djira.catalina.context.path={{ jira_catalina_context_path }} ${CATALINA_OPTS}"
+
+export CATALINA_OPTS
+
 # DO NOT remove the following line
 # !INSTALLER SET JAVA_HOME
 
 echo ""
-echo "If you encounter issues starting or stopping Jira, please see the Troubleshooting guide at https://docs.atlassian.com/jira/jadm-docs-091/Troubleshooting+installation"
+echo "If you encounter issues starting or stopping Jira, please see the Troubleshooting guide at https://docs.atlassian.com/jira/jadm-docs-093/Troubleshooting+installation"
 echo ""
 if [ "$JIRA_HOME_MINUSD" != "" ]; then
     echo "Using JIRA_HOME:       $JIRA_HOME"

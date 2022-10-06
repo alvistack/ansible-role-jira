@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Default with openJDK 11
   - Support Ubuntu 22.10
   - Support Fedora 37
 

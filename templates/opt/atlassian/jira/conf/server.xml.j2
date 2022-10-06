@@ -36,9 +36,9 @@
         <Connector port="8080" relaxedPathChars="[]|" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"
                    maxThreads="150" minSpareThreads="25" connectionTimeout="20000" enableLookups="false"
                    maxHttpHeaderSize="8192" protocol="HTTP/1.1" useBodyEncodingForURI="true" redirectPort="8443"
-                   proxyName="{{ jira_catalina_connector_proxyname }}" proxyPort="{{ jira_catalina_connector_proxyport }}"
-                   scheme="{{ jira_catalina_connector_scheme }}" secure="{{ jira_catalina_connector_secure }}"
-                   acceptCount="100" disableUploadTimeout="true" bindOnInit="false"/>
+                   acceptCount="100" disableUploadTimeout="true" bindOnInit="false"
+                   scheme="${jira.catalina.connector.scheme}" secure="${jira.catalina.connector.secure}"
+                   proxyName="${jira.catalina.connector.proxyname}" proxyPort="${jira.catalina.connector.proxyport}"/>
 
         <!--
          ==============================================================================================================
@@ -102,7 +102,7 @@
         <Engine name="Catalina" defaultHost="localhost">
             <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true">
 
-                <Context path="{{ jira_catalina_context_path }}" docBase="${catalina.home}/atlassian-jira" reloadable="false" useHttpOnly="true">
+                <Context path="${jira.catalina.context.path}" docBase="${catalina.home}/atlassian-jira" reloadable="false" useHttpOnly="true">
                     <Resource name="UserTransaction" auth="Container" type="javax.transaction.UserTransaction"
                               factory="org.objectweb.jotm.UserTransactionFactory" jotm.timeout="60"/>
                     <Manager pathname=""/>

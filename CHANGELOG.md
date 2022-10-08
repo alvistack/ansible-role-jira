@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Default with openJDK 11
   - Support Ubuntu 22.10
   - Support Fedora 37
 
@@ -24,7 +25,6 @@
 ### Major Changes
 
   - Support Ansible community package 6.2.0
-
   - Revamp manually download related with OBS repo
 
 ## 6.1.0 - 2022-07-14

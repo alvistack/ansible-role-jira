@@ -33,12 +33,14 @@ jira_catalina: "/opt/atlassian/jira"
 # JVM minimal and maximum memory usage.
 jira_jvm_minimum_memory: "2048m"
 jira_jvm_maximum_memory: "2048m"
+jira_jvm_reserved_code_cache_size: "512m"
 
 # Proxy and context path setup.
+jira_catalina_connector_port: "8080"
+jira_catalina_connector_scheme: ~
+jira_catalina_connector_secure: ~
 jira_catalina_connector_proxyname: ~
 jira_catalina_connector_proxyport: ~
-jira_catalina_connector_scheme: "http"
-jira_catalina_connector_secure: "false"
 jira_catalina_context_path: ~
 
 # Atlassian Support recommended JVM arguments.
@@ -47,4 +49,4 @@ jira_jvm_support_recommended_args: >-
   -XX:+UnlockExperimentalVMOptions
 
 # Session timeout (in minutes).
-jira_session_timeout: "120"
+jira_autologin_cookie_age: "120"

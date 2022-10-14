@@ -35,7 +35,7 @@ JVM_MAXIMUM_MEMORY="{{ jira_jvm_maximum_memory }}"
 #
 # The following setting configures the size of JVM code cache.  A high value of reserved size allows Jira to work with more installed apps.
 #
-JVM_CODE_CACHE_ARGS='-XX:InitialCodeCacheSize=32m -XX:ReservedCodeCacheSize=512m'
+JVM_CODE_CACHE_ARGS='-XX:ReservedCodeCacheSize={{ jira_jvm_reserved_code_cache_size }}'
 
 #
 # The following are the required arguments for Jira.
@@ -83,6 +83,7 @@ JAVA_OPTS="-Xms${JVM_MINIMUM_MEMORY} -Xmx${JVM_MAXIMUM_MEMORY} ${JVM_CODE_CACHE_
 
 export JAVA_OPTS
 
+CATALINA_OPTS="-Djira.catalina.connector.port={{ jira_catalina_connector_port }} ${CATALINA_OPTS}"
 CATALINA_OPTS="-Djira.catalina.connector.scheme={{ jira_catalina_connector_scheme }} ${CATALINA_OPTS}"
 CATALINA_OPTS="-Djira.catalina.connector.secure={{ jira_catalina_connector_secure }} ${CATALINA_OPTS}"
 CATALINA_OPTS="-Djira.catalina.connector.proxyname={{ jira_catalina_connector_proxyname }} ${CATALINA_OPTS}"

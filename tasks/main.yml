@@ -115,7 +115,7 @@
     xpath: "/ns:web-app/ns:session-config/ns:session-timeout"
     namespaces:
       ns: "http://java.sun.com/xml/ns/javaee"
-    value: "{{ jira_session_timeout | int }}"
+    value: "{{ jira_autologin_cookie_age | int }}"
     state: "present"
   notify:
     - jira | systemctl restart jira.service

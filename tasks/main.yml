@@ -80,6 +80,7 @@
     - dest: "{{ jira_catalina }}"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
+      mode: "0700"
     - dest: "{{ jira_catalina }}/bin"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
@@ -89,6 +90,7 @@
     - dest: "{{ jira_home }}"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
+      mode: "0750"
 
 - name: copy templates
   ansible.builtin.template:

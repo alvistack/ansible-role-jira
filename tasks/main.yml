@@ -69,6 +69,27 @@
     create_home: false
     state: "present"
 
+- name: prepare directories
+  ansible.builtin.file:
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0755') }}"
+    state: "{{ item.state | default('directory') }}"
+  loop:
+    - dest: "{{ jira_catalina }}"
+      owner: "{{ jira_owner }}"
+      group: "{{ jira_group }}"
+    - dest: "{{ jira_catalina }}/bin"
+      owner: "{{ jira_owner }}"
+      group: "{{ jira_group }}"
+    - dest: "{{ jira_catalina }}/conf"
+      owner: "{{ jira_owner }}"
+      group: "{{ jira_group }}"
+    - dest: "{{ jira_home }}"
+      owner: "{{ jira_owner }}"
+      group: "{{ jira_group }}"
+
 - name: copy templates
   ansible.builtin.template:
     dest: "{{ item.dest }}"

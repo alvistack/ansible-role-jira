@@ -77,6 +77,7 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
+    - dest: "/etc/systemd/system"
     - dest: "{{ jira_catalina }}"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
@@ -100,6 +101,7 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
+    - dest: "/etc/systemd/system/jira.service"
     - dest: "{{ jira_catalina }}/bin/setenv.sh"
       src: "./templates/opt/atlassian/jira/bin/setenv.sh.j2"
       owner: "{{ jira_owner }}"
@@ -110,6 +112,7 @@
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
   notify:
+    - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service
 
 - name: prepare files
@@ -120,6 +123,7 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
+    - dest: "/etc/systemd/system/jira.service"
     - dest: "{{ jira_catalina }}/bin/setenv.sh"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
@@ -128,6 +132,7 @@
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
   notify:
+    - jira | systemctl daemon-reload
     - jira | systemctl restart jira.service
 
 - name: patch /opt/atlassian/jira/atlassian-jira/WEB-INF/web.xml

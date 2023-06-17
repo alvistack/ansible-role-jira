@@ -14,17 +14,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-_apt_key:
-  - keyring: "/etc/apt/trusted.gpg.d/home_alvistack.gpg"
-    url: "http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_18.04/Release.key"
-    id: "789CFFDE0295B8A1F4E5690C4BECC97550D0B1FD"
+_rpm_key:
+  - key: "http://downloadcontent.opensuse.org/repositories/home:/alvistack/openSUSE_Leap_15.5/repodata/repomd.xml.key"
+    fingerprint: "789CFFDE0295B8A1F4E5690C4BECC97550D0B1FD"
     state: "present"
 
-_apt_repository:
-  - filename: "home:alvistack"
-    repo: "deb http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_18.04/ /"
+_yum_repository:
+  - file: "home_alvistack"
+    name: "home_alvistack"
+    description: "home:alvistack (openSUSE_Leap_15.5)"
+    baseurl: "http://downloadcontent.opensuse.org/repositories/home:/alvistack/openSUSE_Leap_15.5"
+    enabled: true
+    priority: "2"
+    module_hotfixes: true
+    gpgcheck: true
+    gpgkey: "http://downloadcontent.opensuse.org/repositories/home:/alvistack/openSUSE_Leap_15.5/repodata/repomd.xml.key"
     state: "present"
 
-_apt:
-  - { state: "present", name: "atlassian-jira-core=100:{{ jira_version }}*" }
+_zypper:
+  - { state: "present", name: "atlassian-jira-core-100:{{ jira_version }}" }
   - { state: "latest", name: "fontconfig" }

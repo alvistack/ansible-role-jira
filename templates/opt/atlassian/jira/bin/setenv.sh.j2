@@ -40,7 +40,7 @@ JVM_CODE_CACHE_ARGS='-XX:ReservedCodeCacheSize={{ jira_jvm_reserved_code_cache_s
 #
 # The following are the required arguments for Jira.
 #
-JVM_REQUIRED_ARGS='-Djava.awt.headless=true -Datlassian.standalone=JIRA -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true -Dmail.mime.decodeparameters=true -Dorg.dom4j.factory=com.atlassian.core.xml.InterningDocumentFactory'
+JVM_REQUIRED_ARGS='-Dlog4j2.contextSelector=org.apache.logging.log4j.core.selector.BasicContextSelector -Dlog4j2.disableJmx=true -Dlog4j2.garbagefree.threadContextMap=true -Dlog4j2.isWebapp=false -Djava.awt.headless=true -Datlassian.standalone=JIRA -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true -Dmail.mime.decodeparameters=true -Dorg.dom4j.factory=com.atlassian.core.xml.InterningDocumentFactory'
 
 # Uncomment this setting if you want to import data without notifications
 #
@@ -79,10 +79,6 @@ if [ "$JIRA_HOME" != "" ]; then
     fi
 fi
 
-JAVA_OPTS="-Xms${JVM_MINIMUM_MEMORY} -Xmx${JVM_MAXIMUM_MEMORY} ${JVM_CODE_CACHE_ARGS} ${JAVA_OPTS} ${JVM_REQUIRED_ARGS} ${DISABLE_NOTIFICATIONS} ${JVM_SUPPORT_RECOMMENDED_ARGS} ${JVM_EXTRA_ARGS} ${JIRA_HOME_MINUSD} ${START_JIRA_JAVA_OPTS}"
-
-export JAVA_OPTS
-
 CATALINA_OPTS="-Djira.catalina.connector.port={{ jira_catalina_connector_port }} ${CATALINA_OPTS}"
 CATALINA_OPTS="-Djira.catalina.connector.scheme={{ jira_catalina_connector_scheme }} ${CATALINA_OPTS}"
 CATALINA_OPTS="-Djira.catalina.connector.secure={{ jira_catalina_connector_secure }} ${CATALINA_OPTS}"
@@ -95,8 +91,20 @@ export CATALINA_OPTS
 # DO NOT remove the following line
 # !INSTALLER SET JAVA_HOME
 
+JAVA_OPTS="-Xms${JVM_MINIMUM_MEMORY} -Xmx${JVM_MAXIMUM_MEMORY} ${JVM_CODE_CACHE_ARGS} ${JAVA_OPTS} ${JVM_REQUIRED_ARGS} ${DISABLE_NOTIFICATIONS} ${JVM_SUPPORT_RECOMMENDED_ARGS} ${JVM_EXTRA_ARGS} ${JIRA_HOME_MINUSD} ${START_JIRA_JAVA_OPTS}"
+
+j_ver=`echo "$($JAVA_HOME/bin/java -version 2>&1)" | grep "version" | awk '{ print substr($3, 2, length($3)-2); }'`
+IFS='.' read -a j_ver_parts <<< "$j_ver"
+
+if [[ ${j_ver_parts[0]} = 17 ]]; then
+  JVM_OPENS=$(cat $PRGDIR/java-opens.txt)
+  JAVA_OPTS="$JVM_OPENS $JAVA_OPTS"
+fi
+
+export JAVA_OPTS
+
 echo ""
-echo "If you encounter issues starting or stopping Jira, please see the Troubleshooting guide at https://docs.atlassian.com/jira/jadm-docs-093/Troubleshooting+installation"
+echo "If you encounter issues starting or stopping Jira, please see the Troubleshooting guide at https://docs.atlassian.com/jira/jadm-docs-0911/Troubleshooting+installation"
 echo ""
 if [ "$JIRA_HOME_MINUSD" != "" ]; then
     echo "Using JIRA_HOME:       $JIRA_HOME"

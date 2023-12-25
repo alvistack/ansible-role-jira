@@ -22,9 +22,7 @@
     - name: include role
       ansible.builtin.include_role:
         name: alvistack.openjdk
-      tags: alvistack.openjdk
 
     - name: include role
       ansible.builtin.include_role:
         name: alvistack.jira
-      tags: alvistack.jira

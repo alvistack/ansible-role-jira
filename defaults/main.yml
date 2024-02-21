@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Jira release.
-jira_release: "9.13"
+jira_release: "9.14"
 
 # Jira version.
 jira_version: "{{ _jira_version[jira_release] }}"
@@ -46,6 +46,7 @@ jira_catalina_context_path: ~
 # Atlassian Support recommended JVM arguments.
 jira_jvm_support_recommended_args: >-
   -Datlassian.plugins.enable.wait=300
+  -XX:+IgnoreUnrecognizedVMOptions
   -XX:+UnlockExperimentalVMOptions
 
 # Session timeout (in minutes).

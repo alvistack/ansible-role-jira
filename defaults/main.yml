@@ -50,4 +50,7 @@ jira_jvm_support_recommended_args: >-
   -XX:+UnlockExperimentalVMOptions
 
 # Session timeout (in minutes).
+jira_session_timeout: "120"
+
+# Remember Me timeout (in minutes).
 jira_autologin_cookie_age: "120"

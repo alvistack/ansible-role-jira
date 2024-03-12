@@ -195,7 +195,7 @@
     xpath: /security-config/parameters/init-param[param-name[text()='autologin.cookie.age']]
     set_children:
       - param-name: autologin.cookie.age
-      - param-value: "{{ (jira_autologin_cookie_age | int) * 60}}"
+      - param-value: "{{ (jira_autologin_cookie_age | int) * 60 }}"
     pretty_print: true
     state: present
   notify:

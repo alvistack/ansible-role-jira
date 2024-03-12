@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2024 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +14,7 @@
 # limitations under the License.
 
 - name: include default variables
-  ansible.builtin.include_vars: "../vars/main.yml"
+  ansible.builtin.include_vars: ../vars/main.yml
 
 - name: include release specific variables
   ansible.builtin.include_vars: "{{ _loop_var }}"
@@ -32,7 +31,7 @@
         - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
       paths:
-        - "../vars"
+        - ../vars
       skip: true
 
 - name: include release specific tasks
@@ -50,24 +49,24 @@
         - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
       paths:
-        - "."
+        - .
       skip: true
 
 - name: groupadd
   ansible.builtin.group:
     name: "{{ jira_group }}"
     system: true
-    state: "present"
+    state: present
 
 - name: useradd
   ansible.builtin.user:
     name: "{{ jira_owner }}"
     group: "{{ jira_group }}"
     home: "{{ jira_home }}"
-    shell: "/bin/bash"
+    shell: /bin/bash
     system: true
     create_home: false
-    state: "present"
+    state: present
 
 - name: prepare directories
   ansible.builtin.file:
@@ -77,7 +76,7 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
-    - dest: "/etc/systemd/system"
+    - dest: /etc/systemd/system
     - dest: "{{ jira_catalina }}"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
@@ -101,14 +100,14 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - dest: "/etc/systemd/system/jira.service"
+    - dest: /etc/systemd/system/jira.service
     - dest: "{{ jira_catalina }}/bin/setenv.sh"
-      src: "./templates/opt/atlassian/jira/bin/setenv.sh.j2"
+      src: ./templates/opt/atlassian/jira/bin/setenv.sh.j2
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
       mode: "0755"
     - dest: "{{ jira_catalina }}/conf/server.xml"
-      src: "./templates/opt/atlassian/jira/conf/server.xml.j2"
+      src: ./templates/opt/atlassian/jira/conf/server.xml.j2
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
   notify:
@@ -123,7 +122,7 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - dest: "/etc/systemd/system/jira.service"
+    - dest: /etc/systemd/system/jira.service
     - dest: "{{ jira_catalina }}/bin/setenv.sh"
       owner: "{{ jira_owner }}"
       group: "{{ jira_group }}"
@@ -137,68 +136,68 @@
 
 - name: patch /opt/atlassian/jira/conf/web.xml
   vars:
-    ansible_python_interpreter: "python3"
+    ansible_python_interpreter: python3
   community.general.xml:
     path: "{{ jira_catalina }}/conf/web.xml"
     xpath: "{{ item.xpath }}"
     namespaces:
-      ns: "http://xmlns.jcp.org/xml/ns/javaee"
+      ns: http://xmlns.jcp.org/xml/ns/javaee
     value: "{{ item.value }}"
     pretty_print: true
-    state: "present"
+    state: present
   loop:
-    - xpath: "/ns:web-app/ns:session-config/ns:session-timeout"
+    - xpath: /ns:web-app/ns:session-config/ns:session-timeout
       value: "{{ jira_session_timeout | int }}"
-    - xpath: "/ns:web-app/ns:session-config/ns:tracking-mode"
-      value: "COOKIE"
-    - xpath: "/ns:web-app/ns:session-config/ns:cookie-config/ns:max-age"
+    - xpath: /ns:web-app/ns:session-config/ns:tracking-mode
+      value: COOKIE
+    - xpath: /ns:web-app/ns:session-config/ns:cookie-config/ns:max-age
       value: "{{ (jira_session_timeout | int) * 60 }}"
   notify:
     - jira | systemctl restart jira.service
 
 - name: patch /opt/atlassian/jira/atlassian-jira/WEB-INF/web.xml
   vars:
-    ansible_python_interpreter: "python3"
+    ansible_python_interpreter: python3
   community.general.xml:
     path: "{{ jira_catalina }}/atlassian-jira/WEB-INF/web.xml"
     xpath: "{{ item.xpath }}"
     namespaces:
-      ns: "http://java.sun.com/xml/ns/javaee"
+      ns: http://java.sun.com/xml/ns/javaee
     value: "{{ item.value }}"
     pretty_print: true
-    state: "present"
+    state: present
   loop:
-    - xpath: "/ns:web-app/ns:session-config/ns:session-timeout"
+    - xpath: /ns:web-app/ns:session-config/ns:session-timeout
       value: "{{ jira_session_timeout | int }}"
-    - xpath: "/ns:web-app/ns:session-config/ns:tracking-mode"
-      value: "COOKIE"
-    - xpath: "/ns:web-app/ns:session-config/ns:cookie-config/ns:max-age"
+    - xpath: /ns:web-app/ns:session-config/ns:tracking-mode
+      value: COOKIE
+    - xpath: /ns:web-app/ns:session-config/ns:cookie-config/ns:max-age
       value: "{{ (jira_session_timeout | int) * 60 }}"
   notify:
     - jira | systemctl restart jira.service
 
 - name: patch /opt/atlassian/jira/atlassian-jira/WEB-INF/classes/seraph-config.xml
   vars:
-    ansible_python_interpreter: "python3"
+    ansible_python_interpreter: python3
   community.general.xml:
     path: "{{ jira_catalina }}/atlassian-jira/WEB-INF/classes/seraph-config.xml"
-    xpath: "/security-config/parameters/init-param[param-name[text()='autologin.cookie.age']]"
+    xpath: /security-config/parameters/init-param[param-name[text()='autologin.cookie.age']]
     pretty_print: true
-    state: "present"
+    state: present
   notify:
     - jira | systemctl restart jira.service
 
 - name: patch /opt/atlassian/jira/atlassian-jira/WEB-INF/classes/seraph-config.xml
   vars:
-    ansible_python_interpreter: "python3"
+    ansible_python_interpreter: python3
   community.general.xml:
     path: "{{ jira_catalina }}/atlassian-jira/WEB-INF/classes/seraph-config.xml"
-    xpath: "/security-config/parameters/init-param[param-name[text()='autologin.cookie.age']]"
+    xpath: /security-config/parameters/init-param[param-name[text()='autologin.cookie.age']]
     set_children:
-      - param-name: "autologin.cookie.age"
+      - param-name: autologin.cookie.age
       - param-value: "{{ (jira_autologin_cookie_age | int) * 60}}"
     pretty_print: true
-    state: "present"
+    state: present
   notify:
     - jira | systemctl restart jira.service
 
@@ -207,8 +206,8 @@
 
 - name: systemctl start jira.service
   ansible.builtin.service:
-    name: "jira.service"
-    state: "started"
+    name: jira.service
+    state: started
     enabled: true
   changed_when: false
   failed_when: false

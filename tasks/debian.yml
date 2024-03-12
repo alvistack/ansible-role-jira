@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2024 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,7 +36,7 @@
 - name: apt-mark unhold
   ansible.builtin.dpkg_selections:
     name: "{{ item.name | regex_replace('^(.*)=[0-9]*:*[0-9]+\\..*$', '\\1') }}"
-    selection: "install"
+    selection: install
   loop: "{{ _apt }}"
   when: item.state == "present"
   changed_when: false
@@ -56,7 +55,7 @@
 - name: apt-mark hold
   ansible.builtin.dpkg_selections:
     name: "{{ item.name | regex_replace('^(.*)=[0-9]*:*[0-9]+\\..*$', '\\1') }}"
-    selection: "hold"
+    selection: hold
   loop: "{{ _apt }}"
   when: item.state == "present"
   changed_when: false

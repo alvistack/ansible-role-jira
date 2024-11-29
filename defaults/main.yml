@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Jira release.
-jira_release: "10.0"
+jira_release: "10.2"
 
 # Jira version.
 jira_version: "{{ _jira_version[jira_release] }}"
@@ -41,7 +41,7 @@ jira_catalina_connector_scheme: "http"
 jira_catalina_connector_secure: "false"
 jira_catalina_connector_proxyname:
 jira_catalina_connector_proxyport:
-jira_catalina_context_path:
+jira_catalina_context_path: "/"
 
 # Atlassian Support recommended JVM arguments.
 jira_jvm_support_recommended_args: >-

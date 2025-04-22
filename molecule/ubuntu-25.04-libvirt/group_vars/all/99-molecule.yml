@@ -14,7 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-_jira_version:
-  "10.5": 10.5.1
-  "10.3": 10.3.5
-  "9.12": 9.12.22
+openjdk_release: "17"

@@ -15,6 +15,7 @@
 # limitations under the License.
 
 _jira_version:
+  "11.0": 11.0.0
   "10.7": 10.7.3
   "10.3": 10.3.9
   "9.12": 9.12.26

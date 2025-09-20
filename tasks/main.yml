@@ -141,7 +141,7 @@
     path: "{{ jira_catalina }}/conf/web.xml"
     xpath: "{{ item.xpath }}"
     namespaces:
-      ns: http://xmlns.jcp.org/xml/ns/javaee
+      ns: https://jakarta.ee/xml/ns/jakartaee
     value: "{{ item.value }}"
     pretty_print: true
     state: present
@@ -162,7 +162,7 @@
     path: "{{ jira_catalina }}/atlassian-jira/WEB-INF/web.xml"
     xpath: "{{ item.xpath }}"
     namespaces:
-      ns: http://java.sun.com/xml/ns/javaee
+      ns: https://jakarta.ee/xml/ns/jakartaee
     value: "{{ item.value }}"
     pretty_print: true
     state: present

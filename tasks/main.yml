@@ -147,11 +147,11 @@
     state: present
   loop:
     - xpath: /ns:web-app/ns:session-config/ns:session-timeout
-      value: "{{ jira_session_timeout | int }}"
+      value: "{{ (jira_session_timeout | int) | string }}"
     - xpath: /ns:web-app/ns:session-config/ns:tracking-mode
-      value: COOKIE
+      value: "COOKIE"
     - xpath: /ns:web-app/ns:session-config/ns:cookie-config/ns:max-age
-      value: "{{ (jira_autologin_cookie_age | int) * 60 }}"
+      value: "{{ ((jira_autologin_cookie_age | int) * 60) | string }}"
   notify:
     - jira | systemctl restart jira.service
 
@@ -168,11 +168,11 @@
     state: present
   loop:
     - xpath: /ns:web-app/ns:session-config/ns:session-timeout
-      value: "{{ jira_session_timeout | int }}"
+      value: "{{ (jira_session_timeout | int) | string }}"
     - xpath: /ns:web-app/ns:session-config/ns:tracking-mode
-      value: COOKIE
+      value: "COOKIE"
     - xpath: /ns:web-app/ns:session-config/ns:cookie-config/ns:max-age
-      value: "{{ (jira_autologin_cookie_age | int) * 60 }}"
+      value: "{{ ((jira_autologin_cookie_age | int) * 60) | string }}"
   notify:
     - jira | systemctl restart jira.service
 
@@ -195,7 +195,7 @@
     xpath: /security-config/parameters/init-param[param-name[text()='autologin.cookie.age']]
     set_children:
       - param-name: autologin.cookie.age
-      - param-value: "{{ (jira_autologin_cookie_age | int) * 60 }}"
+      - param-value: "{{ ((jira_autologin_cookie_age | int) * 60) | string }}"
     pretty_print: true
     state: present
   notify:

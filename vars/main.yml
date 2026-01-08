@@ -1,6 +1,6 @@
 ---
 
-# Copyright 2025 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+# Copyright 2026 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,6 +15,6 @@
 # limitations under the License.
 
 _jira_version:
-  "11.2": 11.2.0
-  "10.3": 10.3.13
-  "9.12": 9.12.29
+  "11.3": 11.3.1
+  "10.3": 10.3.16
+  "9.12": 9.12.31

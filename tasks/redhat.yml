@@ -36,30 +36,32 @@
     state: "{{ item.state }}"
   loop: "{{ _yum_repository }}"
 
-- name: yum versionlock delete
+- name: dnf versionlock delete
   community.general.dnf_versionlock:
     name: "{{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\\..*$', '\\1-*') }}"
+    raw: true
     state: absent
-  loop: "{{ _yum }}"
+  loop: "{{ _dnf }}"
   when: item.state == "present"
   changed_when: false
   failed_when: false
 
-- name: yum install
+- name: dnf install
   ansible.builtin.dnf:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
-  loop: "{{ _yum }}"
+  loop: "{{ _dnf }}"
   register: result
   until: result is succeeded
   notify:
     - jira | systemctl restart jira.service
 
-- name: yum versionlock add
+- name: dnf versionlock add
   community.general.dnf_versionlock:
     name: "{{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\\..*$', '\\1-*') }}"
+    raw: true
     state: present
-  loop: "{{ _yum }}"
+  loop: "{{ _dnf }}"
   when: item.state == "present"
   changed_when: false
   failed_when: false

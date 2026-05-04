@@ -31,6 +31,6 @@ _yum_repository:
     gpgkey: http://downloadcontent.opensuse.org/repositories/home:/alvistack/CentOS_10_Stream/repodata/repomd.xml.key
     state: present
 
-_yum:
+_dnf:
   - { state: present, name: "atlassian-jira-core-100:{{ jira_version }}*" }
   - { state: latest, name: fontconfig }

@@ -37,9 +37,12 @@
   loop: "{{ _yum_repository }}"
 
 - name: yum versionlock delete
-  community.general.yum_versionlock:
-    name: "{{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\\..*$', '\\1-*') }}"
-    state: absent
+  ansible.builtin.shell:
+    cmd: |
+      set -euxo pipefail
+      yum --cacheonly versionlock delete {{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\\..*$', '\\1-*') }}
+  args:
+    executable: /bin/bash
   loop: "{{ _yum }}"
   when: item.state == "present"
   changed_when: false
@@ -56,9 +59,12 @@
     - jira | systemctl restart jira.service
 
 - name: yum versionlock add
-  community.general.yum_versionlock:
-    name: "{{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\\..*$', '\\1-*') }}"
-    state: present
+  ansible.builtin.shell:
+    cmd: |
+      set -euxo pipefail
+      yum --cacheonly versionlock add {{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\\..*$', '\\1-*') }}
+  args:
+    executable: /bin/bash
   loop: "{{ _yum }}"
   when: item.state == "present"
   changed_when: false

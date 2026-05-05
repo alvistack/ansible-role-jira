@@ -37,10 +37,12 @@
   loop: "{{ _yum_repository }}"
 
 - name: dnf versionlock delete
-  community.general.dnf_versionlock:
-    name: "{{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\\..*$', '\\1-*') }}"
-    raw: true
-    state: absent
+  ansible.builtin.shell:
+    cmd: |
+      set -euxo pipefail
+      dnf --cacheonly versionlock delete {{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\\..*$', '\\1-*') }}
+  args:
+    executable: /bin/bash
   loop: "{{ _dnf }}"
   when: item.state == "present"
   changed_when: false
@@ -57,10 +59,12 @@
     - jira | systemctl restart jira.service
 
 - name: dnf versionlock add
-  community.general.dnf_versionlock:
-    name: "{{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\\..*$', '\\1-*') }}"
-    raw: true
-    state: present
+  ansible.builtin.shell:
+    cmd: |
+      set -euxo pipefail
+      dnf --cacheonly versionlock add {{ item.name | regex_replace('^(.*)-[0-9]*:*[0-9]+\\..*$', '\\1-*') }}
+  args:
+    executable: /bin/bash
   loop: "{{ _dnf }}"
   when: item.state == "present"
   changed_when: false

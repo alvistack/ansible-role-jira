@@ -23,6 +23,8 @@
   loop: "{{ _rpm_key }}"
   register: result
   until: result is succeeded
+  tags:
+    - _rpm_key
 
 - name: yum-config-manager --add-repo
   ansible.builtin.yum_repository:
@@ -38,6 +40,8 @@
     state: "{{ item.state }}"
     reposdir: "{{ item.reposdir | default('/etc/zypp/repos.d') }}"
   loop: "{{ _yum_repository }}"
+  tags:
+    - _yum_repository
 
 - name: zypper removelock
   ansible.builtin.command:
@@ -46,6 +50,8 @@
   when: item.state == "present"
   changed_when: false
   failed_when: false
+  tags:
+    - _zypper
 
 - name: zypper install
   vars:
@@ -59,6 +65,8 @@
   until: result is succeeded
   notify:
     - jira | systemctl restart jira.service
+  tags:
+    - _zypper
 
 - name: zypper addlock
   ansible.builtin.command:
@@ -67,3 +75,5 @@
   when: item.state == "present"
   changed_when: false
   failed_when: false
+  tags:
+    - _zypper

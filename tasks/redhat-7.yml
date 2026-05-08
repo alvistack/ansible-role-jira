@@ -21,6 +21,8 @@
   loop: "{{ _rpm_key }}"
   register: result
   until: result is succeeded
+  tags:
+    - _rpm_key
 
 - name: yum-config-manager --add-repo
   ansible.builtin.yum_repository:
@@ -35,6 +37,8 @@
     gpgkey: "{{ item.gpgkey }}"
     state: "{{ item.state }}"
   loop: "{{ _yum_repository }}"
+  tags:
+    - _yum_repository
 
 - name: yum versionlock delete
   ansible.builtin.shell:
@@ -47,6 +51,8 @@
   when: item.state == "present"
   changed_when: false
   failed_when: false
+  tags:
+    - _yum
 
 - name: yum install
   ansible.builtin.yum: # noqa fqcn[action-core]
@@ -57,6 +63,8 @@
   until: result is succeeded
   notify:
     - jira | systemctl restart jira.service
+  tags:
+    - _yum
 
 - name: yum versionlock add
   ansible.builtin.shell:
@@ -69,3 +77,5 @@
   when: item.state == "present"
   changed_when: false
   failed_when: false
+  tags:
+    - _yum

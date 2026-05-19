@@ -18,4 +18,4 @@ _jira_version: "{{ __jira_version[jira_release] }}"
 __jira_version:
   "11.3": 11.3.6
   "10.3": 10.3.21
-  "9.12": 9.12.34
+  "9.12": 9.12.35

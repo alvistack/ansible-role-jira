@@ -18,7 +18,7 @@
 jira_release: "11.3"
 
 # Jira version.
-jira_version: "{{ _jira_version[jira_release] }}"
+jira_version: "{{ _jira_version }}"
 
 # Owner and group for Jira.
 jira_owner: jira
